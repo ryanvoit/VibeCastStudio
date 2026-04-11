@@ -1,0 +1,18 @@
+.button__search {
+	padding: 0 10px;
+	display: grid;
+	grid-template-columns: 56px 1fr 16px;
+	border: none;
+	height: 52px;
+	border-radius: 30px;
+	align-items: center;
+	font-size: 14px;
+	line-height: 12px;
+	letter-spacing: 0.01em;
+	font-family: inherit;
+	background-color: $color-white-smoke;
+}
+
+.button__title {
+	text-align: start;
+}

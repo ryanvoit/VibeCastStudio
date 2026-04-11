@@ -1,0 +1,22 @@
+.header__search {
+	padding: 15px 0 0 47px;
+	margin: 0 30px 0 0;
+	position: relative;
+	font-size: 12px;
+}
+
+.input__search {
+	padding: 20px 44px 20px;
+	border: none;
+	background-color: $color-white-smoke;
+	color: $color-dark-gray;
+	border-radius: 30px;
+	// font-size: 12px;
+	line-height: 12px;
+	width: 100%;
+	font-size: inherit;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	height: 52px;
+	font-family: inherit;
+}
