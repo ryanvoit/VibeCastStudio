@@ -1,6 +1,6 @@
 import { el } from "redom";
 
-export function svgInit(role: 'search' | 'logo' | 'arrow') {
+export function svgInit(role: 'search' | 'logo' | 'arrow' | 'musicNote') {
     switch(role) {
         case 'logo':
             const svgLogo = el('.svg-logo')
@@ -26,5 +26,13 @@ export function svgInit(role: 'search' | 'logo' | 'arrow') {
             </svg>`
 
             return svgArrow
+        case 'musicNote':
+            const svgMusicNote = el('.svg-music-note')
+            svgMusicNote.innerHTML = 
+            `<svg class="music-note-icon" width="32" height="32" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-music-note"></use> 
+            </svg>`
+
+            return svgMusicNote
     }
 }

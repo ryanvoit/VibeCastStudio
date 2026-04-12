@@ -1,9 +1,13 @@
+.header {
+	position: fixed;
+	width: 100%;
+}
+
 .header__wrapper {
 	display: grid;
     grid-template-columns: 289px 1fr 246px;
 	height: 69px;
 	align-items: end;
-	margin-bottom: 35px;
 }
 
 .header__logo {

@@ -1,4 +1,4 @@
-import { el, setChildren } from 'redom';
+import { el } from 'redom';
 import { inputInit } from '../elements/input';
 import { buttonInit } from '../elements/button';
 import { svgInit } from '../elements/svg';

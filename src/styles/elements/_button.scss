@@ -16,3 +16,23 @@
 .button__title {
 	text-align: start;
 }
+
+.button__aside {
+	display: flex;
+	padding: 9px 30px;
+	gap: 12px;
+	justify-content: flex-start;
+	align-items: center;
+	border: none;
+	background-color: $color-white-smoke;
+
+	&--active {
+		background-color: $color-white;
+	}
+
+	.button__title {
+		font-size: 20px;
+		line-height: 100%;
+		letter-spacing: 0;
+	}
+}
