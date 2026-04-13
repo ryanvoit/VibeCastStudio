@@ -1,65 +1,11 @@
-import { el, setChildren } from 'redom';
+import { el } from 'redom';
 import { IPodcast, ITrack } from '../../types';
+import { numToMin } from '../../services/numberToMinutes';
+import { svgInit } from '../elements/svg';
+import pic from "./img.svg"
 
-const cellNames: string[] = ['№', 'Название', 'Альбом', '', '', 'Длительность', '']
-
-function cellsMain() {
-    const mainTableRow = el('tr.main-table__row main-table__row--main')
-    for (let i = 0; i < cellNames.length; i++) {
-        const mainTableCell = el('th.main-table__cell', `${cellNames[i]}`)
-        mainTableRow.append(mainTableCell)
-    }
-    return mainTableRow
-}
-
-/*
-function cells() {
-    const tableRow = el('tr.main-table__row', [
-        el('td.main-table__cell', `${tracks.id}`)
-
-    ])
-    for (let i = 0; i < cellNames.length; i++) {
-        const tableCell = el('td.main-table__cell', `${cellNames[i]}`)
-        tableRow.append(tableCell)
-    }
-
-    return tableRow
-}
-    */
-
-function cells() {
-    for (let i = 0; i < tracks.length; i++) {
-        const track = tracks[i];
-
-        const tableRow = el('tr.main-table__row', [
-            el('td.main-table__cell', `${track.id}`),
-            el('td.main-table__cell', [
-                el('span.td.main-table__cell-title', `${track.title}`),
-                el('span.td.main-table__cell-title')
-            ]),
-            el('td.main-table__cell', `${track.id}`),
-            el('td.main-table__cell', `${track.id}`),
-            el('td.main-table__cell', `${track.id}`),
-            el('td.main-table__cell', `${track.id}`),
-            el('td.main-table__cell', `${track.id}`),
-            el('td.main-table__cell', `${track.id}`)
-        ])
-        setChildren(table, [tableRow])
-    }
-}
-
-export const table = el('table.main-table__table', [
-        cellsMain(),
-        cells()
-    ])
-
-export const mainList = el('.main-table', [
-    el('h2.main-table__title', 'Аудифайлы и треки'),
-
-    table
-])
-
-const tracks: Array<IPodcast | ITrack>= [
+const cellNames: string[] = ['№', 'Название', 'Альбом', '', '', '', '']
+const tracks: Array<IPodcast & ITrack>= [
     {
         id: 1,
         title: "Eternal Sunset",
@@ -135,3 +81,63 @@ const tracks: Array<IPodcast | ITrack>= [
         favourite: true
     },
 ]
+
+function cellsMain() {
+    const mainTableRow = el('tr.main-table__row main-table__row--main')
+
+    let cells = []
+
+    for (let i = 0; i < cellNames.length; i++) {
+        const mainTableCell = el('th.main-table__cell', `${cellNames[i]}`)
+        cells.push(mainTableCell)
+        mainTableRow.append(mainTableCell)
+    }
+    cells[3].append(svgInit('calendar'))
+    cells[5].append(svgInit('duration'))
+    return mainTableRow
+}
+
+function cells() {
+    const rows = []
+    for (let i = 0; i < tracks.length; i++) {
+        const track = tracks[i];
+
+        const tableRow = el('tr.main-table__row', [
+            el('td.main-table__cell', `${track.id}`),
+            el('td.main-table__cell', [
+                el('.main-table__wrapper', [
+                    el('img.main-table__pic', {src: pic, height: 60, width: 60}),
+                    el('.main-table__inner', [
+                        el('span.main-table__name', `${track.title}`),
+                        el('span.main-table__artist', 
+                            (track.artist) ? `${track.artist}` : `${track.host}`)
+                    ])
+                ]),
+            ]),
+            el('td.main-table__cell', '-'),
+            el('td.main-table__cell', '-'),
+            el('td.main-table__cell', [
+                (track.favourite) ? svgInit('heart') : svgInit('heart-favourite')
+            ]),
+            el('td.main-table__cell', `${numToMin(track.duration)}`),
+            el('td.main-table__cell', [
+                svgInit('settings')
+            ])
+        ])
+        rows.push(tableRow)
+    }
+    return rows
+}
+
+
+export const table = el('table.main-table__table', [
+    cellsMain(),
+    cells()
+])
+
+export const mainList = el('.main-table', [
+    el('h2.main-table__title', 'Аудифайлы и треки'),
+
+    table
+])
+

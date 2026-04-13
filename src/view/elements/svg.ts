@@ -1,6 +1,6 @@
 import { el } from "redom";
 
-export function svgInit(role: 'search' | 'logo' | 'arrow' | 'musicNote') {
+export function svgInit(role: 'search' | 'logo' | 'arrow' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration') {
     switch(role) {
         case 'logo':
             const svgLogo = el('.svg-logo')
@@ -34,5 +34,45 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'musicNote') {
             </svg>`
 
             return svgMusicNote
+        case 'calendar':
+            const svgCalendar = el('.svg-calendar')
+            svgCalendar.innerHTML = 
+            `<svg class="calendar-icon" width="16" height="16" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-calendar"></use> 
+            </svg>`
+
+            return svgCalendar
+        case 'duration':
+            const svgDuration = el('.svg-duration')
+            svgDuration.innerHTML = 
+            `<svg class="duration-icon" width="16" height="16" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-duration"></use> 
+            </svg>`
+
+            return svgDuration
+        case 'heart-favourite':
+            const svgHeartFavourite = el('.svg-heart--favourite')
+            svgHeartFavourite.innerHTML = 
+            `<svg class="heart-icon--favourite" width="24" height="24" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-heart-favourite"></use> 
+            </svg>`
+
+            return svgHeartFavourite
+        case 'heart':
+            const svgHeart = el('.svg-heart')
+            svgHeart.innerHTML = 
+            `<svg class="heart-icon" width="24" height="24" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-heart"></use> 
+            </svg>`
+
+            return svgHeart
+         case 'settings':
+            const svgSettings = el('.svg-settings')
+            svgSettings.innerHTML = 
+            `<svg class="settings-icon" width="23" height="4" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-settings"></use> 
+            </svg>`
+
+            return svgSettings
     }
 }
