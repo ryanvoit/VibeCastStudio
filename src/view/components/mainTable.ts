@@ -140,9 +140,8 @@ export const table = el('table.main-table__table', [
     cells()
 ])
 
-export const mainList = el('.main-table', [
+export const mainTable = el('.main-table', [
     el('h2.main-table__title', 'Аудифайлы и треки'),
-
     table
 ])
 

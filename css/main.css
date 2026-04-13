@@ -353,7 +353,6 @@ body {
 
 main {
   flex-grow: 1;
-  padding: 69px 0 0 0;
   background: linear-gradient(90deg, #F5F5F5 0%, #F5F5F5 30%, #ffffff 100%);
 }
 
@@ -415,6 +414,11 @@ button {
   letter-spacing: 0.01em;
   font-family: inherit;
   background-color: #F5F5F5;
+  transform: scale(1);
+  transition: transform ease-in 0.3s;
+}
+.button__user:hover, .button__user:focus-visible {
+  transform: scale(1.1);
 }
 .button__aside {
   display: flex;
@@ -434,6 +438,10 @@ button {
   display: grid;
   grid-template-columns: 40px 1fr 262px 195px;
   transition: background-color ease-in 0.3s;
+  padding: 0;
+}
+.button__play .main-table__cell {
+  padding: 14px 0 14px 8px;
 }
 .button__play:hover, .button__play:focus-visible {
   background-color: rgba(252, 109, 62, 0.25);
@@ -499,8 +507,8 @@ button {
 /* components */
 /* ------------------------------------ */
 .header {
-  position: fixed;
   width: 100%;
+  background: linear-gradient(90deg, #F5F5F5 0%, #F5F5F5 30%, #ffffff 100%);
 }
 
 .header__wrapper {
@@ -591,6 +599,54 @@ button {
   justify-content: center;
   align-items: flex-start;
   gap: 10px;
+}
+
+.player {
+  height: 100px;
+  width: 100vw;
+  background-color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #E8E8E8;
+  padding: 20px 30px;
+  gap: 84px;
+  display: grid;
+  grid-template-columns: 434px 1fr 97px;
+}
+.player__wrapper {
+  padding: 0 0 0 8px;
+  display: flex;
+  gap: 10px;
+}
+.player__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  align-items: flex-start;
+}
+.player__title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 24px;
+}
+.player__name {
+  line-height: 12px;
+}
+.player__artist {
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.01em;
+  color: #AAAAAA;
+}
+.player__range {
+  min-width: 681px;
+  background-color: aqua;
+}
+.player__volume {
+  background-color: aqua;
 }
 
 /* pages */

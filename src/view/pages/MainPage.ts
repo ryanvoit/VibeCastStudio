@@ -1,7 +1,8 @@
 import { aside } from "../components/aside";
 import { header } from "../components/header";
 import { setChildren, el } from "redom";
-import { mainList } from "../components/mainTable";
+import { mainTable } from "../components/mainTable";
+import { player } from "../components/player";
 
 export function MainPageInit() {
     setChildren(window.document.body, [
@@ -10,7 +11,8 @@ export function MainPageInit() {
             el('.container', [
                 el('.main-page-wrapper', [
                     aside,
-                    mainList
+                    mainTable,
+                    player
                 ])
             ])
         ])

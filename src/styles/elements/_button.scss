@@ -18,6 +18,13 @@
 		letter-spacing: 0.01em;
 		font-family: inherit;
 		background-color: $color-white-smoke;
+		transform: scale(1);
+		transition: transform $transition;
+
+		&:hover,
+		&:focus-visible {
+			transform: scale(1.1)
+		}
 	}
 
 	&__aside {
@@ -44,6 +51,11 @@
 		display: grid;
 		grid-template-columns: 40px 1fr 262px 195px;
 		transition: background-color $transition;
+		padding: 0;
+
+		.main-table__cell {
+			padding: 14px 0 14px 8px;
+		}
 
 		&:hover,
 		&:focus-visible {

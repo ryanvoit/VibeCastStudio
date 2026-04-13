@@ -27,7 +27,7 @@ export function buttonInit(role: 'user' | 'sidebar' | 'favourite' | 'settings', 
         case 'favourite':
             const buttonFav = el('button.button button__favourite', { type: 'button' }, [
                 el('td.main-table__cell', [
-                    (active) ? svgInit('heart') : svgInit('heart-favourite')
+                    (active) ? svgInit('heart-favourite') : svgInit('heart')
                 ]),
             ])
 
