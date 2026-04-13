@@ -26,20 +26,6 @@ function cells() {
     return tableRow
 }
     */
-function artistCell(title: string): string {
-    type Track = Partial<IPodcast & ITrack>
-    const track: Track | undefined = tracks.find(track => track.title === title)
-
-    let perf:string
-
-    if(track){
-        if(track.artist) {
-            perf = track.artist
-        }
-        perf = track.host
-    }
-    
-}
 
 function cells() {
     for (let i = 0; i < tracks.length; i++) {
