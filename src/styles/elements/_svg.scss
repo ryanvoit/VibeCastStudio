@@ -9,5 +9,13 @@
 
 .heart-icon,
 .heart-icon--favourite {
-	color: $color-burnt-orange
+	color: $color-burnt-orange;
+	transform: scale(1);
+	transition: transform $transition;
+}
+
+.settings-icon {
+	transform: scale(1);
+	color: $color-silver;
+	transition: color $transition, transform $transition;
 }

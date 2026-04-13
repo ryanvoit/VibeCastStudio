@@ -8,7 +8,8 @@
 .input__search {
 	padding: 20px 44px 20px;
 	border: none;
-	background-color: $color-white-smoke;
+	background: linear-gradient(90deg, $color-mercury 0%, $color-white-smoke 100%);
+	// background-color: $color-white-smoke;
 	color: $color-nero;
 	border-radius: 30px;
 	// font-size: 12px;

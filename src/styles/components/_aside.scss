@@ -4,4 +4,11 @@
     padding-top: 46px;
     background-color: $color-white-smoke;
     gap: 12px;
+
+    &__title {
+        font-size: 20px;
+		line-height: 100%;
+		letter-spacing: 0;
+        text-align: start;
+    }
 }

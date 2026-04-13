@@ -15,15 +15,17 @@
 
     &__row {
         display: grid;
-        grid-template-columns: 40px 1fr 262px 195px 44px 56px 43px;
+        grid-template-columns: 1fr 44px 56px 43px;
         border-bottom: 1px solid $color-mercury;
         height: 88px;
         font-weight: 400;
         font-size: 14px;
         line-height: 12px;
         letter-spacing: 0.01em;
+        justify-content: flex-start;
 
         &--main {
+            grid-template-columns: 40px 1fr 262px 195px 44px 56px 43px;
             font-size: 12px;
             line-height: 12px;
             letter-spacing: 0.09em;

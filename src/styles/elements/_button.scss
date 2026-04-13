@@ -1,38 +1,75 @@
-.button__search {
-	padding: 0 10px;
-	display: grid;
-	grid-template-columns: 56px 1fr 16px;
+.button {
 	border: none;
-	height: 52px;
-	border-radius: 30px;
-	align-items: center;
-	font-size: 14px;
-	line-height: 12px;
-	letter-spacing: 0.01em;
-	font-family: inherit;
-	background-color: $color-white-smoke;
-}
+	background-color: transparent;
 
-.button__title {
-	text-align: start;
-}
-
-.button__aside {
-	display: flex;
-	padding: 9px 30px;
-	gap: 12px;
-	justify-content: flex-start;
-	align-items: center;
-	border: none;
-	background-color: $color-white-smoke;
-
-	&--active {
-		background-color: $color-white;
+	.main-table__cell {
+		padding: 0;
 	}
 
-	.button__title {
-		font-size: 20px;
-		line-height: 100%;
-		letter-spacing: 0;
+	&__user {
+		padding: 0 10px;
+		display: grid;
+		grid-template-columns: 56px 1fr 16px;
+		height: 52px;
+		border-radius: 30px;
+		align-items: center;
+		font-size: 14px;
+		line-height: 12px;
+		letter-spacing: 0.01em;
+		font-family: inherit;
+		background-color: $color-white-smoke;
+	}
+
+	&__aside {
+		display: flex;
+		padding: 9px 30px;
+		gap: 12px;
+		justify-content: flex-start;
+		align-items: center;
+		transition: background-color $transition;
+
+		&:hover,
+		&:focus-visible {
+			background-color: $color-burnt-orange-25;
+		}
+
+		&--active,
+		&--active:hover,
+		&--active:focus-visible {
+			background-color: $color-white;
+		}
+	}
+
+	&__play {
+		display: grid;
+		grid-template-columns: 40px 1fr 262px 195px;
+		transition: background-color $transition;
+
+		&:hover,
+		&:focus-visible {
+			background-color: $color-burnt-orange-25;
+		}
+	}
+
+	&__favourite {
+		.main-table__cell {
+			justify-content: center;
+		}
+
+		&:hover .heart-icon,
+		&:hover .heart-icon--favourite {
+			transform: scale(1.4)
+		}
+	}
+
+	&__settings {
+		.main-table__cell {
+			justify-content: center;
+		}
+
+		&:hover .settings-icon {
+			transform: scale(1.25);
+			color: $color-burnt-orange;
+		}
 	}
 }

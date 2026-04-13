@@ -2,10 +2,11 @@ import { el } from 'redom';
 import { IPodcast, ITrack } from '../../types';
 import { numToMin } from '../../services/numberToMinutes';
 import { svgInit } from '../elements/svg';
-import pic from "./img.svg"
+import { buttonInit, buttonPlayInit } from '../elements/button';
+// import pic from "./img.svg"
 
 const cellNames: string[] = ['№', 'Название', 'Альбом', '', '', '', '']
-const tracks: Array<IPodcast & ITrack>= [
+const tracks: Array<IPodcast & ITrack> = [
     {
         id: 1,
         title: "Eternal Sunset",
@@ -41,6 +42,26 @@ const tracks: Array<IPodcast & ITrack>= [
         duration: 8.47,
         size_mb: 7.75,
         encoded_audio: "QXVkaW8gZGF0YSBmb3IgTW9ybmluZyBEZXcgYnkgRnJlc2ggQWly",
+        favourite: true
+    },
+    {
+        id: 5,
+        title: "Starlit Road",
+        artist: "Cosmic Rhythms",
+        duration: 2.2,
+        size_mb: 2.01,
+        encoded_audio:
+            "QXVkaW8gZGF0YSBmb3IgU3RhcmxpdCBSb2FkIGJ5IENvc21pYyBSaHl0aG1z",
+        favourite: true
+    },
+    {
+        id: 6,
+        title: "Midnight Escape",
+        artist: "Nightfall",
+        duration: 5.23,
+        size_mb: 4.77,
+        encoded_audio:
+            "QXVkaW8gZGF0YSBmb3IgTWlkbmlnaHQgRXNjYXBlIGJ5IE5pZ2h0ZmFsbA==",
         favourite: true
     },
     {
@@ -103,26 +124,10 @@ function cells() {
         const track = tracks[i];
 
         const tableRow = el('tr.main-table__row', [
-            el('td.main-table__cell', `${track.id}`),
-            el('td.main-table__cell', [
-                el('.main-table__wrapper', [
-                    el('img.main-table__pic', {src: pic, height: 60, width: 60}),
-                    el('.main-table__inner', [
-                        el('span.main-table__name', `${track.title}`),
-                        el('span.main-table__artist', 
-                            (track.artist) ? `${track.artist}` : `${track.host}`)
-                    ])
-                ]),
-            ]),
-            el('td.main-table__cell', '-'),
-            el('td.main-table__cell', '-'),
-            el('td.main-table__cell', [
-                (track.favourite) ? svgInit('heart') : svgInit('heart-favourite')
-            ]),
+            buttonPlayInit(track.id, track.title, track.artist, track.host),
+            buttonInit('favourite', track.favourite),
             el('td.main-table__cell', `${numToMin(track.duration)}`),
-            el('td.main-table__cell', [
-                svgInit('settings')
-            ])
+            buttonInit('settings')
         ])
         rows.push(tableRow)
     }
