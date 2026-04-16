@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkvcs=self.webpackChunkvcs||[]).push([[326],{326(s,c,e){function u(){console.log("auth")}e.d(c,{default:()=>u})}}]);

@@ -84,4 +84,23 @@
 			color: $color-burnt-orange;
 		}
 	}
+
+	&__shuffle,
+	&__back,
+	&__playSong,
+	&__next,
+	&__repeat {
+		padding: 0;
+	}
+
+	&__shuffle:hover .shuffle-icon,
+	&__back:hover .back-icon,
+	&__next:hover .next-icon,
+	&__repeat:hover .repeat-icon {
+		color: $color-burnt-orange;
+	}
+
+	&__playSong:hover .svg-playSong {
+		background-color: $color-burnt-orange;
+	}
 }

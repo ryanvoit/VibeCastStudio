@@ -55,11 +55,22 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 6px;
     }
 
-    &__buttons  {
+    &__output,
+    &__duration {
+        font-size: 11px;
+        line-height: 1;
+        letter-spacing: 0.015em;
+        color: $color-dark-gray2;
+    }
+
+    &__buttons {
         height: 40px;
         width: 184px;
+        display: flex;
+        gap: 20px;
     }
 
     &__range {
@@ -80,7 +91,7 @@
             box-shadow: -341px 0 0 335px $color-burnt-orange;
             border: 0;
         }
-        
+
         &::-moz-range-thumb {
             height: 6px;
             width: 12px;

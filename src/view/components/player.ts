@@ -1,7 +1,7 @@
 import { el } from "redom"
 import { IPodcast, ITrack } from "../../types"
 import pic from "./img.svg"
-import { buttonInit } from "../elements/button"
+import { buttonInit, btnPlayer } from "../elements/button"
 import { numToMin } from "../../services/playerRanges"
 import { maxRange, numRangeToDuration, volumeValToWidth } from "../../services/playerRanges"
 import { svgInit } from "../elements/svg"
@@ -58,7 +58,11 @@ export function player(track: ITrack & IPodcast) {
         ]),
         el('.player__duration-wrapper', [
             el('.player__buttons', [
-                // buttons
+                btnPlayer('shuffle'),
+                btnPlayer('back'),
+                btnPlayer('playSong'),
+                btnPlayer('next'),
+                btnPlayer('repeat')
             ]),
             el('.player__range-wrapper', [
                 outputRange,

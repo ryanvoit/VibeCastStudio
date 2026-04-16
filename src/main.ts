@@ -1,3 +1,3 @@
-import { MainPageInit } from "./view/pages/MainPage";
+import { navigate } from "./navigate";
 
-MainPageInit()
+navigate('MainPage')

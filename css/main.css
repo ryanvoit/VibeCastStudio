@@ -460,6 +460,15 @@ button {
   transform: scale(1.25);
   color: #FC6D3E;
 }
+.button__shuffle, .button__back, .button__playSong, .button__next, .button__repeat {
+  padding: 0;
+}
+.button__shuffle:hover .shuffle-icon, .button__back:hover .back-icon, .button__next:hover .next-icon, .button__repeat:hover .repeat-icon {
+  color: #FC6D3E;
+}
+.button__playSong:hover .svg-playSong {
+  background-color: #FC6D3E;
+}
 
 .header__search {
   padding: 15px 0 0 47px;
@@ -507,6 +516,31 @@ button {
 
 .svg-speaker {
   height: 16px;
+}
+
+.svg-playSong {
+  width: 40px;
+  height: 40px;
+  background-color: #AAAAAA;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: background-color ease-in 0.3s;
+}
+
+.playSong-icon {
+  position: absolute;
+  top: 12.5px;
+  left: 15px;
+}
+
+.shuffle-icon,
+.back-icon,
+.next-icon,
+.repeat-icon {
+  transition: color ease-in 0.3s;
 }
 
 /* components */
@@ -656,10 +690,19 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
+}
+.player__output, .player__duration {
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.015em;
+  color: #AAAAAA;
 }
 .player__buttons {
   height: 40px;
   width: 184px;
+  display: flex;
+  gap: 20px;
 }
 .player__range {
   -webkit-appearance: none;

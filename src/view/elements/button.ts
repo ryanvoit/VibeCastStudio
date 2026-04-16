@@ -2,6 +2,7 @@ import { el } from "redom";
 import { svgInit } from "./svg";
 import user from './user.svg'
 import pic from "./img.svg"
+import { navigate } from "../../navigate";
 
 export function buttonInit(role: 'user' | 'sidebar' | 'favourite' |
     'favourite-noCell' | 'settings', active?: boolean, text?: string) {
@@ -68,5 +69,13 @@ export function buttonPlayInit(id: number, title: string, artist?: string, host?
     ])
 
     return buttonPlay
+}
+
+export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat') {
+    const btn = el(`button.button button__${role}`, { type: 'button' }, [
+        svgInit(role)
+    ])
+
+    return btn
 }
 

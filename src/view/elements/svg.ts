@@ -1,6 +1,6 @@
 import { el } from "redom";
 
-export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration') {
+export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration' | 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat'): HTMLElement {
     switch(role) {
         case 'logo':
             const svgLogo = el('.svg-logo')
@@ -82,5 +82,46 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
             </svg>`
 
             return svgSpeaker
+
+        case 'shuffle':
+            const svgShuffle = el('.svg-shuffle')
+            svgShuffle.innerHTML = 
+            `<svg class="shuffle-icon" width="16" height="16" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-shuffle"></use> 
+            </svg>`
+
+            return svgShuffle
+        case 'back':
+            const svgBack = el('.svg-back')
+            svgBack.innerHTML = 
+            `<svg class="back-icon" width="16" height="16" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-back"></use> 
+            </svg>`
+
+            return svgBack
+        case 'playSong':
+            const svgPlay = el('.svg-playSong')
+            svgPlay.innerHTML = 
+            `<svg class="playSong-icon" width="13" height="15" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-play"></use> 
+            </svg>`
+
+            return svgPlay
+        case 'next':
+            const svgNext = el('.svg-next')
+            svgNext.innerHTML = 
+            `<svg class="next-icon" width="16" height="16" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-next"></use> 
+            </svg>`
+
+            return svgNext
+        case 'repeat':
+            const svgRepeat = el('.svg-repeat')
+            svgRepeat.innerHTML = 
+            `<svg class="repeat-icon" width="16" height="16" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-repeat"></use> 
+            </svg>`
+
+            return svgRepeat
     }
 }

@@ -16,7 +16,7 @@ const track: ITrack & IPodcast = {
     favourite: true
 }
 
-export function MainPageInit() {
+export default function MainPageInit() {
     setChildren(window.document.body, [
         header,
         el('main', [
