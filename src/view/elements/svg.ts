@@ -1,6 +1,6 @@
 import { el } from "redom";
 
-export function svgInit(role: 'search' | 'logo' | 'arrow' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration') {
+export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration') {
     switch(role) {
         case 'logo':
             const svgLogo = el('.svg-logo')
@@ -66,7 +66,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'musicNote' | 'setti
             </svg>`
 
             return svgHeart
-         case 'settings':
+        case 'settings':
             const svgSettings = el('.svg-settings')
             svgSettings.innerHTML = 
             `<svg class="settings-icon" width="23" height="4" aria-hidden="true"> 
@@ -74,5 +74,13 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'musicNote' | 'setti
             </svg>`
 
             return svgSettings
+        case 'speaker':
+            const svgSpeaker = el('.svg-speaker')
+            svgSpeaker.innerHTML = 
+            `<svg class="speaker-icon" width="16" height="16" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-speaker"></use> 
+            </svg>`
+
+            return svgSpeaker
     }
 }

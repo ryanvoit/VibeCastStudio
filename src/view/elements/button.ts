@@ -3,7 +3,8 @@ import { svgInit } from "./svg";
 import user from './user.svg'
 import pic from "./img.svg"
 
-export function buttonInit(role: 'user' | 'sidebar' | 'favourite' | 'settings', active?: boolean, text?: string) {
+export function buttonInit(role: 'user' | 'sidebar' | 'favourite' |
+    'favourite-noCell' | 'settings', active?: boolean, text?: string) {
     switch (role) {
         case 'user':
             const buttonUser = el('button.button button__user', { type: 'button' }, [
@@ -32,6 +33,12 @@ export function buttonInit(role: 'user' | 'sidebar' | 'favourite' | 'settings', 
             ])
 
             return buttonFav
+        case 'favourite-noCell':
+            const buttonFavNoCell = el('button.button button__favourite', { type: 'button' }, [
+                (active) ? svgInit('heart-favourite') : svgInit('heart')
+            ])
+
+            return buttonFavNoCell
         case 'settings':
             const buttonSettings = el('button.button button__settings', { type: 'button' }, [
                 el('td.main-table__cell', [

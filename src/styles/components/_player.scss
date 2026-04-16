@@ -7,10 +7,10 @@
     left: 0;
     border-top: 1px solid $color-mercury;
     padding: 20px 30px;
-    gap: 84px;
+    gap: 20px;
     display: grid;
     grid-template-columns: 434px 1fr 97px;
-
+    align-items: end;
     // opacity: 0
 
     &__wrapper {
@@ -45,12 +45,102 @@
         color: $color-dark-gray2
     }
 
+    &__range-wrapper {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    &__duration-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__buttons  {
+        height: 40px;
+        width: 184px;
+    }
+
     &__range {
+        appearance: none;
+        height: 4px;
         min-width: 681px;
-        background-color: aqua;
+        background: $color-mercury;
+        border-radius: 50px;
+        overflow: hidden;
+
+        &::-webkit-slider-thumb {
+            height: 6px;
+            width: 12px;
+            appearance: none;
+            background: $color-burnt-orange;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: -341px 0 0 335px $color-burnt-orange;
+            border: 0;
+        }
+        
+        &::-moz-range-thumb {
+            height: 6px;
+            width: 12px;
+            appearance: none;
+            background: $color-burnt-orange;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: -341px 0 0 335px $color-burnt-orange;
+            border: 0;
+        }
     }
 
     &__volume {
-        background-color: aqua;
+        display: flex;
+        gap: 9px;
+        height: 16px;
+        align-items: center;
+        position: relative;
+    }
+
+    &__range-volume {
+        width: 72px;
+        appearance: none;
+        height: 4px;
+        background: $color-mercury;
+        border-radius: 50px;
+
+        &::-webkit-slider-thumb {
+            box-sizing: border-box;
+            height: 12px;
+            width: 12px;
+            appearance: none;
+            background: $color-burnt-orange;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        &::-moz-range-thumb {
+            box-sizing: border-box;
+            height: 12px;
+            width: 12px;
+            appearance: none;
+            background: $color-burnt-orange;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 1;
+        }
+    }
+
+    &__level {
+        max-width: 72px;
+        width: 36px;
+        height: 4px;
+        background-color: $color-burnt-orange;
+        position: absolute;
+        top: 8px;
+        display: flex;
+        left: 25px;
+        border-radius: 6px;
+        transform: translateY(-50%)
     }
 }

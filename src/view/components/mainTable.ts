@@ -1,6 +1,6 @@
 import { el } from 'redom';
 import { IPodcast, ITrack } from '../../types';
-import { numToMin } from '../../services/numberToMinutes';
+import { numToMin } from '../../services/playerRanges';
 import { svgInit } from '../elements/svg';
 import { buttonInit, buttonPlayInit } from '../elements/button';
 // import pic from "./img.svg"
