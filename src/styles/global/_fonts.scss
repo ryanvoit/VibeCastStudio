@@ -11,10 +11,11 @@
 
 @font-face {
   font-family: 'EricaOne';
-  src: url('./fonts/EricaOne-Regular.ttf')
+  src: url('./global/fonts/EricaOne-Regular.ttf')
+  // Надо подключать шрифты от main.scss, a не от _fonts.scss
 }
 
 @font-face {
   font-family: 'Actor';
-  src: url('./fonts/Actor-Regular.ttf') 
+  src: url('./global/fonts/Actor-Regular.ttf') 
 }

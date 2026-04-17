@@ -1,5 +1,7 @@
 import { navigate } from "./navigate";
 import { fetchRegist, fetchTracks } from "./fetches/fetches";
+import "./styles/main.scss"
+import "./sprite.svg"
 
 navigate('MainPage')
 

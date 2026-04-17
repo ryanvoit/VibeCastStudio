@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkvcs=self.webpackChunkvcs||[]).push([[215],{215(s,c,e){function u(){console.log("fav")}e.d(c,{default:()=>u})}}]);
