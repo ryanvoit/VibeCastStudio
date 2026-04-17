@@ -2,7 +2,7 @@ import { el } from "redom";
 import { svgInit } from "./svg";
 import user from './user.svg'
 import pic from "./img.svg"
-import { navigate } from "../../navigate";
+import { navigate } from "./../../services/navigate";
 
 export function buttonInit(role: 'user' | 'sidebar' | 'favourite' |
     'favourite-noCell' | 'settings', active?: boolean, text?: string) {
@@ -90,7 +90,7 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
             const LinkText = (role2 === 'auth') ? 'Авторизация' : 'Регистрация'
             btn = el(`button.button button__${role}`, { type: 'button' }, `${LinkText}`)
 
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function() {
                 navigate((role2 === 'auth') ? 'AuthPage' : 'RegisterPage')
             })
             break

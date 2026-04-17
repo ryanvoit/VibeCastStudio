@@ -6,7 +6,7 @@ export async function fetchTracks() {
 }
 
 interface fetchRegister {
-    username: string, 
+    username: string,
     password: string
 }
 
@@ -19,4 +19,30 @@ export async function fetchRegist(newUser: fetchRegister) {
         body: JSON.stringify(newUser),
         // mode: 'cors'
     })
+}
+
+export async function registerUser(
+    username: string,
+    password: string
+) {
+    return fetch('http://localhost:8000/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    }) .then((response) => response.json())
+}
+
+export async function loginUser(
+    username: string,
+    password: string
+) {
+    return fetch('http://localhost:8000/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    }) 
 }

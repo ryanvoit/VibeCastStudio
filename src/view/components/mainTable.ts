@@ -1,5 +1,5 @@
 import { el } from 'redom';
-import { IPodcast, ITrack } from '../../types';
+import { IPodcast, ITrack } from '../../services/types';
 import { numToMin } from '../../services/playerRanges';
 import { svgInit } from '../elements/svg';
 import { buttonInit, buttonPlayInit } from '../elements/button';

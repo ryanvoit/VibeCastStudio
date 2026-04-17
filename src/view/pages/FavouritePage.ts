@@ -1,3 +1,3 @@
-export default function FavouritePageInit() {
+export default function favouritePageInit() {
     console.log('fav');
 }

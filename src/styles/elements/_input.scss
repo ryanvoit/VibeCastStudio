@@ -42,6 +42,10 @@
 		&:hover, 
 		&:focus-visible {
 			border-color: $color-burnt-orange;
+
+			+ .custom-input__label {
+				color: $color-burnt-orange
+			}
 		}
 	}
 
@@ -54,6 +58,8 @@
 		top: -7px;
 		left: 20px;
 		padding: 0 5px;
+		color: $color-black;
 		background-color: $color-white;
+		transition: color $transition;
 	}
 }

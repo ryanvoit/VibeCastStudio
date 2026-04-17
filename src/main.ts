@@ -1,13 +1,17 @@
-import { navigate } from "./navigate";
-import { fetchRegist, fetchTracks } from "./fetches/fetches";
+import { navigate } from "./services/navigate";
+import { fetchRegist, fetchTracks, registerUser, loginUser } from "./fetches/fetches";
 import "./styles/main.scss"
 import "./sprite.svg"
 
 navigate('AuthPage')
 
-fetchRegist({
-    username: 'ryanvoit',
-    password: 'ryanvoit'
-})
+console.log(
+    registerUser(
+        'ryanvoit', 'ryanvoit'
+    )
+);
+loginUser(
+    'ryanvoit', 'ryanvoit'
+)
 
 fetchTracks()

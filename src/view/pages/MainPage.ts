@@ -3,7 +3,7 @@ import { header } from "../components/header";
 import { setChildren, el } from "redom";
 import { mainTable } from "../components/mainTable";
 import { player } from "../components/player";
-import { IPodcast, ITrack } from "../../types";
+import { IPodcast, ITrack } from "../../services/types";
 
 const track: ITrack & IPodcast = {
     id: 1,
@@ -16,7 +16,7 @@ const track: ITrack & IPodcast = {
     favourite: true
 }
 
-export default function MainPageInit() {
+export default function mainPageInit() {
     setChildren(window.document.body, [
         header,
         el('main', [

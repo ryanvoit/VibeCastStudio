@@ -1,29 +1,28 @@
-import MainPageInit from "./view/pages/MainPage"
-import FavouritePageInit from "./view/pages/FavouritePage"
-import authPageInit from "./view/pages/AuthPage"
-import registerPageInit from "./view/pages/RegisterPage"
+import mainPageInit from "../view/pages/MainPage"
+import favouritePageInit from "../view/pages/favouritePage"
+import formPageInit from "../view/pages/formPage"
 
 export async function navigate(page: 'MainPage' | 'FavouritePage' | 'AuthPage' | 'RegisterPage') {
     document.body.innerHTML = ''
 
     switch(page) {
         case 'MainPage':
-            MainPageInit()
+            mainPageInit()
             // const MainPage = await import("./view/pages/MainPage")
             // MainPage.default()
             break
         case 'FavouritePage':
-            FavouritePageInit()
+            favouritePageInit()
             // const FavouritePage = await import("./view/pages/FavouritePage")
             // FavouritePage.default()
             break
         case 'AuthPage':
-            authPageInit()
+            formPageInit('auth')
             // const AuthPage = await import("./view/pages/AuthPage")
             // AuthPage.default()
             break  
         case 'RegisterPage':
-            registerPageInit()
+            formPageInit('register')
             break
     }
 }
