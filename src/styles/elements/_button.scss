@@ -69,7 +69,9 @@
 		}
 
 		&:hover .heart-icon,
-		&:hover .heart-icon--favourite {
+		&:hover .heart-icon--favourite,
+		&:focus-visible .heart-icon,
+		&:focus-visible .heart-icon--favourite {
 			transform: scale(1.4)
 		}
 	}
@@ -79,7 +81,8 @@
 			justify-content: center;
 		}
 
-		&:hover .settings-icon {
+		&:hover .settings-icon,
+		&:focus-visible .settings-icon {
 			transform: scale(1.25);
 			color: $color-burnt-orange;
 		}
@@ -96,11 +99,31 @@
 	&__shuffle:hover .shuffle-icon,
 	&__back:hover .back-icon,
 	&__next:hover .next-icon,
-	&__repeat:hover .repeat-icon {
+	&__repeat:hover .repeat-icon,
+	&__shuffle:focus-visible .shuffle-icon,
+	&__back:focus-visible .back-icon,
+	&__next:focus-visible .next-icon,
+	&__repeat:focus-visible .repeat-icon {
 		color: $color-burnt-orange;
 	}
 
-	&__playSong:hover .svg-playSong {
+	&__playSong:hover .svg-playSong,
+	&__playSong:focus-visible .svg-playSong {
 		background-color: $color-burnt-orange;
+	}
+
+	&__submit {
+		border: none;
+		padding: 10px 30px;
+		border-radius: 20px;
+		margin: 0 auto;
+		height: 40px;
+		color: $color-white;
+		background-color: $color-burnt-orange;
+	}
+
+	&__link {
+		color: $color-burnt-orange;
+		text-decoration: underline;
 	}
 }

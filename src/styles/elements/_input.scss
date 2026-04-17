@@ -21,3 +21,39 @@
 	height: 52px;
 	font-family: inherit;
 }
+
+.custom-input {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	position: relative;
+	width: 100%;
+
+	&__field {
+		padding: 25px 15px;
+		width: 100%;
+		border-radius: 8px;
+		height: 40px;
+		font-size: 16px;
+		background: linear-gradient(90deg, $color-white 0%, $color-white 25%, $color-burnt-orange-25 100%);
+		border: 2px solid $color-nero;
+		transition: border-color $transition;
+
+		&:hover, 
+		&:focus-visible {
+			border-color: $color-burnt-orange;
+		}
+	}
+
+	&__label {
+		font-family: $ff-actor;
+		font-size: 14px;
+		font-weight: 600;
+		user-select: none;
+		position: absolute;
+		top: -7px;
+		left: 20px;
+		padding: 0 5px;
+		background-color: $color-white;
+	}
+}

@@ -79,3 +79,21 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
     return btn
 }
 
+export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
+    let btn
+    switch (role) {
+        case 'submit':
+            const submitText = (role2 === 'auth') ? 'Войти' : 'Зарегестрироваться'
+            btn = el(`button.button button__${role}`, { type: 'submit' }, `${submitText}`)
+            break
+        case 'link':
+            const LinkText = (role2 === 'auth') ? 'Авторизация' : 'Регистрация'
+            btn = el(`button.button button__${role}`, { type: 'button' }, `${LinkText}`)
+
+            btn.addEventListener('click', function(e) {
+                navigate((role2 === 'auth') ? 'AuthPage' : 'RegisterPage')
+            })
+            break
+    }
+    return btn
+}

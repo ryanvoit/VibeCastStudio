@@ -1,13 +1,13 @@
 import { el, setChildren } from "redom";
-import authFormInit from "../components/authForm";
+import registerFormInit from "../components/registerForm";
 import { headerAuth } from "../components/header--auth";
 
-export default function authPageInit() {
+export default function registerPageInit() {
     setChildren(window.document.body, [
         headerAuth(),
         el('main', [
             el('.container', [
-                authFormInit()
+                registerFormInit()
             ])
         ])
     ]);

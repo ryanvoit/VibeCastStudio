@@ -1,0 +1,9 @@
+.register-form,
+.auth-form {
+    width: 100%;
+    padding: 200px 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}

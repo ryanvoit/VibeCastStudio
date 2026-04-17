@@ -1,8 +1,9 @@
 import MainPageInit from "./view/pages/MainPage"
 import FavouritePageInit from "./view/pages/FavouritePage"
-import AuthPageInit from "./view/pages/AuthPage"
+import authPageInit from "./view/pages/AuthPage"
+import registerPageInit from "./view/pages/RegisterPage"
 
-export async function navigate(page: 'MainPage' | 'FavouritePage' | 'AuthPage') {
+export async function navigate(page: 'MainPage' | 'FavouritePage' | 'AuthPage' | 'RegisterPage') {
     document.body.innerHTML = ''
 
     switch(page) {
@@ -17,9 +18,12 @@ export async function navigate(page: 'MainPage' | 'FavouritePage' | 'AuthPage') 
             // FavouritePage.default()
             break
         case 'AuthPage':
-            AuthPageInit()
+            authPageInit()
             // const AuthPage = await import("./view/pages/AuthPage")
             // AuthPage.default()
-            break        
+            break  
+        case 'RegisterPage':
+            registerPageInit()
+            break
     }
 }

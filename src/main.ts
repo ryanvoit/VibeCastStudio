@@ -3,12 +3,11 @@ import { fetchRegist, fetchTracks } from "./fetches/fetches";
 import "./styles/main.scss"
 import "./sprite.svg"
 
-navigate('MainPage')
+navigate('AuthPage')
 
-const newUser = {
+fetchRegist({
     username: 'ryanvoit',
     password: 'ryanvoit'
-}
+})
 
-fetchRegist(newUser)
 fetchTracks()
