@@ -1,5 +1,5 @@
 import { navigate } from "./services/navigate";
-import { fetchRegist, fetchTracks, registerUser, loginUser } from "./fetches/fetches";
+import { fetchRegist, fetchTracks, registerUser, loginUser, fetchFavouriteTracks } from "./model/requestsClass.ts";
 import "./styles/main.scss"
 import "./sprite.svg"
 
@@ -14,4 +14,5 @@ loginUser(
     'ryanvoit', 'ryanvoit'
 )
 
+fetchFavouriteTracks()
 fetchTracks()

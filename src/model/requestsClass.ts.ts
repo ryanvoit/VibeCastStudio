@@ -1,5 +1,16 @@
+/**
+ * ! Сделать класс!!!!
+ */
+
 export async function fetchTracks() {
     const response = await fetch('http://localhost:8000/api/tracks')
+
+    const data = await response.json()
+    console.log(data);
+}
+
+export async function fetchFavouriteTracks() {
+    const response = await fetch('http://localhost:8000/api/favourites')
 
     const data = await response.json()
     console.log(data);

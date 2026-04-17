@@ -5,6 +5,10 @@ import { mainTable } from "../components/mainTable";
 import { player } from "../components/player";
 import { IPodcast, ITrack } from "../../services/types";
 
+/**
+ * ! fetch /tracks - GET
+ */
+
 const track: ITrack & IPodcast = {
     id: 1,
     title: "Eternal Sunset",
