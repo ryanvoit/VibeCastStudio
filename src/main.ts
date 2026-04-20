@@ -1,21 +1,7 @@
 import { navigate } from "./services/navigate";
-import { fetchRegist, fetchTracks, registerUser, loginUser, fetchFavouriteTracks } from "./model/requestsClass.ts";
+// import requestClass from "./model/requestClass.ts";
 import "./styles/main.scss";
 import "./sprite.svg";
 
-navigate('MainPage')
-
-
-console.log(
-    registerUser(
-        'ryanvoit', 'ryanvoit'
-    )
-);
-loginUser(
-    'ryanvoit', 'ryanvoit'
-)
-
-fetchFavouriteTracks()
-fetchTracks()
-
+navigate('RegisterPage')
 

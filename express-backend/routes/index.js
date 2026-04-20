@@ -9,9 +9,17 @@ const router = express.Router();
 const cors = require('cors');
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:8080',
+  credentials: true
+}));
+
+/*
 // Базовая настройка (разрешить все источники)
 // app.use(cors());
+*/
 
+/*
 // Детальная настройка
 app.use(cors({
     origin: 'http://127.0.0.1:5500',
@@ -19,6 +27,16 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
+
+app.use(cors({
+    origin: 'http://localhost:8080',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
+*/
+
+
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);

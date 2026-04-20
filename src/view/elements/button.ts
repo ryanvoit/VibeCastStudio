@@ -4,6 +4,7 @@ import pic from "./img.svg";
 import { navigate } from "./../../services/navigate";
 import { IPodcast, ITrack } from "../../services/types";
 import HandleFunctionsClass from "../../controller/HandleFunctionsClass";
+import { validate } from "../../services/validateRegister";
 
 const HandleFunctions = new HandleFunctionsClass()
 
@@ -103,14 +104,14 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
             const submitText = (role2 === 'auth') ? 'Войти' : 'Зарегестрироваться'
             btn = el(`button.button button__${role}`, { type: 'submit' }, `${submitText}`)
 
+            /*
             btn.addEventListener('click', function(e){
-                console.log('fff');
                 /**
                  * !----------------------------------
                  * !---------------------------
                  * !----------------------
                  */
-            })
+            // })
             break
         case 'link':
             const LinkText = (role2 === 'auth') ? 'Авторизация' : 'Регистрация'

@@ -1,7 +1,7 @@
 import { el } from "redom";
 import { registAuthInput } from "../elements/input";
 import { btnForm } from "../elements/button";
-import { validate } from "../../services/validate";
+import { validate } from "../../services/validateRegister";
 
 export default function registerFormInit() {
     const btnSubmit = btnForm('submit', 'regist')
@@ -9,7 +9,7 @@ export default function registerFormInit() {
     const inputPassword: HTMLElement = registAuthInput('password')
 
     const registerForm = el('form.register-form', {
-        action: '#',
+        action: 'http://localhost:8000/api/register',
         method: 'POST'
     }, [
         inputUsername,
@@ -21,9 +21,9 @@ export default function registerFormInit() {
         ])
     ]) as HTMLFormElement
 
-    btnSubmit.addEventListener('click', function (e) {
-        validate(e, registerForm, 'register')
-    })
+    setTimeout(() => {
+        validate()
+    }, 10)
 
     return registerForm
 }

@@ -19,3 +19,8 @@ export interface IPodcast {
     encoded_audio: string;
     favourite: boolean
 }
+
+export interface fetchUser {
+    username: string,
+    password: string
+}

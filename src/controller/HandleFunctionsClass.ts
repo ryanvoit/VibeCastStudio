@@ -6,10 +6,6 @@ import { svgInit } from "../view/elements/svg";
 import { navigate } from "../services/navigate";
 import { numRangeToDuration } from "../services/playerRanges";
 
-/** 
- * ! Создать класс функций кликов и input
- */
-
 export default class HandleFunctionsClass {
     inputSearch(input: HTMLInputElement, tracks: Array<ITrack & IPodcast>) {
         const search = input.value
