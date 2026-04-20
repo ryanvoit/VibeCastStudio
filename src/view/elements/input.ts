@@ -1,35 +1,43 @@
 import { el } from "redom";
 import { svgInit } from "./svg";
+import HandleFunctions from "../../controller/HandleFunctionsClass";
+import { IPodcast, ITrack } from "../../services/types";
 
-export function inputInit(role: 'search' | 'reg-auth', name?: 'username' | 'password') {
-    switch (role) {
-        case 'search':
-            const inputSearch = el('.header__search', [
-                el('input.input__search', { type: 'text', placeholder: 'Что будем искать?' }),
-                svgInit('search')
-            ])
+const handleFunctions = new HandleFunctions()
 
-            return inputSearch
-        case 'reg-auth':
-            const label = (name === 'username') ? 'Имя пользователя*:' : 'Пароль*:'
-            // const error = (name === 'username') ? ''
+export function searchInput(tracks: Array<ITrack & IPodcast>) {
+    const inputSearch = el('.header__search', [
+        el('input.input__search', { type: 'text', placeholder: 'Что будем искать?' }),
+        svgInit('search')
+    ]);
+    
+    (inputSearch.firstElementChild as HTMLInputElement).addEventListener('input', function() {
+        handleFunctions.inputSearch((inputSearch.firstElementChild as HTMLInputElement), tracks)
+    })
 
-            const field = el('input.custom-input__field', {
-                type: 'text',
-                name: name,
-                id: name,
-                placeholder: name,
-                required: true,
-                autocomplete: 'on'
-            })
+    return inputSearch
+}
 
-            const input = el('.custom-input', [
-                field,
-                el('label.custom-input__label', {
-                    for: name
-                }, label)
-            ])
+export function registAuthInput(name: 'username' | 'password') {
+    const label = (name === 'username') ? 'Имя пользователя*:' : 'Пароль*:'
+    // const error = (name === 'username') ? ''
 
-            return input
-    }
+    const field = el('input.custom-input__field', {
+        type: 'text',
+        name: name,
+        id: name,
+        placeholder: name,
+        required: true,
+        autocomplete: 'on'
+    })
+
+    const input = el('.custom-input', [
+        field,
+        el('label.custom-input__label', {
+            for: name
+        }, label)
+    ])
+
+    return input
+
 }

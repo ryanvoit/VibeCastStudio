@@ -1,9 +1,10 @@
 import { navigate } from "./services/navigate";
 import { fetchRegist, fetchTracks, registerUser, loginUser, fetchFavouriteTracks } from "./model/requestsClass.ts";
-import "./styles/main.scss"
-import "./sprite.svg"
+import "./styles/main.scss";
+import "./sprite.svg";
 
-navigate('AuthPage')
+navigate('MainPage')
+
 
 console.log(
     registerUser(
@@ -16,3 +17,5 @@ loginUser(
 
 fetchFavouriteTracks()
 fetchTracks()
+
+

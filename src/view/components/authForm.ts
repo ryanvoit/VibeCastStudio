@@ -1,12 +1,12 @@
 import { el } from "redom";
-import { inputInit } from "../elements/input";
+import { registAuthInput } from "../elements/input";
 import { btnForm } from "../elements/button";
 import { validate } from "../../services/validate";
 
 export default function authFormInit() {
     const btnSubmit = btnForm('submit', 'auth')
-    const inputUsername: HTMLElement = inputInit('reg-auth', 'username')
-    const inputPassword: HTMLElement = inputInit('reg-auth', 'password')
+    const inputUsername: HTMLElement = registAuthInput('username')
+    const inputPassword: HTMLElement = registAuthInput('password')
 
     const authForm = el('form.auth-form', {
         action: '#',

@@ -1,4 +1,4 @@
-const podcasts = [
+export const podcasts = [
   {
     id: 1,
     title: "Tech Talk Weekly",

@@ -16,8 +16,8 @@ export function validate(e: Event, form: HTMLFormElement, formRole: 'register' |
          * ! catch(error) { error.message } 
          * ! message can be 'пользователь уже существует'
          */
-
         /*
+
 validator
     .addField(inputUsername, [
         {
@@ -52,9 +52,10 @@ validator
     ])
         */
 
-        /*
+    /*
         validator.onSuccess(function() {
-            // fetchLogin()
+            console.log('register');
+            // fetchRegister()
         })
             */
 

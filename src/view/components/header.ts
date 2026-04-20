@@ -1,17 +1,29 @@
 import { el } from 'redom';
-import { inputInit } from '../elements/input';
-import { buttonInit } from '../elements/button';
+import { searchInput } from '../elements/input';
 import { svgInit } from '../elements/svg';
+import user from './user.svg';
+import { ITrack, IPodcast } from '../../services/types';
 
-export const header = el('header.header', [
-	el('.container', [
-		el('.header__wrapper', [
-			el(".header__logo", [
-				svgInit('logo'),
-				el("span.header__title", "VibeCast Studio")
-			]),
-			inputInit('search'),
-			buttonInit('user')
+export function header(tracks: Array<ITrack & IPodcast>) {
+	const header = el('header.header', [
+		el('.container', [
+			el('.header__wrapper', [
+				el(".header__logo", [
+					svgInit('logo'),
+					el("span.header__title", "VibeCast Studio")
+				]),
+				searchInput(tracks),
+				el('.header__user', [
+					el("img.header__icon", { src: user, height: '42', width: '42' }),
+					/**
+					 * ! username из fetch login
+					 */
+					el("span.header__username", "username"),
+					svgInit('arrow')
+				])
+			])
 		])
-	])
-]);
+	]);
+
+	return header
+}

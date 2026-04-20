@@ -11,7 +11,8 @@
     display: grid;
     grid-template-columns: 434px 1fr 97px;
     align-items: end;
-    // opacity: 0
+    transform: translateY(100px);
+    transition: transform $transition;
 
     &__wrapper {
         padding: 0 0 0 8px;

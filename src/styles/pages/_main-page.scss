@@ -1,5 +1,15 @@
 .main-page-wrapper {
     display: grid;
     grid-template-columns: 289px 1fr;
-    min-height: calc(100vh - 69px)
+    min-height: calc(100vh - 69px);
+    margin: 0 0 100px;
+
+    &--player-on {
+        margin: 0;
+
+        .player {
+            transform: translateY(0);
+            transition: transform $transition;
+        }
+    }
 }

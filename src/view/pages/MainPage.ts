@@ -8,27 +8,24 @@ import { IPodcast, ITrack } from "../../services/types";
 /**
  * ! fetch /tracks - GET
  */
-
-const track: ITrack & IPodcast = {
-    id: 1,
-    title: "Eternal Sunset",
-    artist: "Skyline Sounds",
-    duration: 9.36,
-    size_mb: 8.57,
-    encoded_audio:
-        "QXVkaW8gZGF0YSBmb3IgRXRlcm5hbCBTdW5zZXQgYnkgU2t5bGluZSBTb3VuZHM=",
-    favourite: true
-}
+import { tracksProcess } from "../../services/trackProcess";
+/**
+ * ! fetch /favourite - GET --> if(favourite) --> favourite: true
+ */
 
 export default function mainPageInit() {
+    let tracks: Array<ITrack & IPodcast> = tracksProcess()
+
     setChildren(window.document.body, [
-        header,
+        header(tracks),
         el('main', [
             el('.container', [
                 el('.main-page-wrapper', [
-                    aside,
-                    mainTable,
-                    player(track)
+                    aside('main'),
+                    mainTable(tracks),
+                    el('.player__super-wrapper', [
+                        player(tracks[0])
+                    ])
                 ])
             ])
         ])

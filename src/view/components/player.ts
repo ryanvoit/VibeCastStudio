@@ -1,24 +1,27 @@
 import { el } from "redom"
-import { IPodcast, ITrack } from "../../services/types"
-import pic from "./img.svg"
+import { IPodcast, ITrack } from "../../services/types";
+import pic from "./img.svg";
 import { buttonInit, btnPlayer } from "../elements/button"
 import { numToMin } from "../../services/playerRanges"
 import { maxRange, numRangeToDuration, volumeValToWidth } from "../../services/playerRanges"
 import { svgInit } from "../elements/svg"
-
+import { listening } from "../../services/listening"
 
 export function player(track: ITrack & IPodcast) {
-    const range = el('input.player__range', {
+    let range = el('input.player__range', {
         type: 'range',
         min: 0,
         max: maxRange(track.duration),
         step: 1,
+        value: 0
     }) as HTMLInputElement
     const outputRange = el('output.player__output', `${numRangeToDuration(Number(range.value))}`)
 
     range.addEventListener("input", (event) /*rangeEv(outputRange, event)*/ => {
         outputRange.textContent = numRangeToDuration(Number((event.target as HTMLInputElement).value))
     })
+
+    listening(range, outputRange)
 
     const maxVolume: number = 20
 
@@ -27,7 +30,7 @@ export function player(track: ITrack & IPodcast) {
         min: 0,
         max: maxVolume,
         step: 1,
-        value: 10
+        value: Math.floor(maxVolume * 0.5)
     }) as HTMLInputElement
 
     const rangeVolumeLevel = el('span.player__level')
@@ -51,7 +54,7 @@ export function player(track: ITrack & IPodcast) {
             el('.player__inner', [
                 el('span.player__title', [
                     el('span.player__name', `${track.title}`),
-                    el('span.player__favourite', buttonInit('favourite-noCell', track.favourite))
+                    el('span.player__favourite', buttonInit('favourite-noCell', track))
                 ]),
                 el('span.player__artist', (track.artist) ? `${track.artist}` : `${track.host}`)
             ])

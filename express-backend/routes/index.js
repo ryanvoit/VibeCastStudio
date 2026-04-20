@@ -2,21 +2,23 @@ const express = require("express");
 const authController = require("../controllers/authController");
 const trackController = require("../controllers/trackController");
 const authenticate = require("../middleware/authMiddleware");
-// const app = express()
-// const cors = require("cors");
 
 const router = express.Router();
 
-/*
-app.use(cors({
-    origin: "http://127.0.0.1:5500/dist/index.html",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
-app.use(express.json());
+// Использование в приложении
+const cors = require('cors');
+const app = express();
 
-app.use(cors());
-*/
+// Базовая настройка (разрешить все источники)
+// app.use(cors());
+
+// Детальная настройка
+app.use(cors({
+    origin: 'http://127.0.0.1:5500',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);
