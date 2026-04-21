@@ -25,7 +25,6 @@ export function validate() {
         ])
         .onSuccess(function (e) {
             requests.loginUser()
-            navigate('MainPage')
             /**
              * ! try { fetch --> !response.ok } 
              * ! try { fetch --> response.ok --> navigate('MainPage')}

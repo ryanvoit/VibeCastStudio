@@ -20,6 +20,9 @@ export interface IPodcast {
     favourite: boolean
 }
 
+export type OmitFavouriteTrack = Omit<ITrack, 'favourite'>
+export type OmitFavouritePodcast = Omit<IPodcast, 'favourite'>
+
 export interface fetchUser {
     username: string,
     password: string

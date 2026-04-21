@@ -37,7 +37,9 @@ export default class requestClass {
     }
     /**
      * ! try { fetch --> !response.ok } 
-     * ! try { fetch --> response.ok --> navigate('MainPage')}
+     * ! try { fetch --> response.ok --> navigate('MainPage')
+     * ! + username!!!
+     * ! }
      * ! catch(error) { error.message } 
      * ! message can be 'произошла ошибка при авторизации — неверные данные'
      */

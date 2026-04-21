@@ -7,7 +7,9 @@ import { maxRange, numRangeToDuration, volumeValToWidth } from "../../services/p
 import { svgInit } from "../elements/svg"
 import { listening } from "../../services/listening"
 
-export function player(track: ITrack & IPodcast) {
+export function player(tracks: Array<ITrack & IPodcast>, id: number) {
+    const track = tracks[id]
+
     let range = el('input.player__range', {
         type: 'range',
         min: 0,
@@ -17,7 +19,7 @@ export function player(track: ITrack & IPodcast) {
     }) as HTMLInputElement
     const outputRange = el('output.player__output', `${numRangeToDuration(Number(range.value))}`)
 
-    range.addEventListener("input", (event) /*rangeEv(outputRange, event)*/ => {
+    range.addEventListener("input", (event) => {
         outputRange.textContent = numRangeToDuration(Number((event.target as HTMLInputElement).value))
     })
 
@@ -39,32 +41,23 @@ export function player(track: ITrack & IPodcast) {
         rangeVolumeLevel.style.width = volumeValToWidth(Number((event.target as HTMLInputElement).value), maxVolume)
     })
 
-    /*rangeEv(outputRange, event)*/
-    /*=> {
-        outputRange.textContent = (event.target as HTMLInputElement).value
-    })
-    function rangeEv(rangeOut: HTMLElement, e: InputEvent):any {
-        rangeOut.textContent = (e.target as HTMLInputElement).value
-    }
-    */
-
     const player = el('.player', [
         el('.player__wrapper', [
             el('img.player__pic', { src: pic, height: 60, width: 60 }),
             el('.player__inner', [
                 el('span.player__title', [
                     el('span.player__name', `${track.title}`),
-                    el('span.player__favourite', buttonInit('favourite-noCell', track))
+                    el('span.player__favourite', buttonInit('favourite-noCell', tracks, id))
                 ]),
                 el('span.player__artist', (track.artist) ? `${track.artist}` : `${track.host}`)
             ])
         ]),
         el('.player__duration-wrapper', [
             el('.player__buttons', [
-                btnPlayer('shuffle'),
-                btnPlayer('back'),
+                btnPlayer('shuffle', tracks, id),
+                btnPlayer('back', tracks, id),
                 btnPlayer('playSong'),
-                btnPlayer('next'),
+                btnPlayer('next', tracks, id),
                 btnPlayer('repeat')
             ]),
             el('.player__range-wrapper', [

@@ -24,13 +24,11 @@ export function cellsMain() {
 export function cells(tracks: (ITrack & IPodcast)[]): HTMLElement[] {
     const rows = []
     for (let i = 0; i < tracks.length; i++) {
-        const track = tracks[i];
-
         const tableRow = el('tr.main-table__row main-table__row--secondary', [
-            buttonPlayInit(track),
-            buttonInit('favourite', track),
-            el('td.main-table__cell', `${numToMin(track.duration)}`),
-            buttonInit('settings', track)
+            buttonPlayInit(tracks, i),
+            buttonInit('favourite', tracks, i),
+            el('td.main-table__cell', `${numToMin(tracks[i].duration)}`),
+            buttonInit('settings', tracks, i)
         ])
         rows.push(tableRow)
     }

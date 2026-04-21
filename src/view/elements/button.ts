@@ -4,11 +4,11 @@ import pic from "./img.svg";
 import { navigate } from "./../../services/navigate";
 import { IPodcast, ITrack } from "../../services/types";
 import HandleFunctionsClass from "../../controller/HandleFunctionsClass";
-import { validate } from "../../services/validateRegister";
 
 const HandleFunctions = new HandleFunctionsClass()
 
-export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', track: ITrack & IPodcast) {
+export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack & IPodcast>, id: number) {
+    const track = tracks[id]
     switch (role) {
         case 'favourite':
             const buttonFav = el('button.button button__favourite', { type: 'button' }, [
@@ -39,8 +39,8 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
                 ])
             ])
 
-            buttonSettings.addEventListener('click', function(e){
-                HandleFunctions.buttonStartPlay(track)
+            buttonSettings.addEventListener('click', function (e) {
+                HandleFunctions.buttonStartPlay(tracks, id)
             })
 
             return buttonSettings
@@ -65,7 +65,9 @@ export function asideBtn(active: boolean, text: string) {
     return buttonAside
 }
 
-export function buttonPlayInit(track: ITrack & IPodcast) {
+export function buttonPlayInit(tracks: Array<ITrack & IPodcast>, id: number) {
+    const track = tracks[id]
+
     const buttonPlay = el('button.button button__play', { type: 'button' }, [
         el('td.main-table__cell', `${track.id}`),
         el('td.main-table__cell', [
@@ -83,17 +85,50 @@ export function buttonPlayInit(track: ITrack & IPodcast) {
     ])
 
     buttonPlay.addEventListener('click', function () {
-        HandleFunctions.buttonStartPlay(track)
+        HandleFunctions.buttonStartPlay(tracks, id)
     })
 
     return buttonPlay
 }
 
-export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat') {
+export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat', tracks?: Array<ITrack & IPodcast>, id?: number) {
     const btn = el(`button.button button__${role}`, { type: 'button' }, [
         svgInit(role)
-    ])
+    ]) as HTMLButtonElement
 
+    switch (role) {
+        case 'playSong':
+            btn.addEventListener('click', function() {
+                HandleFunctions.btnPlay(btn)
+            })
+            break
+        case 'shuffle':
+            btn.addEventListener('click', function() {
+                HandleFunctions.btnShuffle(tracks as Array<ITrack & IPodcast>)
+            })
+            break
+        case 'back':
+            btn.addEventListener('click', function() {
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number - 1))
+            })
+            break
+        case 'next':
+            btn.addEventListener('click', function() {
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number + 1))
+            })
+            break
+        case 'repeat':
+             btn.addEventListener('click', function() {
+                HandleFunctions.btnRepeat(
+                    document.querySelector('.player__range') as HTMLInputElement,
+                    document.querySelector('.player__output') as HTMLElement
+                )
+            })
+            /**
+             * ! repeat
+             */
+            break
+    }
     return btn
 }
 
@@ -104,14 +139,6 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
             const submitText = (role2 === 'auth') ? 'Войти' : 'Зарегестрироваться'
             btn = el(`button.button button__${role}`, { type: 'submit' }, `${submitText}`)
 
-            /*
-            btn.addEventListener('click', function(e){
-                /**
-                 * !----------------------------------
-                 * !---------------------------
-                 * !----------------------
-                 */
-            // })
             break
         case 'link':
             const LinkText = (role2 === 'auth') ? 'Авторизация' : 'Регистрация'

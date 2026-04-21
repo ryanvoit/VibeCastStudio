@@ -4,24 +4,26 @@ import { setChildren, el } from "redom";
 import { mainTable } from "../components/mainTable";
 import { player } from "../components/player";
 import { IPodcast, ITrack } from "../../services/types";
-
-/**
- * ! fetch /favourite - GET
- */
 import { tracksProcess } from "../../services/trackProcess";
 
+import { tracks } from './tracks';
+import { podcasts } from "./podcasts"
+
 export default function favouritePageInit() {
-    let tracks: Array<ITrack & IPodcast> = tracksProcess()
+     /**
+     * ! fetch /favourite - GET
+     */
+    let trax: Array<ITrack & IPodcast> = tracksProcess(tracks, podcasts)
 
     setChildren(window.document.body, [
-        header(tracks),
+        header(trax),
         el('main', [
             el('.container', [
                 el('.main-page-wrapper', [
                     aside('favourite'),
-                    mainTable(tracks),
+                    mainTable(trax),
                     el('.player__super-wrapper', [
-                        player(tracks[0])
+                        player(trax, 0)
                     ])
                 ])
             ])

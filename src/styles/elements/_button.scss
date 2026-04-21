@@ -73,6 +73,10 @@
 	&__next,
 	&__repeat {
 		padding: 0;
+
+		&--off .svg-playSong {
+			background-color: $color-dark-gray2;
+		}
 	}
 
 	&__shuffle:hover .shuffle-icon,

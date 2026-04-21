@@ -1,5 +1,4 @@
 import { numRangeToDuration } from "./playerRanges"
-import HandleFunctionsClass from "../controller/HandleFunctionsClass"
 
 export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
     let interval = setInterval(() => {
@@ -22,12 +21,16 @@ export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
         })
 
         const btnPlay = document.querySelector('.button__playSong') as HTMLButtonElement
-        const handleFunctions = new HandleFunctionsClass()
 
         btnPlay.addEventListener('click', function () {
-            handleFunctions.btnPlay(btnPlay, interval, range, outputRange)
+            clearInterval(interval)
+        })
+
+        const btnRepeat = document.querySelector('.button__repeat') as HTMLButtonElement
+
+        btnRepeat.addEventListener('click', function () {
+            clearInterval(interval)
+
         })
     }, 10)
-
-    return interval
 }
