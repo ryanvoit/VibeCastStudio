@@ -1,6 +1,12 @@
 import { numRangeToDuration } from "./playerRanges"
+// import HandleFunctionsClass from "../controller/HandleFunctionsClass"
+// import { IPodcast, ITrack } from "./types"
 
-export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
+// const HandleFunctions = new HandleFunctionsClass()
+
+export function listening(range: HTMLInputElement, outputRange: HTMLElement,
+    // tracks: Array<ITrack & IPodcast>, id: number
+    ) {
     let interval = setInterval(() => {
         let seconds = Number(range.value)
         seconds++
@@ -8,6 +14,10 @@ export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
         outputRange.textContent = numRangeToDuration(Number(range.value))
         if (Number(range.value) === Number(range.max)) {
             clearInterval(interval)
+            /**
+             * TODO: improving
+             * HandleFunctions.buttonStartPlay(tracks, id)
+             */
         }
     }, 1000)
 
@@ -24,13 +34,6 @@ export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
 
         btnPlay.addEventListener('click', function () {
             clearInterval(interval)
-        })
-
-        const btnRepeat = document.querySelector('.button__repeat') as HTMLButtonElement
-
-        btnRepeat.addEventListener('click', function () {
-            clearInterval(interval)
-
         })
     }, 10)
 }

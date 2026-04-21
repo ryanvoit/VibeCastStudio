@@ -28,6 +28,7 @@ export default class HandleFunctionsClass {
         if (id <= -1) {
             id = 0
         }
+        console.log(id, tracks);
         const mainPageWrapper = document.querySelector('.main-page-wrapper') as HTMLElement
         const playerSuper = document.querySelector('.player__super-wrapper') as HTMLElement
         mainPageWrapper.classList.remove('main-page-wrapper--player-on')
@@ -75,12 +76,15 @@ export default class HandleFunctionsClass {
         }, 300)
     }
 
-    btnPlay(btn: HTMLButtonElement) {
+    btnPlay(btn: HTMLButtonElement, 
+        // tracks: Array<ITrack & IPodcast>, id: number
+    ) {
         setTimeout(() => {
             if (btn.classList.contains('button__playSong--off')) {
                 listening(
                     document.querySelector('.player__range') as HTMLInputElement,
-                    document.querySelector('.player__output') as HTMLElement
+                    document.querySelector('.player__output') as HTMLElement,
+                    // tracks, id
                 )
 
                 btn.classList.remove('button__playSong--off')

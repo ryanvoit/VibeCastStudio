@@ -23,7 +23,9 @@ export function player(tracks: Array<ITrack & IPodcast>, id: number) {
         outputRange.textContent = numRangeToDuration(Number((event.target as HTMLInputElement).value))
     })
 
-    listening(range, outputRange)
+    listening(range, outputRange,
+        // tracks, id
+    )
 
     const maxVolume: number = 20
 
@@ -58,7 +60,7 @@ export function player(tracks: Array<ITrack & IPodcast>, id: number) {
                 btnPlayer('back', tracks, id),
                 btnPlayer('playSong'),
                 btnPlayer('next', tracks, id),
-                btnPlayer('repeat')
+                btnPlayer('repeat', tracks, id)
             ]),
             el('.player__range-wrapper', [
                 outputRange,

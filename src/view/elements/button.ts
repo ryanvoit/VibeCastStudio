@@ -99,7 +99,9 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
     switch (role) {
         case 'playSong':
             btn.addEventListener('click', function() {
-                HandleFunctions.btnPlay(btn)
+                HandleFunctions.btnPlay(btn, 
+                    // tracks as Array<ITrack & IPodcast>, id as number
+                )
             })
             break
         case 'shuffle':
@@ -118,15 +120,9 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
             })
             break
         case 'repeat':
-             btn.addEventListener('click', function() {
-                HandleFunctions.btnRepeat(
-                    document.querySelector('.player__range') as HTMLInputElement,
-                    document.querySelector('.player__output') as HTMLElement
-                )
+            btn.addEventListener('click', function() {
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number))
             })
-            /**
-             * ! repeat
-             */
             break
     }
     return btn
