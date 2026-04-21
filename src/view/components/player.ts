@@ -8,7 +8,9 @@ import { svgInit } from "../elements/svg"
 import { listening } from "../../services/listening"
 
 export function player(tracks: Array<ITrack & IPodcast>, id: number) {
+    console.log(tracks);
     const track = tracks[id]
+    console.log(track);
 
     let range = el('input.player__range', {
         type: 'range',

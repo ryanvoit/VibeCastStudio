@@ -21,12 +21,9 @@ export default function mainPageInit() {
             el('.container', [
                 el('.main-page-wrapper', [
                     aside('main'),
-                    mainTable(trax),
-                    /**
-                     * !
-                     * ! PAGGINATION
-                     * !
-                     */
+                    el('.main-table__super-wrapper', [
+                        mainTable(trax),
+                    ]),
                     el('.player__super-wrapper', [
                         player(trax, 0)
                     ])

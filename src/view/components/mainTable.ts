@@ -4,6 +4,7 @@ import { numToMin } from '../../services/playerRanges';
 import { svgInit } from '../elements/svg';
 import { buttonInit, buttonPlayInit } from '../elements/button';
 // import pic from "./img.svg"
+import { btnPagination } from "../elements/button"
 
 export function cellsMain() {
     const cellNames: string[] = ['№', 'Название', 'Альбом', '', '', '', '']
@@ -21,30 +22,60 @@ export function cellsMain() {
     return mainTableRow
 }
 
-export function cells(tracks: (ITrack & IPodcast)[]): HTMLElement[] {
+export function cells(trax: (ITrack & IPodcast)[], tracks: (ITrack & IPodcast)[]): HTMLElement[] {
+    console.log(trax)
+    console.log(tracks);
     const rows = []
-    for (let i = 0; i < tracks.length; i++) {
+    for (let i = 0; i < trax.length; i++) {
         const tableRow = el('tr.main-table__row main-table__row--secondary', [
-            buttonPlayInit(tracks, i),
-            buttonInit('favourite', tracks, i),
-            el('td.main-table__cell', `${numToMin(tracks[i].duration)}`),
-            buttonInit('settings', tracks, i)
+            buttonPlayInit(trax, i),
+            buttonInit('favourite', trax, i),
+            el('td.main-table__cell', `${numToMin(trax[i].duration)}`),
+            buttonInit('settings', trax, i)
         ])
         rows.push(tableRow)
     }
     return rows
 }
 
-export function table(tracks: (ITrack & IPodcast)[]) {
+export function table(tracks: (ITrack & IPodcast)[], tracksAmountPage: number, btns: HTMLButtonElement[]) {
+    const active = btns.find(btn => btn.classList.contains('button__pagination--active'))
+    let pageNumber = 1
+
+    if (active) {
+        console.log(active);
+        pageNumber = Number(active.textContent)
+    } else {
+        btns[0].classList.add('button__pagination--active')
+    }
+
+    const trax = tracks.slice((pageNumber - 1) * tracksAmountPage, (pageNumber - 1) * tracksAmountPage + 5)
     return el('table.main-table__table', [
         cellsMain(),
-        cells(tracks)
+        cells(trax, tracks),
     ])
 }
 
 export function mainTable(tracks: (ITrack & IPodcast)[]) {
+    const amountTracks = tracks.length
+    const tracksAmountPage = 5
+    let pages = amountTracks / tracksAmountPage
+    if(pages === 0) {
+        pages = 1
+    } 
+
+    let btns:HTMLButtonElement[] = []
+    for (let i = 1; i < pages + 1; i++) {
+        btns.push(btnPagination(i, tracks, btns) as HTMLButtonElement)
+    }
+
     return el('.main-table', [
         el('h2.main-table__title', 'Аудифайлы и треки'),
-        table(tracks)
+        el('.main-table__super', [
+            table(tracks, tracksAmountPage, btns)
+        ]),
+        el('.main-table__pagination-wrapper', [
+            btns
+        ])
     ])
 }

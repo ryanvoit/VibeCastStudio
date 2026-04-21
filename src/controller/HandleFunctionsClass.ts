@@ -1,6 +1,6 @@
 import { setChildren, el } from "redom";
 import { ITrack, IPodcast } from "../services/types";
-import { table } from "../view/components/mainTable";
+import { mainTable } from "../view/components/mainTable";
 import { player } from "../view/components/player";
 import { svgInit } from "../view/elements/svg";
 import { navigate } from "../services/navigate";
@@ -15,12 +15,12 @@ export default class HandleFunctionsClass {
             track => track.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
 
-        const mainTable = document.querySelector('.main-table') as HTMLElement
-        mainTable.innerHTML = ''
+        const mainTableWrapper = document.querySelector('.main-table__super-wrapper') as HTMLElement
+        // mainTableWrapper.innerHTML = ''
+        console.log(mainTableWrapper);
 
-        setChildren(mainTable, [
-            el('h2.main-table__title', 'Аудифайлы и треки'),
-            table(filteredTracks)
+        setChildren(mainTableWrapper, [
+            mainTable(filteredTracks)
         ])
     }
 

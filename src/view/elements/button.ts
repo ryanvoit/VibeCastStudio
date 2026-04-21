@@ -4,6 +4,7 @@ import pic from "./img.svg";
 import { navigate } from "./../../services/navigate";
 import { IPodcast, ITrack } from "../../services/types";
 import HandleFunctionsClass from "../../controller/HandleFunctionsClass";
+import { table } from "../components/mainTable";
 
 const HandleFunctions = new HandleFunctionsClass()
 
@@ -145,5 +146,26 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
             })
             break
     }
+    return btn
+}
+
+export function btnPagination(pageNumber: number, tracks: (ITrack & IPodcast)[], btns: HTMLButtonElement[]) {
+    const btn = el(
+        'button.button button__pagination', { type: 'button' }, `${pageNumber}`
+    )
+
+    btn.addEventListener('click', function() {
+        btns.forEach(btn => {
+            btn.classList.remove('button__pagination--active')
+        })
+
+        btn.classList.add('button__pagination--active')
+        console.log(btns);
+
+        setChildren(
+            document.querySelector('.main-table__super') as HTMLElement,
+            [table(tracks, 5, btns)]
+        )
+    })
     return btn
 }

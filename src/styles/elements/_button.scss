@@ -109,4 +109,27 @@
 		color: $color-burnt-orange;
 		text-decoration: underline;
 	}
+
+	&__pagination {
+		border: 1px solid $color-black;
+		border-radius: 5px;
+		width: 30px;
+		height: 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: color $transition, background-color $transition;
+
+		&:hover {
+			color: $color-burnt-orange;
+		}
+
+		&--active {
+			background-color: $color-burnt-orange;
+
+			&:hover {
+				color: $color-black;
+			}
+		}
+	}
 }

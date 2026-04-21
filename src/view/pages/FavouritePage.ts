@@ -21,7 +21,9 @@ export default function favouritePageInit() {
             el('.container', [
                 el('.main-page-wrapper', [
                     aside('favourite'),
-                    mainTable(trax),
+                    el('.main-table__super-wrapper', [
+                        mainTable(trax),
+                    ]),
                     el('.player__super-wrapper', [
                         player(trax, 0)
                     ])
