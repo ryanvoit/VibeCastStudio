@@ -1,20 +1,22 @@
 import { fetchUser } from "../services/types"
+import { navigate } from "../services/navigate"
 
 export default class requestClass {
     async registerUser(newUser: fetchUser) {
-        return fetch('http://localhost:8000/api/register', {
-            // http://localhost:8000/api/register
-            // /api/register
-            // http://127.0.0.1:5500/api/register
+        await fetch('http://localhost:8000/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'origin': 'http://localhost:8080',
             },
             body: JSON.stringify(newUser)
         }).then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            if(data.message !== "пользователь уже существует") {
+                navigate('AuthPage')
+                console.log(data);
+            } else {
+                console.log(data);
+            }
         })
     }
     /**
@@ -29,18 +31,19 @@ export default class requestClass {
 
     async loginUser(user: fetchUser) {
         return fetch('http://localhost:8000/api/login', {
-            // http://localhost:8000/api/login
-            // /api/login
-            // http://127.0.0.1:5500/api/login
             method: 'POST',
-            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         }).then((response) => response.json())
-        .then((data) => {
-            console.log(data);
+            .then((data) => {
+            if(data.message !== "произошла ошибка при авторизации - неверные данные") {
+                navigate('MainPage')
+                console.log(data);
+            } else {
+                console.log(data);
+            }
         })
     }
     /**
@@ -54,20 +57,12 @@ export default class requestClass {
 
     async fetchTracks() {
         const response = await fetch('http://localhost:8000/api/tracks')
-        // http://localhost:8000/api/tracks
-        // /api/tracks
-        // http://127.0.0.1:5500/api/tracks
-
         const data = await response.json()
         console.log(data);
     }
 
     async fetchFavouriteTracks() {
-        const response = await fetch('http://localhost:8000/api/favourites') 
-        // http://localhost:8000/api/favourites
-        // /api/favourites
-        // http://127.0.0.1:5500/api/favourites
-
+        const response = await fetch('http://localhost:8000/api/favourites')
         const data = await response.json()
         console.log(data);
     }
