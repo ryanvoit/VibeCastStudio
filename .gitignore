@@ -1,0 +1,15 @@
+dist/
+build/
+node_modules/
+
+.npm/
+.yarn/cache/
+.yarn/*
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+
+logs/
+*.log
