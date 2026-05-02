@@ -25,6 +25,10 @@ export function cellsMain() {
 export function cells(trax: (ITrack & IPodcast)[], tracks: (ITrack & IPodcast)[]): HTMLElement[] {
     console.log(trax)
     console.log(tracks);
+    /**
+     * ! PAGINATION !!!!!!!
+     * ! WORKS BAD
+     */
     const rows = []
     for (let i = 0; i < trax.length; i++) {
         const tableRow = el('tr.main-table__row main-table__row--secondary', [

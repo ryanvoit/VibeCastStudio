@@ -1,17 +1,21 @@
 import { fetchUser } from "../services/types"
 
 export default class requestClass {
-    registerUser(newUser: fetchUser) {
+    async registerUser(newUser: fetchUser) {
         return fetch('http://localhost:8000/api/register', {
             // http://localhost:8000/api/register
             // /api/register
             // http://127.0.0.1:5500/api/register
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                // 'origin': 'http://localhost:8080',
             },
             body: JSON.stringify(newUser)
         }).then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
     }
     /**
      * ! try { fetch --> !response.ok } 
@@ -23,17 +27,21 @@ export default class requestClass {
      * ! message can be 'пользователь уже существует'
      */
 
-    loginUser(user: fetchUser) {
+    async loginUser(user: fetchUser) {
         return fetch('http://localhost:8000/api/login', {
             // http://localhost:8000/api/login
             // /api/login
             // http://127.0.0.1:5500/api/login
             method: 'POST',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         }).then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
     }
     /**
      * ! try { fetch --> !response.ok } 

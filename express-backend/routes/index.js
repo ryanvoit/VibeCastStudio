@@ -6,40 +6,17 @@ const authenticate = require("../middleware/authMiddleware");
 const router = express.Router();
 
 // Использование в приложении
-const cors = require('cors');
 const app = express();
 
 /*
 
 app.use(cors({
-  origin: 'http://localhost:8080',
-  credentials: true
-}));
-*/
-
-/*
-// Базовая настройка (разрешить все источники)
-// app.use(cors());
-*/
-
-/*
-// Детальная настройка
-app.use(cors({
-    origin: 'http://127.0.0.1:5500',
+    origin: 'http://localhost:8080', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'application/json'],
     credentials: true
 }));
 */
-
-app.use(cors({
-    origin: 'http://localhost:8080',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'application/json'],
-    credentials: true
-}));
-
-
 
 
 router.post("/register", authController.register);
