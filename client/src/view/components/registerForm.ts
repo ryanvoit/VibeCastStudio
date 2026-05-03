@@ -23,6 +23,7 @@ export default function registerFormInit() {
 
     setTimeout(() => {
         validate()
+        registerForm.classList.add('register-form--animated')
     }, 10)
 
     return registerForm

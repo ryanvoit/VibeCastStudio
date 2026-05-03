@@ -4,6 +4,8 @@
 
 	&--auth {
 		background: $color-white;
+		transform: translateX(-95%);
+    	transition: transform $transition-animation;
 		
 		.header__wrapper {
 			display: flex;
@@ -15,6 +17,10 @@
 			margin: 0;
 			background: $color-white;
 		}
+	}
+
+	&--animated {
+		transform: translateX(0);
 	}
 
 	&__user {

@@ -5,14 +5,20 @@ import { mainTable } from "../components/mainTable";
 import { player } from "../components/player";
 import { IPodcast, ITrack } from "../../services/types";
 import { tracksProcess } from "../../services/trackProcess";
+import requestClass from "../../model/requestClass.ts";
+import { OmitFavouriteTrack } from "../../services/types";
 
-import { tracks } from './tracks';
+const request = new requestClass()
+
 import { podcasts } from "./podcasts"
+import { tracks } from "./tracks"
 
 export default function mainPageInit() {
     /**
      * ! fetch /tracks - GET
      */
+    let tracking = request.fetchTracks() as Promise<OmitFavouriteTrack> 
+    console.log(tracking);
     let trax: Array<ITrack & IPodcast> = tracksProcess(tracks, podcasts)
 
     setChildren(window.document.body, [

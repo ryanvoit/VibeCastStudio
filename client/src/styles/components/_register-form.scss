@@ -6,4 +6,10 @@
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    transform: translateX(95%);
+    transition: transform $transition-animation;
+
+    &--animated {
+        transform: translateX(0)
+    }
 }

@@ -24,12 +24,9 @@ export function validate() {
             }
         ])
         .onSuccess(function (e) {
-            requests.loginUser()
-            /**
-             * ! try { fetch --> !response.ok } 
-             * ! try { fetch --> response.ok --> navigate('MainPage')}
-             * ! catch(error) { error.message } 
-             * ! message can be 'произошла ошибка при авторизации — неверные данные'
-             */
+            requests.loginUser({
+                username: inputUsername.value,
+                password: inputPassword.value
+            })
         })
 }

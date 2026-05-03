@@ -23,6 +23,7 @@ export default function authFormInit() {
 
     setTimeout(() => {
         validate()
+        authForm.classList.add('auth-form--animated')
     }, 10)
 
     return authForm

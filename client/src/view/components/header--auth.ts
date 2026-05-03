@@ -13,5 +13,9 @@ export function headerAuth() {
         ])
     ])
 
+    setTimeout(() => {
+        header.classList.add('header--animated')
+    }, 10)
+
     return header
 }

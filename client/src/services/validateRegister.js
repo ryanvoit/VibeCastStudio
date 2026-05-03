@@ -46,14 +46,5 @@ export function validate() {
                 username: inputUsername.value,
                 password: inputPassword.value
             })
-            /**
-             * ! try { fetch --> !response.ok } 
-             * ! try { 
-             * ! fetch --> response.ok --> navigate('AuthPage');
-             * ! localStorage(response) ---> value 'AuthPage'
-             * ! }
-             * ! catch(error) { error.message } 
-             * ! message can be 'пользователь уже существует'
-             */
         })
 }

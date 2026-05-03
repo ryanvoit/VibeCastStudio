@@ -2,6 +2,9 @@ import { fetchUser } from "../services/types"
 import { navigate } from "../services/navigate"
 
 export default class requestClass {
+    form = document.querySelector('form') as HTMLFormElement
+    header = document.querySelector('.header') as HTMLElement
+
     async registerUser(newUser: fetchUser) {
         await fetch('http://localhost:8000/api/register', {
             method: 'POST',
@@ -12,8 +15,11 @@ export default class requestClass {
         }).then((response) => response.json())
         .then((data) => {
             if(data.message !== "пользователь уже существует") {
-                navigate('AuthPage')
+                this.form.classList.remove('register-form--animated')
                 console.log(data);
+                setTimeout(() => {
+                    navigate('AuthPage')
+                }, 1000)
             } else {
                 console.log(data);
             }
@@ -39,8 +45,12 @@ export default class requestClass {
         }).then((response) => response.json())
             .then((data) => {
             if(data.message !== "произошла ошибка при авторизации - неверные данные") {
-                navigate('MainPage')
+                this.form.classList.remove('auth-form--animated')
+                this.header.classList.remove('header--animated')
                 console.log(data);
+                setTimeout(() => {
+                    navigate('MainPage')
+                }, 1000)
             } else {
                 console.log(data);
             }
@@ -59,6 +69,7 @@ export default class requestClass {
         const response = await fetch('http://localhost:8000/api/tracks')
         const data = await response.json()
         console.log(data);
+        return data
     }
 
     async fetchFavouriteTracks() {
