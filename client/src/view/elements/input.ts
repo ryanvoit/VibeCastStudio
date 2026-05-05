@@ -5,13 +5,12 @@ import { IPodcast, ITrack } from "../../services/types";
 
 const handleFunctions = new HandleFunctions()
 
-export function searchInput(tracks: Array<ITrack & IPodcast>) {
+export function searchInput(tracks: ITrack[]) {
     const inputSearch = el('.header__search', [
         el('input.input__search', { type: 'text', placeholder: 'Что будем искать?' }),
         svgInit('search')
     ]);
-    
-    (inputSearch.firstElementChild as HTMLInputElement).addEventListener('input', function() {
+    (inputSearch.firstElementChild as HTMLInputElement).addEventListener('input', function () {
         handleFunctions.inputSearch((inputSearch.firstElementChild as HTMLInputElement), tracks)
     })
 

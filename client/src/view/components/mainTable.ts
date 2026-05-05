@@ -23,8 +23,6 @@ export function cellsMain() {
 }
 
 export function cells(trax: (ITrack & IPodcast)[], tracks: (ITrack & IPodcast)[]): HTMLElement[] {
-    console.log(trax)
-    console.log(tracks);
     /**
      * ! PAGINATION !!!!!!!
      * ! WORKS BAD
@@ -60,15 +58,15 @@ export function table(tracks: (ITrack & IPodcast)[], tracksAmountPage: number, b
     ])
 }
 
-export function mainTable(tracks: (ITrack & IPodcast)[]) {
+export function mainTable(tracks: ITrack[]) {
     const amountTracks = tracks.length
     const tracksAmountPage = 5
     let pages = amountTracks / tracksAmountPage
-    if(pages === 0) {
+    if (pages === 0) {
         pages = 1
-    } 
+    }
 
-    let btns:HTMLButtonElement[] = []
+    let btns: HTMLButtonElement[] = []
     for (let i = 1; i < pages + 1; i++) {
         btns.push(btnPagination(i, tracks, btns) as HTMLButtonElement)
     }

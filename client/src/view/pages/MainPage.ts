@@ -10,31 +10,42 @@ import { OmitFavouriteTrack } from "../../services/types";
 
 const request = new requestClass()
 
-import { podcasts } from "./podcasts"
-import { tracks } from "./tracks"
+// import { podcasts } from "./podcasts"
+// import { tracks } from "./tracks"
 
 export default function mainPageInit() {
     /**
      * ! fetch /tracks - GET
      */
-    let tracking = request.fetchTracks() as Promise<OmitFavouriteTrack> 
-    console.log(tracking);
-    let trax: Array<ITrack & IPodcast> = tracksProcess(tracks, podcasts)
 
-    setChildren(window.document.body, [
-        header(trax),
-        el('main', [
-            el('.container', [
-                el('.main-page-wrapper', [
-                    aside('main'),
-                    el('.main-table__super-wrapper', [
-                        mainTable(trax),
-                    ]),
-                    el('.player__super-wrapper', [
-                        player(trax, 0)
+    /**
+    * ! fetch /favourite - GET
+    */
+   
+    let tracks = request.fetchTracks() as Promise<OmitFavouriteTrack[]>
+    // const tracking = trackingPromise.then((tracking) => {
+    // return tracking
+    // })
+    // console.log(tracking);
+    // console.log(tracks);
+    let trax: Promise<ITrack[] /*& IPodcast*/> = tracksProcess(tracks, /*podcasts*/);
+
+    trax.then((tracking) => {
+        setChildren(window.document.body, [
+            header(tracking),
+            el('main', [
+                el('.container', [
+                    el('.main-page-wrapper', [
+                        aside('main'),
+                        el('.main-table__super-wrapper', [
+                            mainTable(tracking),
+                        ]),
+                        el('.player__super-wrapper', [
+                            player(tracking, 0)
+                        ])
                     ])
                 ])
             ])
-        ])
-    ]);
+        ]);
+    })
 }

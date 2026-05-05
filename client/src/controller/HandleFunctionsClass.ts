@@ -6,6 +6,11 @@ import { svgInit } from "../view/elements/svg";
 import { navigate } from "../services/navigate";
 import { numRangeToDuration } from "../services/playerRanges";
 import { listening } from "../services/listening";
+import requestClass from "../model/requestClass.ts";
+import { tracksProcess } from "../services/trackProcess";
+import { OmitFavouriteTrack } from "../services/types";
+
+const request = new requestClass()
 
 export default class HandleFunctionsClass {
     inputSearch(input: HTMLInputElement, tracks: Array<ITrack & IPodcast>) {
@@ -43,28 +48,33 @@ export default class HandleFunctionsClass {
 
     }
 
-    buttonFavourite(track: ITrack & IPodcast, buttonFav: HTMLElement) {
+    buttonFavourite(track: ITrack & IPodcast, buttonFav: HTMLElement, id: number) {
         console.log(track.title);
         if (track.favourite) {
             /**
               * ! fetch /favourite -- DELETE
               */
+            request.removeFavourite(id)
 
         } else {
             /**
               * ! fetch /favourite -- POST
               */
+            request.AddFavourite(id)
         }
         /**
           * ! const favourites = fetch /favourite -- GET | []
           */
 
-        const favourites: (ITrack & IPodcast)[] = []
+        let tracks = request.fetchFavouriteTracks() as Promise<OmitFavouriteTrack[]>
+        let trax: Promise<ITrack[]> = tracksProcess(tracks, /*podcasts*/)
 
-        track.favourite = (favourites.includes(track)) ? true : false;
+        trax.then((tracking) => {
+            tracking[id].favourite = (tracking.includes(track)) ? true : false;
 
-        (buttonFav.firstElementChild as HTMLElement).innerHTML = '';
-        setChildren((buttonFav.firstElementChild as HTMLElement), [(track.favourite) ? svgInit('heart-favourite') : svgInit('heart')])
+            (buttonFav.firstElementChild as HTMLElement).innerHTML = '';
+            setChildren((buttonFav.firstElementChild as HTMLElement), [(tracking[id].favourite) ? svgInit('heart-favourite') : svgInit('heart')])
+        })
     }
 
     buttonAside(navigation: 'FavouritePage' | 'MainPage') {

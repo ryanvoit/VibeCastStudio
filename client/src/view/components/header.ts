@@ -4,7 +4,7 @@ import { svgInit } from '../elements/svg';
 import user from './user.svg';
 import { ITrack, IPodcast } from '../../services/types';
 
-export function header(tracks: Array<ITrack & IPodcast>) {
+export function header(tracks: ITrack[]) {
 	const header = el('header.header', [
 		el('.container', [
 			el('.header__wrapper', [

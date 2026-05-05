@@ -66,15 +66,40 @@ export default class requestClass {
      */
 
     async fetchTracks() {
-        const response = await fetch('http://localhost:8000/api/tracks')
-        const data = await response.json()
-        console.log(data);
-        return data
+        return await fetch('http://localhost:8000/api/tracks'
+            // , {
+            // method: 'GET',
+            // headers: {
+                // 'Content-Type': 'application/json'
+            // },
+        // }
+    ).then((response) => response.json())
     }
 
     async fetchFavouriteTracks() {
-        const response = await fetch('http://localhost:8000/api/favourites')
-        const data = await response.json()
-        console.log(data);
+        return await fetch('http://localhost:8000/api/favorites')
+        .then((response) => response.json())
+    }
+
+    async AddFavourite(id: number) {
+        return fetch('http://localhost:8000/api/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(id)
+        }).then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+
+    async removeFavourite(id: number) {
+        return fetch('http://localhost:8000/api/favorites', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(id)
+        }).then((response) => response.json())
+        .then((data) => console.log(data));
     }
 }

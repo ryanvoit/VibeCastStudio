@@ -19,7 +19,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
             ])
 
             buttonFav.addEventListener('click', function (e) {
-                HandleFunctions.buttonFavourite(track, (e.target as HTMLElement))
+                HandleFunctions.buttonFavourite(track, (e.target as HTMLElement), id)
             })
 
             return buttonFav
@@ -29,7 +29,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
             ])
 
             buttonFavNoCell.addEventListener('click', function (e) {
-                HandleFunctions.buttonFavourite(track, (e.target as HTMLElement))
+                HandleFunctions.buttonFavourite(track, (e.target as HTMLElement), id)
             })
 
             return buttonFavNoCell
