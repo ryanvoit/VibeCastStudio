@@ -13,27 +13,32 @@ import { OmitFavouriteTrack } from "../../services/types";
 
 const request = new requestClass()
 
-export default function favouritePageInit() {
-    let tracks = request.fetchFavouriteTracks() as Promise<OmitFavouriteTrack[]>
+export default function favouritePageInit(username: string, token: string) {
+    console.log(token);
+    let tracks = request.fetchTracks(token) as Promise<OmitFavouriteTrack[]>
     let trax: Promise<ITrack[]> = tracksProcess(tracks, /*podcasts*/)
-    // console.log(trax);
+    let tracksFav = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+    let traxFav: Promise<ITrack[] /*& IPodcast*/> = tracksProcess(tracksFav, /*podcasts*/);
 
     trax.then((tracking) => {
-        setChildren(window.document.body, [
-            header(tracking),
-            el('main', [
-                el('.container', [
-                    el('.main-page-wrapper', [
-                        aside('favourite'),
-                        el('.main-table__super-wrapper', [
-                            mainTable(tracking),
-                        ]),
-                        el('.player__super-wrapper', [
-                            player(tracking, 0)
+        traxFav.then((trackingFav) => {
+            setChildren(window.document.body, [
+                header(tracking, username, token, trackingFav),
+                el('main', [
+                    el('.container', [
+                        el('.main-page-wrapper', [
+                            aside('favourite'),
+                            el('.main-table__super-wrapper', [
+                                mainTable(tracking, token, trackingFav),
+                            ]),
+                            el('.player__super-wrapper', [
+                                player(tracking, 0, token)
+                            ])
                         ])
                     ])
                 ])
-            ])
-        ]);
+            ]);
+
+        })
     })
 }

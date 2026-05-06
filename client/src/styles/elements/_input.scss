@@ -58,7 +58,8 @@
 		left: 20px;
 		padding: 0 5px;
 		color: $color-black;
-		background-color: $color-white;
+		background: linear-gradient(180deg, $color-white-smoke 0%, $color-white 50%, $color-white 100%);
 		transition: color $transition;
+		border-radius: 3px;
 	}
 }

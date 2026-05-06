@@ -27,3 +27,7 @@ export interface fetchUser {
     username: string,
     password: string
 }
+
+export interface idTrack {
+    trackId: number
+}

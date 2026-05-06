@@ -1,0 +1,15 @@
+.modal-window {
+    width: 240px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: $color-spring-green;
+    position: relative;
+    bottom: 640px;
+    left: 85%;
+    display: flex;
+    padding: 10px 25px;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: center;
+    color: $color-green-pea;
+}

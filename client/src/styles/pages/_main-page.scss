@@ -3,6 +3,8 @@
     grid-template-columns: 289px 1fr;
     min-height: calc(100vh - 69px);
     margin: 0 0 100px;
+    transform: translateY(95%);
+    transition: transform $transition-animation;
 
     &--player-on {
         margin: 0;
@@ -11,5 +13,9 @@
             transform: translateY(0);
             transition: transform $transition;
         }
+    }
+
+    &--animated {
+        transform: translateY(0);
     }
 }

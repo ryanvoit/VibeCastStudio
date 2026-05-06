@@ -103,11 +103,25 @@
 		height: 40px;
 		color: $color-white;
 		background-color: $color-burnt-orange;
+		transform: scale(1);
+		transition: transform $transition;
+
+		&:hover,
+		&:focus-visible {
+			transform: scale(1.1);
+		}
 	}
 
 	&__link {
 		color: $color-burnt-orange;
 		text-decoration: underline;
+		transform: scale(1) translateX(0);
+		transition: transform $transition;
+
+		&:hover,
+		&:focus-visible {
+			transform: scale(1.1) translateX(5px);
+		}
 	}
 
 	&__pagination {
@@ -118,16 +132,19 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		transition: color $transition, background-color $transition;
+		transition: color $transition, background-color $transition, border-color $transition;
 
-		&:hover {
+		&:hover,
+		&:focus-visible {
 			color: $color-burnt-orange;
+			border-color: $color-burnt-orange;
 		}
 
 		&--active {
 			background-color: $color-burnt-orange;
 
-			&:hover {
+			&:hover, 
+			&:focus-visible {
 				color: $color-black;
 			}
 		}

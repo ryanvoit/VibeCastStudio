@@ -7,10 +7,11 @@ import { maxRange, numRangeToDuration, volumeValToWidth } from "../../services/p
 import { svgInit } from "../elements/svg"
 import { listening } from "../../services/listening"
 
-export function player(tracks: Array<ITrack & IPodcast>, id: number) {
-    console.log(tracks);
-    const track = tracks[id]
-    console.log(track);
+export function player(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
+    let track = tracks[id - 1]
+    if(!track) {
+        track = tracks[0]
+    }
 
     let range = el('input.player__range', {
         type: 'range',
@@ -51,7 +52,7 @@ export function player(tracks: Array<ITrack & IPodcast>, id: number) {
             el('.player__inner', [
                 el('span.player__title', [
                     el('span.player__name', `${track.title}`),
-                    el('span.player__favourite', buttonInit('favourite-noCell', tracks, id))
+                    el('span.player__favourite', buttonInit('favourite-noCell', tracks, id, token))
                 ]),
                 el('span.player__artist', (track.artist) ? `${track.artist}` : `${track.host}`)
             ])

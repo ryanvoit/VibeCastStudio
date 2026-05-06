@@ -10,42 +10,38 @@ import { OmitFavouriteTrack } from "../../services/types";
 
 const request = new requestClass()
 
-// import { podcasts } from "./podcasts"
-// import { tracks } from "./tracks"
-
-export default function mainPageInit() {
-    /**
-     * ! fetch /tracks - GET
-     */
-
+export default function mainPageInit(username: string, token: string) {
     /**
     * ! fetch /favourite - GET
     */
-   
-    let tracks = request.fetchTracks() as Promise<OmitFavouriteTrack[]>
-    // const tracking = trackingPromise.then((tracking) => {
-    // return tracking
-    // })
-    // console.log(tracking);
-    // console.log(tracks);
-    let trax: Promise<ITrack[] /*& IPodcast*/> = tracksProcess(tracks, /*podcasts*/);
+    let tracks = request.fetchTracks(token) as Promise<OmitFavouriteTrack[]>
+    let trax: Promise<ITrack[]> = tracksProcess(tracks);
+    let tracksFav = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+    let traxFav: Promise<ITrack[]> = tracksProcess(tracksFav);
 
     trax.then((tracking) => {
-        setChildren(window.document.body, [
-            header(tracking),
-            el('main', [
-                el('.container', [
-                    el('.main-page-wrapper', [
-                        aside('main'),
-                        el('.main-table__super-wrapper', [
-                            mainTable(tracking),
-                        ]),
-                        el('.player__super-wrapper', [
-                            player(tracking, 0)
+        traxFav.then((trackingFav) => {
+            setChildren(window.document.body, [
+                header(tracking, username, token, trackingFav),
+                el('main', [
+                    el('.container', [
+                        el('.main-page-wrapper', [
+                            aside('main'),
+                            el('.main-table__super-wrapper', [
+                                mainTable(tracking, token, trackingFav),
+                            ]),
+                            el('.player__super-wrapper', [
+                                player(tracking, 0, token)
+                            ])
                         ])
                     ])
                 ])
-            ])
-        ]);
+            ]);
+
+        })
     })
+
+    setTimeout(() => {
+        (document.querySelector('.main-page-wrapper') as HTMLElement).classList.add('main-page-wrapper--animated')
+    }, 1000)
 }

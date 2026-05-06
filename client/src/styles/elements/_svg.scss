@@ -48,3 +48,15 @@
 .repeat-icon {
 	transition: color $transition;
 }
+
+.svg-tick {
+	transform: scale(2);
+	color: $color-green-pea;
+	border-radius: 50%;
+	border: 1px solid $color-green-pea;
+	width: 18px;
+	height: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

@@ -13,7 +13,7 @@ import { OmitFavouriteTrack } from "../services/types";
 const request = new requestClass()
 
 export default class HandleFunctionsClass {
-    inputSearch(input: HTMLInputElement, tracks: Array<ITrack & IPodcast>) {
+    inputSearch(input: HTMLInputElement, tracks: Array<ITrack & IPodcast>, token: string, favTrax: ITrack[]) {
         const search = input.value
 
         const filteredTracks = tracks.filter(
@@ -22,25 +22,23 @@ export default class HandleFunctionsClass {
 
         const mainTableWrapper = document.querySelector('.main-table__super-wrapper') as HTMLElement
         // mainTableWrapper.innerHTML = ''
-        console.log(mainTableWrapper);
 
         setChildren(mainTableWrapper, [
-            mainTable(filteredTracks)
+            mainTable(filteredTracks, token, favTrax)
         ])
     }
 
-    buttonStartPlay(tracks: Array<ITrack & IPodcast>, id: number) {
-        if (id <= -1) {
-            id = 0
+    buttonStartPlay(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
+        if (id <= 0) {
+            id = 1
         }
-        console.log(id, tracks);
         const mainPageWrapper = document.querySelector('.main-page-wrapper') as HTMLElement
         const playerSuper = document.querySelector('.player__super-wrapper') as HTMLElement
         mainPageWrapper.classList.remove('main-page-wrapper--player-on')
 
         setTimeout(() => {
             playerSuper.innerHTML = ''
-            setChildren(playerSuper, [player(tracks, id)])
+            setChildren(playerSuper, [player(tracks, id, token)])
             setTimeout(() => {
                 mainPageWrapper.classList.add('main-page-wrapper--player-on')
             }, 10)
@@ -48,33 +46,69 @@ export default class HandleFunctionsClass {
 
     }
 
-    buttonFavourite(track: ITrack & IPodcast, buttonFav: HTMLElement, id: number) {
-        console.log(track.title);
-        if (track.favourite) {
-            /**
-              * ! fetch /favourite -- DELETE
-              */
-            request.removeFavourite(id)
+    buttonFavourite(track: ITrack & IPodcast, buttonFav: HTMLElement, id: number, token: string) {
+        let tracks = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+        tracks.then((trax) => {
+            const tracking = trax.find(track => track.id === id)
 
-        } else {
-            /**
-              * ! fetch /favourite -- POST
-              */
-            request.AddFavourite(id)
-        }
+            if (tracking) {
+                /**
+                 * ! fetch /favourite -- DELETE
+                 */
+                request.removeFavourite({
+                    trackId: id
+                }, token)
+            } else {
+                /**
+                 * ! fetch /favourite -- POST
+                 */
+                request.AddFavourite({
+                    trackId: id
+                }, token)
+            }
+        })
+
+        setTimeout(() => {
+            let tracks2 = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+            tracks2.then((trax) => {
+                const track2 = trax.find(track => track.id === id);
+                console.log(buttonFav.firstElementChild);
+                // const btnF = document.querySelectorAll('.svg-heart')
+                (buttonFav.firstElementChild as HTMLElement).innerHTML = ''
+                if(track2) {
+                    setChildren((buttonFav.firstElementChild as HTMLElement), [
+                        svgInit('heart-favourite')
+                    ])
+                } else {
+                    setChildren((buttonFav.firstElementChild as HTMLElement), [
+                        svgInit('heart')
+                    ])
+                }
+                console.log(trax);
+            })
+        }, 100)
+
+
+        // request.AddFavourite({
+        // trackId: id
+        // }, token)
+        // }
         /**
           * ! const favourites = fetch /favourite -- GET | []
           */
+        // setTimeout(() => {
+        // let tracks = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+        // console.log(tracks);
+        // let trax: Promise<ITrack[]> = tracksProcess(tracks, /*podcasts*/)
+        // console.log(trax);
 
-        let tracks = request.fetchFavouriteTracks() as Promise<OmitFavouriteTrack[]>
-        let trax: Promise<ITrack[]> = tracksProcess(tracks, /*podcasts*/)
+        // trax.then((tracking) => {
+        // tracking[id].favourite = (tracking.includes(track)) ? true : false;
 
-        trax.then((tracking) => {
-            tracking[id].favourite = (tracking.includes(track)) ? true : false;
-
-            (buttonFav.firstElementChild as HTMLElement).innerHTML = '';
-            setChildren((buttonFav.firstElementChild as HTMLElement), [(tracking[id].favourite) ? svgInit('heart-favourite') : svgInit('heart')])
-        })
+        // (buttonFav.firstElementChild as HTMLElement).innerHTML = '';
+        // setChildren((buttonFav.firstElementChild as HTMLElement), [(tracking[id].favourite) ? svgInit('heart-favourite') : svgInit('heart')])
+        // })
+        // }, 10)
     }
 
     buttonAside(navigation: 'FavouritePage' | 'MainPage') {
@@ -86,7 +120,7 @@ export default class HandleFunctionsClass {
         }, 300)
     }
 
-    btnPlay(btn: HTMLButtonElement, 
+    btnPlay(btn: HTMLButtonElement,
         // tracks: Array<ITrack & IPodcast>, id: number
     ) {
         setTimeout(() => {
@@ -104,7 +138,7 @@ export default class HandleFunctionsClass {
         }, 100)
     }
 
-    btnShuffle(tracks: Array<ITrack & IPodcast>) {
+    btnShuffle(tracks: Array<ITrack & IPodcast>, token: string) {
         let idArr: number[] = []
         for (let i = 0; i < (tracks).length; i++) {
             idArr.push((tracks)[i].id)
@@ -112,7 +146,7 @@ export default class HandleFunctionsClass {
         const max = Math.max(...idArr)
         const randomId = Math.floor(Math.random() * max + 1)
 
-        this.buttonStartPlay(tracks, randomId - 1)
+        this.buttonStartPlay(tracks, randomId - 1, token)
     }
 
     btnRepeat(range: HTMLInputElement, outputRange: HTMLElement) {

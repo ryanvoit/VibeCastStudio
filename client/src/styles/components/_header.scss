@@ -1,11 +1,11 @@
 .header {
 	width: 100%;
-	background: linear-gradient(90deg, $color-white-smoke 0%, $color-white-smoke 30%, $color-white 100%);
+	background: transparent;
+	transform: translateX(-100%);
+	transition: transform $transition-animation;
 
 	&--auth {
-		background: $color-white;
-		transform: translateX(-95%);
-    	transition: transform $transition-animation;
+		transition: transform $transition-animation;
 		
 		.header__wrapper {
 			display: flex;
@@ -15,7 +15,6 @@
 
 		+ main {
 			margin: 0;
-			background: $color-white;
 		}
 	}
 

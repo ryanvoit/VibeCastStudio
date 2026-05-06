@@ -16,12 +16,11 @@ body {
   font-weight: 400;
   line-height: 18px;
   color: $color-nero;
-  background-color: $color-white;
+  background: linear-gradient(90deg, $color-white-smoke 0%, $color-white-smoke 30%, $color-white 100%);
 }
 
 main {
   flex-grow: 1;
-  background: linear-gradient(90deg, $color-white-smoke 0%, $color-white-smoke 30%, $color-white 100%);
 }
 
 img {

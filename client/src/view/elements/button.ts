@@ -8,18 +8,19 @@ import { table } from "../components/mainTable";
 
 const HandleFunctions = new HandleFunctionsClass()
 
-export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack & IPodcast>, id: number) {
+export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack & IPodcast>, id: number, token: string, favTrax?: ITrack[]) {
     const track = tracks[id]
     switch (role) {
         case 'favourite':
+            const isFav = favTrax?.find(tracking => tracking.id === track.id)
             const buttonFav = el('button.button button__favourite', { type: 'button' }, [
                 el('td.main-table__cell', [
-                    (track.favourite) ? svgInit('heart-favourite') : svgInit('heart')
+                    (isFav) ? svgInit('heart-favourite') : svgInit('heart')
                 ]),
             ])
 
             buttonFav.addEventListener('click', function (e) {
-                HandleFunctions.buttonFavourite(track, (e.target as HTMLElement), id)
+                HandleFunctions.buttonFavourite(track, buttonFav, id, token)
             })
 
             return buttonFav
@@ -29,7 +30,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
             ])
 
             buttonFavNoCell.addEventListener('click', function (e) {
-                HandleFunctions.buttonFavourite(track, (e.target as HTMLElement), id)
+                HandleFunctions.buttonFavourite(track, (e.target as HTMLElement), id, token)
             })
 
             return buttonFavNoCell
@@ -41,7 +42,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
             ])
 
             buttonSettings.addEventListener('click', function (e) {
-                HandleFunctions.buttonStartPlay(tracks, id)
+                HandleFunctions.buttonStartPlay(tracks, id, token)
             })
 
             return buttonSettings
@@ -66,8 +67,9 @@ export function asideBtn(active: boolean, text: string) {
     return buttonAside
 }
 
-export function buttonPlayInit(tracks: Array<ITrack & IPodcast>, id: number) {
-    const track = tracks[id]
+export function buttonPlayInit(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
+    const track = tracks[id - 1]
+    console.log(track);
 
     const buttonPlay = el('button.button button__play', { type: 'button' }, [
         el('td.main-table__cell', `${track.id}`),
@@ -86,13 +88,13 @@ export function buttonPlayInit(tracks: Array<ITrack & IPodcast>, id: number) {
     ])
 
     buttonPlay.addEventListener('click', function () {
-        HandleFunctions.buttonStartPlay(tracks, id)
+        HandleFunctions.buttonStartPlay(tracks, id, token)
     })
 
     return buttonPlay
 }
 
-export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat', tracks?: Array<ITrack & IPodcast>, id?: number) {
+export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat', tracks?: Array<ITrack & IPodcast>, id?: number, token?: string) {
     const btn = el(`button.button button__${role}`, { type: 'button' }, [
         svgInit(role)
     ]) as HTMLButtonElement
@@ -107,22 +109,22 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
             break
         case 'shuffle':
             btn.addEventListener('click', function() {
-                HandleFunctions.btnShuffle(tracks as Array<ITrack & IPodcast>)
+                HandleFunctions.btnShuffle(tracks as Array<ITrack & IPodcast>, token as string)
             })
             break
         case 'back':
             btn.addEventListener('click', function() {
-                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number - 1))
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number - 1), token as string)
             })
             break
         case 'next':
             btn.addEventListener('click', function() {
-                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number + 1))
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number + 1), token as string)
             })
             break
         case 'repeat':
             btn.addEventListener('click', function() {
-                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number))
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack & IPodcast>, (id as number), token as string)
             })
             break
     }
@@ -142,14 +144,19 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
             btn = el(`button.button button__${role}`, { type: 'button' }, `${LinkText}`)
 
             btn.addEventListener('click', function () {
-                navigate((role2 === 'auth') ? 'AuthPage' : 'RegisterPage')
+                (document.querySelector('header') as HTMLElement).classList.remove('header--animated')
+                const form = ((role2 === 'auth') ? document.querySelector('.register-form') : document.querySelector('.auth-form')) as HTMLFormElement
+                form.classList.remove((role2 === 'auth') ? 'register-form--animated' : 'auth-form--animated')
+                setTimeout(() => {
+                    navigate((role2 === 'auth') ? 'AuthPage' : 'RegisterPage')
+                }, 1000)
             })
             break
     }
     return btn
 }
 
-export function btnPagination(pageNumber: number, tracks: (ITrack & IPodcast)[], btns: HTMLButtonElement[]) {
+export function btnPagination(pageNumber: number, tracks: (ITrack & IPodcast)[], btns: HTMLButtonElement[], token: string, favTrax: ITrack[]) {
     const btn = el(
         'button.button button__pagination', { type: 'button' }, `${pageNumber}`
     )
@@ -160,11 +167,10 @@ export function btnPagination(pageNumber: number, tracks: (ITrack & IPodcast)[],
         })
 
         btn.classList.add('button__pagination--active')
-        console.log(btns);
 
         setChildren(
             document.querySelector('.main-table__super') as HTMLElement,
-            [table(tracks, 5, btns)]
+            [table(tracks, 5, btns, token, favTrax)]
         )
     })
     return btn
