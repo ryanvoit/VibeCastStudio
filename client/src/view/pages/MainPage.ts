@@ -7,10 +7,12 @@ import { IPodcast, ITrack } from "../../services/types";
 import { tracksProcess } from "../../services/trackProcess";
 import requestClass from "../../model/requestClass.ts";
 import { OmitFavouriteTrack } from "../../services/types";
+import { modalWindow } from "../components/modalWindow";
 
 const request = new requestClass()
 
-export default function mainPageInit(username: string, token: string) {
+export default function mainPageInit(username: string, token: string, message: "произошла ошибка при авторизации - неверные данные" | "пользователь уже существует" |
+    "авторизация прошла успешно" | "пользователь успешно добавлен" | null) {
     /**
     * ! fetch /favourite - GET
     */
@@ -35,7 +37,8 @@ export default function mainPageInit(username: string, token: string) {
                             ])
                         ])
                     ])
-                ])
+                ]),
+                modalWindow(message, true)
             ]);
 
         })

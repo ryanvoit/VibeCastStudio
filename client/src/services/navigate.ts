@@ -1,9 +1,13 @@
 import mainPageInit from "../view/pages/MainPage"
 import favouritePageInit from "../view/pages/favouritePage"
 import formPageInit from "../view/pages/formPage"
+import { modalWindow } from '../view/components/modalWindow'
+import { setChildren } from "redom"
 
 export async function navigate(
     page: 'MainPage' | 'FavouritePage' | 'AuthPage' | 'RegisterPage', 
+    message: "произошла ошибка при авторизации - неверные данные" | "пользователь уже существует" |
+    "авторизация прошла успешно" | "пользователь успешно добавлен" | null,
     username?: string, 
     token?: string
 ) {
@@ -11,7 +15,7 @@ export async function navigate(
 
     switch(page) {
         case 'MainPage':
-            mainPageInit(username as string, token as string)
+            mainPageInit(username as string, token as string, message)
             // const MainPage = await import("./view/pages/MainPage")
             // MainPage.default()
             break
@@ -21,12 +25,12 @@ export async function navigate(
             // FavouritePage.default()
             break
         case 'AuthPage':
-            formPageInit('auth')
+            formPageInit('auth', message)
             // const AuthPage = await import("./view/pages/AuthPage")
             // AuthPage.default()
             break  
         case 'RegisterPage':
-            formPageInit('register')
+            formPageInit('register', message)
             break
     }
 }

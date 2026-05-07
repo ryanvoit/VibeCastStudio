@@ -148,7 +148,7 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
                 const form = ((role2 === 'auth') ? document.querySelector('.register-form') : document.querySelector('.auth-form')) as HTMLFormElement
                 form.classList.remove((role2 === 'auth') ? 'register-form--animated' : 'auth-form--animated')
                 setTimeout(() => {
-                    navigate((role2 === 'auth') ? 'AuthPage' : 'RegisterPage')
+                    navigate((role2 === 'auth') ? 'AuthPage' : 'RegisterPage', null)
                 }, 1000)
             })
             break

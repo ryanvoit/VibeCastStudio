@@ -1,15 +1,72 @@
 .modal-window {
-    width: 240px;
+    width: 400px;
     height: 80px;
     border-radius: 10px;
     background-color: $color-spring-green;
-    position: relative;
-    bottom: 640px;
-    left: 85%;
+    position: absolute;
+    top: 75px;
+    left: 70%;
     display: flex;
     padding: 10px 25px;
     gap: 30px;
     justify-content: flex-start;
     align-items: center;
     color: $color-green-pea;
+    pointer-events: none;
+    opacity: 0;
+    animation: appearance-and-fade 5s linear forwards;
+
+    &--none {
+        display: none;
+    }
+
+    &--success {
+        animation: appearance 5s linear forwards;
+    }
+
+    &--success-fade {
+        opacity: 1;
+        animation: fade 5s linear forwards;
+    }
+
+    &--fail {
+        background-color: $color-mona-lisa;
+        color: $color-maroon;
+    }
+
+    @keyframes appearance-and-fade {
+        from {
+            opacity: 0;
+        } 20% {
+            opacity: 1;
+        } 90% {
+            opacity: 1;
+        } to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes appearance {
+        from {
+            opacity: 0;
+        } 10% {
+            opacity: 1;
+        } to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 1;
+        } 90% {
+            opacity: 1;
+        } to {
+            opacity: 0;
+        }
+    }
+
+
+
+
 }

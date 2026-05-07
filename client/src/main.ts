@@ -3,6 +3,6 @@ import "./styles/main.scss";
 import requestClass from "./model/requestClass.ts";
 import "./sprite.svg";
 
-navigate('AuthPage')
+navigate('AuthPage', null)
 
 

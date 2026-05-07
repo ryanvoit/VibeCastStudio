@@ -1,6 +1,7 @@
 import { fetchUser, idTrack } from "../services/types"
 import { navigate } from "../services/navigate"
 import { setChildren } from "redom"
+import { modalWindow } from "../view/components/modalWindow"
 
 export default class requestClass {
     form = document.querySelector('form') as HTMLFormElement
@@ -16,14 +17,27 @@ export default class requestClass {
         }).then((response) => response.json())
             .then((data) => {
                 if (data.message !== "пользователь уже существует") {
+                    if (document.querySelector('.modal-window--fail')) {
+                        const fail = document.querySelector('.modal-window--fail') as HTMLElement
+                        fail.classList.remove('modal-window--fail')
+                        fail.classList.add('modal-window--none')
+                    }
+                    document.body.append(modalWindow(data.message, false))
+                    // modalWindow(data.message)
                     this.form.classList.remove('register-form--animated')
                     this.header.classList.remove('header--animated')
                     console.log(data);
                     setTimeout(() => {
-                        navigate('AuthPage')
+                        navigate('AuthPage', data.message)
                     }, 1000)
                 } else {
                     console.log(data);
+                    console.log('gggg');
+                    
+                    if (!document.querySelector('.modal-window--fail')) {
+                        document.body.append(modalWindow(data.message))
+                    }
+                    // setChildren(window.document.body, [modalWindow(data.message)])
                 }
             })
     }
@@ -47,14 +61,37 @@ export default class requestClass {
         }).then((response) => response.json())
             .then((data) => {
                 if (data.message !== "произошла ошибка при авторизации - неверные данные") {
+                    if (document.querySelector('.modal-window--fail')) {
+                        const fail = document.querySelector('.modal-window--fail') as HTMLElement
+                        fail.classList.remove('modal-window--fail')
+                        fail.classList.add('modal-window--none')
+                    } else if (document.querySelector('.modal-window--success')) {
+                        const success = document.querySelector('.modal-window--success') as HTMLElement
+                        success.classList.remove('modal-window--success')
+                        success.classList.add('modal-window--none')
+                    }
+                    document.body.append(modalWindow(data.message, false))
+                    // modalWindow(data.message)
                     this.form.classList.remove('auth-form--animated')
                     this.header.classList.remove('header--animated')
                     console.log(data);
                     setTimeout(() => {
-                        navigate('MainPage', user.username, data.token)
+                        navigate('MainPage', data.message, user.username, data.token)
                     }, 1000)
                 } else {
+                    // setChildren(window.document.body, [modalWindow(data.message)])
                     console.log(data);
+                    console.log('ddd');
+                    if (document.querySelector('.modal-window--fail')) {
+                        const fail = document.querySelector('.modal-window--fail') as HTMLElement
+                        fail.classList.remove('modal-window--fail')
+                        fail.classList.add('modal-window--none')
+                    } else if (document.querySelector('.modal-window--success')) {
+                        const success = document.querySelector('.modal-window--success') as HTMLElement
+                        success.classList.remove('modal-window--success')
+                        success.classList.add('modal-window--none')
+                    }
+                    document.body.append(modalWindow(data.message))
                 }
             })
     }

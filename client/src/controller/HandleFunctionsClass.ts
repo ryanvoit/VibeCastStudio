@@ -116,8 +116,8 @@ export default class HandleFunctionsClass {
         mainPageWrapper.classList.remove('main-page-wrapper--player-on');
 
         setTimeout(() => {
-            navigate(navigation)
-        }, 300)
+            navigate(navigation, null)
+        }, 30)
     }
 
     btnPlay(btn: HTMLButtonElement,

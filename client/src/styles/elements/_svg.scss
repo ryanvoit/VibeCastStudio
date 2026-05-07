@@ -59,4 +59,21 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-shrink: 0;
+}
+
+.svg-cross {
+	color: $color-maroon;
+	border-radius: 50%;
+	border: 2px solid $color-maroon;
+	width: 38px;
+	height: 38px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.cross-icon {
+	flex-shrink: 0;
 }

@@ -1,6 +1,6 @@
 import { el } from "redom";
 
-export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration' | 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat' | 'tick'): HTMLElement {
+export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration' | 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat' | 'tick' | 'cross'): HTMLElement {
     switch(role) {
         case 'logo':
             const svgLogo = el('.svg-logo')
@@ -131,5 +131,13 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
             </svg>`
 
             return svgTick
+        case 'cross':
+            const svgCross = el('.svg-cross')
+            svgCross.innerHTML = 
+            `<svg class="cross-icon" width="32" height="32" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-cross"></use> 
+            </svg>`
+
+            return svgCross
     }
 }
