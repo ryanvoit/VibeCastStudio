@@ -23,14 +23,8 @@ export function cellsMain() {
 }
 
 export function cells(trax: (ITrack & IPodcast)[], tracks: (ITrack & IPodcast)[], token: string, favTrax: ITrack[]): HTMLElement[] {
-    /**
-     * ! PAGINATION !!!!!!!
-     * ! WORKS BAD
-     */
-    
     const rows = []
     for (let i = 0; i < trax.length; i++) {
-        console.log(trax[i]);
         const tableRow = el('tr.main-table__row main-table__row--secondary', [
             buttonPlayInit(tracks, trax[i].id, token),
             buttonInit('favourite', tracks, trax[i].id, token, favTrax),
@@ -52,7 +46,13 @@ export function table(tracks: (ITrack & IPodcast)[], tracksAmountPage: number, b
         btns[0].classList.add('button__pagination--active')
     }
 
-    const trax = tracks.slice((pageNumber - 1) * tracksAmountPage, (pageNumber - 1) * tracksAmountPage + 5)
+
+    // console.log(pageNumber)
+    const trax = tracks.slice((pageNumber - 1) * tracksAmountPage, (pageNumber - 1) * tracksAmountPage + 5);
+
+    // const grt = tracks.splice((pageNumber - 1) * tracksAmountPage, 5);
+
+
     return el('table.main-table__table', [
         cellsMain(),
         cells(trax, tracks, token, favTrax),
@@ -69,7 +69,7 @@ export function mainTable(tracks: ITrack[], token: string, favTrax: ITrack[]) {
 
     let btns: HTMLButtonElement[] = []
     for (let i = 1; i < pages + 1 ; i++) {
-        btns.push(btnPagination(i, tracks, btns, token, favTrax) as HTMLButtonElement)
+        btns.push(btnPagination(i, tracks, btns, token, favTrax, tracksAmountPage) as HTMLButtonElement)
     }
 
     return el('.main-table', [

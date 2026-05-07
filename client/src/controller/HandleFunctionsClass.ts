@@ -21,11 +21,11 @@ export default class HandleFunctionsClass {
         )
 
         const mainTableWrapper = document.querySelector('.main-table__super-wrapper') as HTMLElement
-        // mainTableWrapper.innerHTML = ''
-
+        
         setChildren(mainTableWrapper, [
             mainTable(filteredTracks, token, favTrax)
         ])
+            
     }
 
     buttonStartPlay(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
@@ -52,16 +52,10 @@ export default class HandleFunctionsClass {
             const tracking = trax.find(track => track.id === id)
 
             if (tracking) {
-                /**
-                 * ! fetch /favourite -- DELETE
-                 */
                 request.removeFavourite({
                     trackId: id
                 }, token)
             } else {
-                /**
-                 * ! fetch /favourite -- POST
-                 */
                 request.AddFavourite({
                     trackId: id
                 }, token)
@@ -72,7 +66,6 @@ export default class HandleFunctionsClass {
             let tracks2 = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
             tracks2.then((trax) => {
                 const track2 = trax.find(track => track.id === id);
-                console.log(buttonFav.firstElementChild);
                 // const btnF = document.querySelectorAll('.svg-heart')
                 (buttonFav.firstElementChild as HTMLElement).innerHTML = ''
                 if(track2) {
@@ -84,7 +77,6 @@ export default class HandleFunctionsClass {
                         svgInit('heart')
                     ])
                 }
-                console.log(trax);
             })
         }, 100)
 

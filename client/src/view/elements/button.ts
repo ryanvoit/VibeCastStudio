@@ -8,11 +8,17 @@ import { table } from "../components/mainTable";
 
 const HandleFunctions = new HandleFunctionsClass()
 
-export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack & IPodcast>, id: number, token: string, favTrax?: ITrack[]) {
-    const track = tracks[id]
+export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack & IPodcast>, id: number, token: string, favTrax?: ITrack[], filtered?: boolean, tracksAll?:ITrack[]) {
+    const track = tracks.find(track => id === track.id) as ITrack & IPodcast
+    // if (filtered) {
+        // track = tracksAll[]
+    // } else {
+        // track = tracks[id - 1]
+    // }
+
+    const isFav = favTrax?.find(tracking => tracking.id === track.id)
     switch (role) {
         case 'favourite':
-            const isFav = favTrax?.find(tracking => tracking.id === track.id)
             const buttonFav = el('button.button button__favourite', { type: 'button' }, [
                 el('td.main-table__cell', [
                     (isFav) ? svgInit('heart-favourite') : svgInit('heart')
@@ -26,7 +32,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
             return buttonFav
         case 'favourite-noCell':
             const buttonFavNoCell = el('button.button button__favourite', { type: 'button' }, [
-                (track.favourite) ? svgInit('heart-favourite') : svgInit('heart')
+                (isFav) ? svgInit('heart-favourite') : svgInit('heart')
             ])
 
             buttonFavNoCell.addEventListener('click', function (e) {
@@ -68,8 +74,7 @@ export function asideBtn(active: boolean, text: string) {
 }
 
 export function buttonPlayInit(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
-    const track = tracks[id - 1]
-    console.log(track);
+    const track = tracks.find(track => id === track.id) as ITrack & IPodcast
 
     const buttonPlay = el('button.button button__play', { type: 'button' }, [
         el('td.main-table__cell', `${track.id}`),
@@ -156,7 +161,7 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
     return btn
 }
 
-export function btnPagination(pageNumber: number, tracks: (ITrack & IPodcast)[], btns: HTMLButtonElement[], token: string, favTrax: ITrack[]) {
+export function btnPagination(pageNumber: number, tracks: (ITrack & IPodcast)[], btns: HTMLButtonElement[], token: string, favTrax: ITrack[], tracksAmountPage: number) {
     const btn = el(
         'button.button button__pagination', { type: 'button' }, `${pageNumber}`
     )
@@ -169,8 +174,7 @@ export function btnPagination(pageNumber: number, tracks: (ITrack & IPodcast)[],
         btn.classList.add('button__pagination--active')
 
         setChildren(
-            document.querySelector('.main-table__super') as HTMLElement,
-            [table(tracks, 5, btns, token, favTrax)]
+            document.querySelector('.main-table__super') as HTMLElement, [table(tracks, tracksAmountPage, btns, token, favTrax)]
         )
     })
     return btn

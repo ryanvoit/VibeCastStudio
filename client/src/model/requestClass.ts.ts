@@ -26,14 +26,10 @@ export default class requestClass {
                     // modalWindow(data.message)
                     this.form.classList.remove('register-form--animated')
                     this.header.classList.remove('header--animated')
-                    console.log(data);
                     setTimeout(() => {
                         navigate('AuthPage', data.message)
                     }, 1000)
                 } else {
-                    console.log(data);
-                    console.log('gggg');
-                    
                     if (!document.querySelector('.modal-window--fail')) {
                         document.body.append(modalWindow(data.message))
                     }
@@ -41,15 +37,6 @@ export default class requestClass {
                 }
             })
     }
-    /**
-     * ! try { fetch --> !response.ok } 
-     * ! try { 
-     * ! fetch --> response.ok --> navigate('AuthPage');
-     * ! localStorage(response) ---> value 'AuthPage'
-     * ! }
-     * ! catch(error) { error.message } 
-     * ! message can be 'пользователь уже существует'
-     */
 
     async loginUser(user: fetchUser) {
         return fetch('http://localhost:8000/api/login', {
@@ -74,14 +61,11 @@ export default class requestClass {
                     // modalWindow(data.message)
                     this.form.classList.remove('auth-form--animated')
                     this.header.classList.remove('header--animated')
-                    console.log(data);
                     setTimeout(() => {
                         navigate('MainPage', data.message, user.username, data.token)
                     }, 1000)
                 } else {
                     // setChildren(window.document.body, [modalWindow(data.message)])
-                    console.log(data);
-                    console.log('ddd');
                     if (document.querySelector('.modal-window--fail')) {
                         const fail = document.querySelector('.modal-window--fail') as HTMLElement
                         fail.classList.remove('modal-window--fail')
@@ -95,14 +79,6 @@ export default class requestClass {
                 }
             })
     }
-    /**
-     * ! try { fetch --> !response.ok } 
-     * ! try { fetch --> response.ok --> navigate('MainPage')
-     * ! + username!!!
-     * ! }
-     * ! catch(error) { error.message } 
-     * ! message can be 'произошла ошибка при авторизации — неверные данные'
-     */
 
     async fetchTracks(token: string) {
         return await fetch('http://localhost:8000/api/tracks', {

@@ -14,7 +14,6 @@ import { OmitFavouriteTrack } from "../../services/types";
 const request = new requestClass()
 
 export default function favouritePageInit(username: string, token: string) {
-    console.log(token);
     let tracks = request.fetchTracks(token) as Promise<OmitFavouriteTrack[]>
     let trax: Promise<ITrack[]> = tracksProcess(tracks, /*podcasts*/)
     let tracksFav = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>

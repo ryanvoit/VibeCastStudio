@@ -13,9 +13,6 @@ const request = new requestClass()
 
 export default function mainPageInit(username: string, token: string, message: "произошла ошибка при авторизации - неверные данные" | "пользователь уже существует" |
     "авторизация прошла успешно" | "пользователь успешно добавлен" | null) {
-    /**
-    * ! fetch /favourite - GET
-    */
     let tracks = request.fetchTracks(token) as Promise<OmitFavouriteTrack[]>
     let trax: Promise<ITrack[]> = tracksProcess(tracks);
     let tracksFav = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
