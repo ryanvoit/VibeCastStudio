@@ -21,11 +21,19 @@ export default class HandleFunctionsClass {
         )
 
         const mainTableWrapper = document.querySelector('.main-table__super-wrapper') as HTMLElement
-        
+
         setChildren(mainTableWrapper, [
             mainTable(filteredTracks, token, favTrax)
         ])
-            
+    }
+
+    btnLogOut() {
+        (document.querySelector('.main-page-wrapper') as HTMLElement).classList.remove('main-page-wrapper--animated'),
+        (document.querySelector('.header') as HTMLElement).classList.remove('header--animated')
+
+        setTimeout(() => {
+            navigate('AuthPage', null)
+        }, 1000)
     }
 
     buttonStartPlay(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
@@ -36,17 +44,21 @@ export default class HandleFunctionsClass {
         const playerSuper = document.querySelector('.player__super-wrapper') as HTMLElement
         mainPageWrapper.classList.remove('main-page-wrapper--player-on')
 
-        setTimeout(() => {
-            playerSuper.innerHTML = ''
-            setChildren(playerSuper, [player(tracks, id, token)])
-            setTimeout(() => {
-                mainPageWrapper.classList.add('main-page-wrapper--player-on')
-            }, 10)
-        }, 300)
+        const tracksFav = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+        let traxFav: Promise<ITrack[] /*& IPodcast*/> = tracksProcess(tracksFav, /*podcasts*/);
 
+        traxFav.then((trackingFav) => {
+            setTimeout(() => {
+                playerSuper.innerHTML = ''
+                setChildren(playerSuper, [player(tracks, id, token, trackingFav)])
+                setTimeout(() => {
+                    mainPageWrapper.classList.add('main-page-wrapper--player-on')
+                }, 10)
+            }, 300)
+        })
     }
 
-    buttonFavourite(track: ITrack & IPodcast, buttonFav: HTMLElement, id: number, token: string) {
+    buttonFavourite(track: ITrack & IPodcast, buttonFav: HTMLElement, id: number, token: string, role: 'favourite' | 'favourite-noCell') {
         let tracks = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
         tracks.then((trax) => {
             const tracking = trax.find(track => track.id === id)
@@ -65,42 +77,49 @@ export default class HandleFunctionsClass {
         setTimeout(() => {
             let tracks2 = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
             tracks2.then((trax) => {
-                const track2 = trax.find(track => track.id === id);
-                // const btnF = document.querySelectorAll('.svg-heart')
-                (buttonFav.firstElementChild as HTMLElement).innerHTML = ''
-                if(track2) {
-                    setChildren((buttonFav.firstElementChild as HTMLElement), [
-                        svgInit('heart-favourite')
-                    ])
-                } else {
-                    setChildren((buttonFav.firstElementChild as HTMLElement), [
-                        svgInit('heart')
-                    ])
+
+                const tableCells = document.querySelectorAll('.main-table__cell')
+                let idCell = null
+                for (let i = 0; i < tableCells.length; i++) {
+                    const element = tableCells[i];
+                    if (element.textContent.trim() === track.id.toString().trim()) {
+                        idCell = tableCells[i]
+                    }
                 }
+
+                const trackF = trax.find(track => track.id === id);
+
+                if (idCell) {
+                    const favBtn = ((idCell?.parentNode as HTMLElement).nextElementSibling as HTMLElement).firstElementChild as HTMLElement
+                    console.log(favBtn);
+                    favBtn.innerHTML = ''
+                    if (trackF) {
+                        setChildren(favBtn, [
+                            svgInit('heart-favourite')
+                        ])
+                    } else {
+                        setChildren(favBtn, [
+                            svgInit('heart')
+                        ])
+                    }
+                }
+
+                const playerTitle = document.querySelector('.player__name') as HTMLElement
+                const playerTrackTitle = playerTitle.textContent.trim()
+                if (playerTrackTitle === track.title.trim()) {
+                    ((playerTitle.nextElementSibling as HTMLElement).firstElementChild as HTMLElement).innerHTML = ''
+                    if (trackF) {
+                        setChildren(((playerTitle.nextElementSibling as HTMLElement).firstElementChild as HTMLElement), [
+                            svgInit('heart-favourite')
+                        ])
+                    } else {
+                        setChildren(((playerTitle.nextElementSibling as HTMLElement).firstElementChild as HTMLElement), [
+                            svgInit('heart')
+                        ])
+                    }
+                } 
             })
         }, 100)
-
-
-        // request.AddFavourite({
-        // trackId: id
-        // }, token)
-        // }
-        /**
-          * ! const favourites = fetch /favourite -- GET | []
-          */
-        // setTimeout(() => {
-        // let tracks = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
-        // console.log(tracks);
-        // let trax: Promise<ITrack[]> = tracksProcess(tracks, /*podcasts*/)
-        // console.log(trax);
-
-        // trax.then((tracking) => {
-        // tracking[id].favourite = (tracking.includes(track)) ? true : false;
-
-        // (buttonFav.firstElementChild as HTMLElement).innerHTML = '';
-        // setChildren((buttonFav.firstElementChild as HTMLElement), [(tracking[id].favourite) ? svgInit('heart-favourite') : svgInit('heart')])
-        // })
-        // }, 10)
     }
 
     buttonAside(navigation: 'FavouritePage' | 'MainPage') {
@@ -112,15 +131,12 @@ export default class HandleFunctionsClass {
         }, 30)
     }
 
-    btnPlay(btn: HTMLButtonElement,
-        // tracks: Array<ITrack & IPodcast>, id: number
-    ) {
+    btnPlay(btn: HTMLButtonElement) {
         setTimeout(() => {
             if (btn.classList.contains('button__playSong--off')) {
                 listening(
                     document.querySelector('.player__range') as HTMLInputElement,
-                    document.querySelector('.player__output') as HTMLElement,
-                    // tracks, id
+                    document.querySelector('.player__output') as HTMLElement
                 )
 
                 btn.classList.remove('button__playSong--off')

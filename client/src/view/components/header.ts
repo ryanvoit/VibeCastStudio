@@ -3,8 +3,21 @@ import { searchInput } from '../elements/input';
 import { svgInit } from '../elements/svg';
 import user from './user.svg';
 import { ITrack, IPodcast } from '../../services/types';
+import HandleFunctionsClass from '../../controller/HandleFunctionsClass';
+
+const click = new HandleFunctionsClass()
 
 export function header(tracks: ITrack[], username: string, token: string, favTrax: ITrack[]) {
+	const btnLogOut = el('button.header__user', [
+					el("img.header__icon", { src: user, height: '42', width: '42' }),
+					el("span.header__username", `${username}`),
+					svgInit('arrow')
+				])
+
+	btnLogOut.addEventListener('click', function(e) {
+		click.btnLogOut()
+	})
+
 	const header = el('header.header', [
 		el('.container', [
 			el('.header__wrapper', [
@@ -13,11 +26,7 @@ export function header(tracks: ITrack[], username: string, token: string, favTra
 					el("span.header__title", "VibeCast Studio")
 				]),
 				searchInput(tracks, token, favTrax),
-				el('.header__user', [
-					el("img.header__icon", { src: user, height: '42', width: '42' }),
-					el("span.header__username", `${username}`),
-					svgInit('arrow')
-				])
+				btnLogOut
 			])
 		])
 	]);

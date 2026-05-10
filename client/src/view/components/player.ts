@@ -7,7 +7,7 @@ import { maxRange, numRangeToDuration, volumeValToWidth } from "../../services/p
 import { svgInit } from "../elements/svg"
 import { listening } from "../../services/listening"
 
-export function player(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
+export function player(tracks: Array<ITrack & IPodcast>, id: number, token: string, tracksFav: Array<ITrack & IPodcast>) {
     let track = tracks[id - 1]
     if(!track) {
         track = tracks[0]
@@ -52,7 +52,7 @@ export function player(tracks: Array<ITrack & IPodcast>, id: number, token: stri
             el('.player__inner', [
                 el('span.player__title', [
                     el('span.player__name', `${track.title}`),
-                    el('span.player__favourite', buttonInit('favourite-noCell', tracks, id, token))
+                    el('span.player__favourite', buttonInit('favourite-noCell', tracks, id, token, tracksFav))
                 ]),
                 el('span.player__artist', (track.artist) ? `${track.artist}` : `${track.host}`)
             ])

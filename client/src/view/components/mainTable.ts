@@ -46,12 +46,7 @@ export function table(tracks: (ITrack & IPodcast)[], tracksAmountPage: number, b
         btns[0].classList.add('button__pagination--active')
     }
 
-
-    // console.log(pageNumber)
     const trax = tracks.slice((pageNumber - 1) * tracksAmountPage, (pageNumber - 1) * tracksAmountPage + 5);
-
-    // const grt = tracks.splice((pageNumber - 1) * tracksAmountPage, 5);
-
 
     return el('table.main-table__table', [
         cellsMain(),

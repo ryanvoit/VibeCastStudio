@@ -20,6 +20,7 @@ export default function mainPageInit(username: string, token: string, message: "
 
     trax.then((tracking) => {
         traxFav.then((trackingFav) => {
+            console.log(trackingFav);
             setChildren(window.document.body, [
                 header(tracking, username, token, trackingFav),
                 el('main', [
@@ -30,7 +31,7 @@ export default function mainPageInit(username: string, token: string, message: "
                                 mainTable(tracking, token, trackingFav),
                             ]),
                             el('.player__super-wrapper', [
-                                player(tracking, 0, token)
+                                player(tracking, 0, token, trackingFav)
                             ])
                         ])
                     ])

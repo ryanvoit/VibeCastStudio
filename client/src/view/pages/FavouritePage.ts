@@ -31,7 +31,7 @@ export default function favouritePageInit(username: string, token: string) {
                                 mainTable(tracking, token, trackingFav),
                             ]),
                             el('.player__super-wrapper', [
-                                player(tracking, 0, token)
+                                player(tracking, 0, token, trackingFav)
                             ])
                         ])
                     ])
