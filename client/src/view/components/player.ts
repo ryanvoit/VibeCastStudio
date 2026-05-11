@@ -59,11 +59,11 @@ export function player(tracks: Array<ITrack & IPodcast>, id: number, token: stri
         ]),
         el('.player__duration-wrapper', [
             el('.player__buttons', [
-                btnPlayer('shuffle', tracks, id),
-                btnPlayer('back', tracks, id),
+                btnPlayer('shuffle', tracks, id, token),
+                btnPlayer('back', tracks, id, token),
                 btnPlayer('playSong'),
-                btnPlayer('next', tracks, id),
-                btnPlayer('repeat', tracks, id)
+                btnPlayer('next', tracks, id, token),
+                btnPlayer('repeat', tracks, id, token)
             ]),
             el('.player__range-wrapper', [
                 outputRange,
