@@ -20,13 +20,14 @@ export default function mainPageInit(username: string, token: string, message: "
 
     trax.then((tracking) => {
         traxFav.then((trackingFav) => {
-            console.log(trackingFav);
             setChildren(window.document.body, [
                 header(tracking, username, token, trackingFav),
                 el('main', [
                     el('.container', [
                         el('.main-page-wrapper', [
-                            aside('main'),
+                            el('.aside-nav', [
+                                aside('main', trackingFav, token, tracking)
+                            ]),
                             el('.main-table__super-wrapper', [
                                 mainTable(tracking, token, trackingFav),
                             ]),

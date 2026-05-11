@@ -52,7 +52,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
     }
 }
 
-export function asideBtn(active: boolean, text: string) {
+export function asideBtn(active: boolean, text: string, favTrax: ITrack[], token: string, trax: ITrack[]) {
     const buttonAside = el('button.button button__aside', { type: 'button' }, [
         svgInit('musicNote'),
         el("span.sidebar__title", `${text}`),
@@ -63,7 +63,7 @@ export function asideBtn(active: boolean, text: string) {
         buttonAside.classList.add('button__aside--active')
     } else {
         buttonAside.addEventListener('click', function () {
-            HandleFunctions.buttonAside(navigation)
+            HandleFunctions.buttonAside(navigation, favTrax, token, trax)
         })
     }
 

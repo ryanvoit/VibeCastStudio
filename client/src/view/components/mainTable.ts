@@ -54,7 +54,7 @@ export function table(tracks: (ITrack & IPodcast)[], tracksAmountPage: number, b
     ])
 }
 
-export function mainTable(tracks: ITrack[], token: string, favTrax: ITrack[]) {
+export function mainTable(tracks: ITrack[], token: string, favTrax: ITrack[]): HTMLElement {
     const amountTracks = tracks.length
     const tracksAmountPage = 5
     let pages = amountTracks / tracksAmountPage

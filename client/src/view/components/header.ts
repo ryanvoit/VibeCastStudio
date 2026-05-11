@@ -9,12 +9,12 @@ const click = new HandleFunctionsClass()
 
 export function header(tracks: ITrack[], username: string, token: string, favTrax: ITrack[]) {
 	const btnLogOut = el('button.header__user', [
-					el("img.header__icon", { src: user, height: '42', width: '42' }),
-					el("span.header__username", `${username}`),
-					svgInit('arrow')
-				])
+		el("img.header__icon", { src: user, height: '42', width: '42' }),
+		el("span.header__username", `${username}`),
+		svgInit('arrow')
+	])
 
-	btnLogOut.addEventListener('click', function(e) {
+	btnLogOut.addEventListener('click', function (e) {
 		click.btnLogOut()
 	})
 
@@ -25,15 +25,15 @@ export function header(tracks: ITrack[], username: string, token: string, favTra
 					svgInit('logo'),
 					el("span.header__title", "VibeCast Studio")
 				]),
-				searchInput(tracks, token, favTrax),
+				el('.header__search-super-wrapper', [searchInput(tracks, token, favTrax)]),
 				btnLogOut
 			])
 		])
 	]);
 
 	setTimeout(() => {
-        header.classList.add('header--animated')
-    }, 10)
+		header.classList.add('header--animated')
+	}, 10)
 
 	return header
 }

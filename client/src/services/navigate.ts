@@ -1,8 +1,5 @@
 import mainPageInit from "../view/pages/MainPage"
-import favouritePageInit from "../view/pages/favouritePage"
 import formPageInit from "../view/pages/formPage"
-import { modalWindow } from '../view/components/modalWindow'
-import { setChildren } from "redom"
 
 export async function navigate(
     page: 'MainPage' | 'FavouritePage' | 'AuthPage' | 'RegisterPage', 
@@ -18,11 +15,6 @@ export async function navigate(
             mainPageInit(username as string, token as string, message)
             // const MainPage = await import("./view/pages/MainPage")
             // MainPage.default()
-            break
-        case 'FavouritePage':
-            favouritePageInit(username as string, token as string)
-            // const FavouritePage = await import("./view/pages/FavouritePage")
-            // FavouritePage.default()
             break
         case 'AuthPage':
             formPageInit('auth', message)

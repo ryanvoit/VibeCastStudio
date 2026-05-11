@@ -9,6 +9,8 @@ import { listening } from "../services/listening";
 import requestClass from "../model/requestClass.ts";
 import { tracksProcess } from "../services/trackProcess";
 import { OmitFavouriteTrack } from "../services/types";
+import { aside } from "../view/components/aside";
+import { searchInput } from "../view/elements/input";
 
 const request = new requestClass()
 
@@ -29,7 +31,7 @@ export default class HandleFunctionsClass {
 
     btnLogOut() {
         (document.querySelector('.main-page-wrapper') as HTMLElement).classList.remove('main-page-wrapper--animated'),
-        (document.querySelector('.header') as HTMLElement).classList.remove('header--animated')
+            (document.querySelector('.header') as HTMLElement).classList.remove('header--animated')
 
         setTimeout(() => {
             navigate('AuthPage', null)
@@ -91,7 +93,6 @@ export default class HandleFunctionsClass {
 
                 if (idCell) {
                     const favBtn = ((idCell?.parentNode as HTMLElement).nextElementSibling as HTMLElement).firstElementChild as HTMLElement
-                    console.log(favBtn);
                     favBtn.innerHTML = ''
                     if (trackF) {
                         setChildren(favBtn, [
@@ -117,18 +118,50 @@ export default class HandleFunctionsClass {
                             svgInit('heart')
                         ])
                     }
-                } 
+                }
             })
         }, 100)
     }
 
-    buttonAside(navigation: 'FavouritePage' | 'MainPage') {
+    buttonAside(navigation: 'FavouritePage' | 'MainPage', favTrax: ITrack[], token: string, trax: ITrack[]) {
         const mainPageWrapper = document.querySelector('.main-page-wrapper') as HTMLElement
         mainPageWrapper.classList.remove('main-page-wrapper--player-on');
 
-        setTimeout(() => {
-            navigate(navigation, null)
-        }, 30)
+        const fav = request.fetchFavouriteTracks(token)
+        fav.then((f) => {
+            setTimeout(() => {
+                // navigate(navigation, null)
+                const mainTableWrapper = document.querySelector('.main-table__super-wrapper') as HTMLElement
+                const asideNav = document.querySelector('.aside-nav') as HTMLElement
+                const searchEl = document.querySelector('.header__search-super-wrapper') as HTMLElement
+
+                if (navigation === 'FavouritePage') {
+                    setChildren(mainTableWrapper, [
+                        mainTable(f, token, f)
+                    ]),
+                        setChildren(asideNav, [
+                            aside('favourite', f, token, trax)
+                        ])
+                        /**
+                         * ! ASIDE - SEARCH !!!!!
+                         */
+                        // ,
+                        // setChildren(searchEl, [
+                            // searchInput(f, token, f)
+                        // ])
+                } else {
+                    setChildren(mainTableWrapper, [
+                        mainTable(trax, token, f)
+                    ]),
+                        setChildren(asideNav, [
+                            aside('main', f, token, trax)
+                        ])// ,
+                        // setChildren(searchEl, [
+                            // searchInput(trax, token, f)
+                        // ])
+                }
+            }, 30)
+        })
     }
 
     btnPlay(btn: HTMLButtonElement) {
