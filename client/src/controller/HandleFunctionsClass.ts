@@ -8,6 +8,7 @@ import { numRangeToDuration } from "../services/playerRanges";
 import { listening } from "../services/listening";
 import requestClass from "../model/requestClass";
 import { aside } from "../view/components/aside";
+import { searchInput } from "../view/elements/input";
 
 const request = new requestClass()
 
@@ -28,7 +29,7 @@ export default class HandleFunctionsClass {
 
     btnLogOut() {
         (document.querySelector('.main-page-wrapper') as HTMLElement).classList.remove('main-page-wrapper--animated'),
-            (document.querySelector('.header') as HTMLElement).classList.remove('header--animated')
+        (document.querySelector('.header') as HTMLElement).classList.remove('header--animated')
 
         setTimeout(() => {
             navigate('AuthPage', null)
@@ -120,9 +121,6 @@ export default class HandleFunctionsClass {
     }
 
     buttonAside(navigation: 'FavouritePage' | 'MainPage', favTrax: ITrack[], token: string, trax: ITrack[]) {
-        const mainPageWrapper = document.querySelector('.main-page-wrapper') as HTMLElement
-        mainPageWrapper.classList.remove('main-page-wrapper--player-on');
-
         const fav = request.fetchFavouriteTracks(token)
         fav.then((f) => {
             setTimeout(() => {
@@ -151,7 +149,8 @@ export default class HandleFunctionsClass {
                     ]),
                         setChildren(asideNav, [
                             aside('main', f, token, trax)
-                        ])// ,
+                        ]) 
+                        // ,
                         // setChildren(searchEl, [
                             // searchInput(trax, token, f)
                         // ])

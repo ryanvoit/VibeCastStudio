@@ -77,7 +77,7 @@ export function buttonPlayInit(tracks: Array<ITrack>, id: number, token: string)
         el('td.main-table__cell', `${track.id}`),
         el('td.main-table__cell', [
             el('.main-table__wrapper', [
-                el('img.main-table__pic', { src: pic, height: 60, width: 60 }),
+                el('img.main-table__pic', { src: pic, height: 60, width: 60, alt: 'Обложка альбома' }),
                 el('.main-table__inner', [
                     el('span.main-table__name', `${track.title}`),
                     el('span.main-table__artist', `${track.artist}`)

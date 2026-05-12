@@ -6,12 +6,17 @@ import { numToMin } from "../../services/playerRanges"
 import { maxRange, numRangeToDuration, volumeValToWidth } from "../../services/playerRanges"
 import { svgInit } from "../elements/svg"
 import { listening } from "../../services/listening"
+import localStorageWork from "../../model/localStorageClass";
+
+const lS = new localStorageWork()
 
 export function player(tracks: Array<ITrack>, id: number, token: string, tracksFav: Array<ITrack>) {
     let track = tracks[id - 1]
     if(!track) {
         track = tracks[0]
     }
+
+    lS.saveTrackId(track.id)
 
     let range = el('input.player__range', {
         type: 'range',
@@ -26,10 +31,7 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
         outputRange.textContent = numRangeToDuration(Number((event.target as HTMLInputElement).value))
     })
 
-    listening(range, outputRange,
-        // tracks, id
-    )
-
+    listening(range, outputRange)
     const maxVolume: number = 20
 
     const rangeVolume = el('input.player__range-volume', {
@@ -48,7 +50,7 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
 
     const player = el('.player__super-wrapper', [
         el('.player__wrapper', [
-            el('img.player__pic', { src: pic, height: 60, width: 60 }),
+            el('img.player__pic', { src: pic, height: 60, width: 60, alt: 'Обложка альбома' }),
             el('.player__inner', [
                 el('span.player__title', [
                     el('span.player__name', `${track.title}`),

@@ -1,10 +1,11 @@
+import localStorageWork from "../model/localStorageClass"
 import { numRangeToDuration } from "./playerRanges"
 // import HandleFunctionsClass from "../controller/HandleFunctionsClass"
 
 // const HandleFunctions = new HandleFunctionsClass()
+const lS = new localStorageWork()
 
-export function listening(range: HTMLInputElement, outputRange: HTMLElement,
-    ) {
+export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
     let interval = setInterval(() => {
         let seconds = Number(range.value)
         seconds++
@@ -32,6 +33,13 @@ export function listening(range: HTMLInputElement, outputRange: HTMLElement,
 
         btnPlay.addEventListener('click', function () {
             clearInterval(interval)
+        })
+
+        const btnLogOut = document.querySelector('.header__user') as HTMLButtonElement
+
+        btnLogOut.addEventListener('click', function() {
+            clearInterval(interval)
+            lS.removeUser()
         })
     }, 10)
 }

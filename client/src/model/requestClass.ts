@@ -1,6 +1,9 @@
 import { fetchUser, idTrack } from "../services/types"
 import { navigate } from "../services/navigate"
 import { modalWindow } from "../view/components/modalWindow"
+import localStorageWork from "./localStorageClass"
+
+const lS = new localStorageWork()
 
 export default class requestClass {
     form = document.querySelector('form') as HTMLFormElement
@@ -37,7 +40,7 @@ export default class requestClass {
             })
     }
 
-    async loginUser(user: fetchUser) {
+    async loginUser(user: fetchUser, localStorage?: boolean) {
         return fetch('http://localhost:8000/api/login', {
             method: 'POST',
             headers: {
@@ -46,7 +49,9 @@ export default class requestClass {
             body: JSON.stringify(user)
         }).then((response) => response.json())
             .then((data) => {
-                if (data.message !== "произошла ошибка при авторизации - неверные данные") {
+                if (localStorage && data.message !== "произошла ошибка при авторизации - неверные данные") {
+                    navigate('MainPage', data.message, user.username, data.token)
+                } else if (!localStorage && data.message !== "произошла ошибка при авторизации - неверные данные") {
                     if (document.querySelector('.modal-window--fail')) {
                         const fail = document.querySelector('.modal-window--fail') as HTMLElement
                         fail.classList.remove('modal-window--fail')
@@ -60,10 +65,11 @@ export default class requestClass {
                     // modalWindow(data.message)
                     this.form.classList.remove('auth-form--animated')
                     this.header.classList.remove('header--animated')
+                    lS.saveLogin(user)
                     setTimeout(() => {
                         navigate('MainPage', data.message, user.username, data.token)
                     }, 1000)
-                } else {
+                } else if (!localStorage && data.message === "произошла ошибка при авторизации - неверные данные") {
                     // setChildren(window.document.body, [modalWindow(data.message)])
                     if (document.querySelector('.modal-window--fail')) {
                         const fail = document.querySelector('.modal-window--fail') as HTMLElement
