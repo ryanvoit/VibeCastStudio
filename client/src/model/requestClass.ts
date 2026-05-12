@@ -1,6 +1,5 @@
 import { fetchUser, idTrack } from "../services/types"
 import { navigate } from "../services/navigate"
-import { setChildren } from "redom"
 import { modalWindow } from "../view/components/modalWindow"
 
 export default class requestClass {

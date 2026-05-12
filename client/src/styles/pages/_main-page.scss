@@ -9,7 +9,7 @@
     &--player-on {
         margin: 0;
 
-        .player {
+        .player__super-wrapper {
             transform: translateY(0);
             transition: transform $transition;
         }

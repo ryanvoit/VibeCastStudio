@@ -1,13 +1,13 @@
 import { el } from "redom";
 import { svgInit } from "./svg";
 import HandleFunctions from "../../controller/HandleFunctionsClass";
-import { IPodcast, ITrack } from "../../services/types";
+import { ITrack } from "../../services/types";
 
 const handleFunctions = new HandleFunctions()
 
 export function searchInput(tracks: ITrack[], token: string, favTrax: ITrack[]) {
     const inputSearch = el('.header__search', [
-        el('input.input__search', { type: 'text', placeholder: 'Что будем искать?' }),
+        el('input.header__input-search', { type: 'text', placeholder: 'Что будем искать?' }),
         svgInit('search')
     ]);
     (inputSearch.firstElementChild as HTMLInputElement).addEventListener('input', function () {

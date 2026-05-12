@@ -1,28 +1,25 @@
-import { setChildren, el } from "redom";
-import { ITrack, IPodcast } from "../services/types";
+import { setChildren } from "redom";
+import { ITrack } from "../services/types";
 import { mainTable } from "../view/components/mainTable";
 import { player } from "../view/components/player";
 import { svgInit } from "../view/elements/svg";
 import { navigate } from "../services/navigate";
 import { numRangeToDuration } from "../services/playerRanges";
 import { listening } from "../services/listening";
-import requestClass from "../model/requestClass.ts";
-import { tracksProcess } from "../services/trackProcess";
-import { OmitFavouriteTrack } from "../services/types";
+import requestClass from "../model/requestClass";
 import { aside } from "../view/components/aside";
-import { searchInput } from "../view/elements/input";
 
 const request = new requestClass()
 
 export default class HandleFunctionsClass {
-    inputSearch(input: HTMLInputElement, tracks: Array<ITrack & IPodcast>, token: string, favTrax: ITrack[]) {
+    inputSearch(input: HTMLInputElement, tracks: Array<ITrack>, token: string, favTrax: ITrack[]) {
         const search = input.value
 
         const filteredTracks = tracks.filter(
             track => track.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
 
-        const mainTableWrapper = document.querySelector('.main-table__super-wrapper') as HTMLElement
+        const mainTableWrapper = document.querySelector('.main-table') as HTMLElement
 
         setChildren(mainTableWrapper, [
             mainTable(filteredTracks, token, favTrax)
@@ -38,18 +35,17 @@ export default class HandleFunctionsClass {
         }, 1000)
     }
 
-    buttonStartPlay(tracks: Array<ITrack & IPodcast>, id: number, token: string) {
+    buttonStartPlay(tracks: Array<ITrack>, id: number, token: string) {
         if (id <= 0) {
             id = 1
         }
         const mainPageWrapper = document.querySelector('.main-page-wrapper') as HTMLElement
-        const playerSuper = document.querySelector('.player__super-wrapper') as HTMLElement
+        const playerSuper = document.querySelector('.player') as HTMLElement
         mainPageWrapper.classList.remove('main-page-wrapper--player-on')
 
-        const tracksFav = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
-        let traxFav: Promise<ITrack[] /*& IPodcast*/> = tracksProcess(tracksFav, /*podcasts*/);
+        const tracksFav = request.fetchFavouriteTracks(token) as Promise<ITrack[]>
 
-        traxFav.then((trackingFav) => {
+        tracksFav.then((trackingFav) => {
             setTimeout(() => {
                 playerSuper.innerHTML = ''
                 setChildren(playerSuper, [player(tracks, id, token, trackingFav)])
@@ -60,8 +56,8 @@ export default class HandleFunctionsClass {
         })
     }
 
-    buttonFavourite(track: ITrack & IPodcast, buttonFav: HTMLElement, id: number, token: string, role: 'favourite' | 'favourite-noCell') {
-        let tracks = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+    buttonFavourite(track: ITrack, buttonFav: HTMLElement, id: number, token: string, role: 'favourite' | 'favourite-noCell') {
+        const tracks = request.fetchFavouriteTracks(token) as Promise<ITrack[]>
         tracks.then((trax) => {
             const tracking = trax.find(track => track.id === id)
 
@@ -77,7 +73,7 @@ export default class HandleFunctionsClass {
         })
 
         setTimeout(() => {
-            let tracks2 = request.fetchFavouriteTracks(token) as Promise<OmitFavouriteTrack[]>
+            const tracks2 = request.fetchFavouriteTracks(token) as Promise<ITrack[]>
             tracks2.then((trax) => {
 
                 const tableCells = document.querySelectorAll('.main-table__cell')
@@ -131,9 +127,9 @@ export default class HandleFunctionsClass {
         fav.then((f) => {
             setTimeout(() => {
                 // navigate(navigation, null)
-                const mainTableWrapper = document.querySelector('.main-table__super-wrapper') as HTMLElement
+                const mainTableWrapper = document.querySelector('.main-table') as HTMLElement
                 const asideNav = document.querySelector('.aside-nav') as HTMLElement
-                const searchEl = document.querySelector('.header__search-super-wrapper') as HTMLElement
+                const searchEl = document.querySelector('.header__search') as HTMLElement
 
                 if (navigation === 'FavouritePage') {
                     setChildren(mainTableWrapper, [
@@ -166,21 +162,21 @@ export default class HandleFunctionsClass {
 
     btnPlay(btn: HTMLButtonElement) {
         setTimeout(() => {
-            if (btn.classList.contains('button__playSong--off')) {
+            if (btn.classList.contains('button--playSong--off')) {
                 listening(
                     document.querySelector('.player__range') as HTMLInputElement,
                     document.querySelector('.player__output') as HTMLElement
                 )
 
-                btn.classList.remove('button__playSong--off')
+                btn.classList.remove('button--playSong--off')
             } else {
-                btn.classList.add('button__playSong--off')
+                btn.classList.add('button--playSong--off')
             }
         }, 100)
     }
 
-    btnShuffle(tracks: Array<ITrack & IPodcast>, token: string) {
-        let idArr: number[] = []
+    btnShuffle(tracks: Array<ITrack>, token: string) {
+        const idArr: number[] = []
         for (let i = 0; i < (tracks).length; i++) {
             idArr.push((tracks)[i].id)
         }
@@ -191,7 +187,7 @@ export default class HandleFunctionsClass {
     }
 
     btnRepeat(range: HTMLInputElement, outputRange: HTMLElement) {
-        let interval = setInterval(() => {
+        const interval = setInterval(() => {
             let seconds = Number(range.value)
             seconds++
             range.value = `${seconds}`

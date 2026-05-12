@@ -1,5 +1,5 @@
 import JustValidate from 'just-validate';
-import requestClass from '../model/requestClass.ts.ts';
+import requestClass from '../model/requestClass.ts';
 // import { navigate } from './navigate.ts'
 
 export function validate() {

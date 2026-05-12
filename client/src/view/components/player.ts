@@ -1,5 +1,5 @@
 import { el } from "redom"
-import { IPodcast, ITrack } from "../../services/types";
+import { ITrack } from "../../services/types";
 import pic from "./img.svg";
 import { buttonInit, btnPlayer } from "../elements/button"
 import { numToMin } from "../../services/playerRanges"
@@ -7,7 +7,7 @@ import { maxRange, numRangeToDuration, volumeValToWidth } from "../../services/p
 import { svgInit } from "../elements/svg"
 import { listening } from "../../services/listening"
 
-export function player(tracks: Array<ITrack & IPodcast>, id: number, token: string, tracksFav: Array<ITrack & IPodcast>) {
+export function player(tracks: Array<ITrack>, id: number, token: string, tracksFav: Array<ITrack>) {
     let track = tracks[id - 1]
     if(!track) {
         track = tracks[0]
@@ -46,7 +46,7 @@ export function player(tracks: Array<ITrack & IPodcast>, id: number, token: stri
         rangeVolumeLevel.style.width = volumeValToWidth(Number((event.target as HTMLInputElement).value), maxVolume)
     })
 
-    const player = el('.player', [
+    const player = el('.player__super-wrapper', [
         el('.player__wrapper', [
             el('img.player__pic', { src: pic, height: 60, width: 60 }),
             el('.player__inner', [
@@ -54,7 +54,7 @@ export function player(tracks: Array<ITrack & IPodcast>, id: number, token: stri
                     el('span.player__name', `${track.title}`),
                     el('span.player__favourite', buttonInit('favourite-noCell', tracks, id, token, tracksFav))
                 ]),
-                el('span.player__artist', (track.artist) ? `${track.artist}` : `${track.host}`)
+                el('span.player__artist', `${track.artist}`)
             ])
         ]),
         el('.player__duration-wrapper', [

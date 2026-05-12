@@ -5,7 +5,6 @@ export interface ITrack {
     duration: number;
     size_mb: number;
     encoded_audio: string;
-    favourite: boolean
 }
 
 export interface IPodcast {
@@ -17,11 +16,7 @@ export interface IPodcast {
     category?: string;
     description?: string;
     encoded_audio: string;
-    favourite: boolean
 }
-
-export type OmitFavouriteTrack = Omit<ITrack, 'favourite'>
-export type OmitFavouritePodcast = Omit<IPodcast, 'favourite'>
 
 export interface fetchUser {
     username: string,

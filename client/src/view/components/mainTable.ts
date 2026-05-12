@@ -1,5 +1,5 @@
 import { el } from 'redom';
-import { IPodcast, ITrack } from '../../services/types';
+import { ITrack } from '../../services/types';
 import { numToMin } from '../../services/playerRanges';
 import { svgInit } from '../elements/svg';
 import { buttonInit, buttonPlayInit } from '../elements/button';
@@ -22,7 +22,7 @@ export function cellsMain() {
     return mainTableRow
 }
 
-export function cells(trax: (ITrack & IPodcast)[], tracks: (ITrack & IPodcast)[], token: string, favTrax: ITrack[]): HTMLElement[] {
+export function cells(trax: ITrack[], tracks: ITrack[], token: string, favTrax: ITrack[]): HTMLElement[] {
     const rows = []
     for (let i = 0; i < trax.length; i++) {
         const tableRow = el('tr.main-table__row main-table__row--secondary', [
@@ -36,14 +36,14 @@ export function cells(trax: (ITrack & IPodcast)[], tracks: (ITrack & IPodcast)[]
     return rows
 }
 
-export function table(tracks: (ITrack & IPodcast)[], tracksAmountPage: number, btns: HTMLButtonElement[], token: string, favTrax: ITrack[]) {
-    const active = btns.find(btn => btn.classList.contains('button__pagination--active'))
+export function table(tracks: ITrack[], tracksAmountPage: number, btns: HTMLButtonElement[], token: string, favTrax: ITrack[]) {
+    const active = btns.find(btn => btn.classList.contains('button--pagination-active'))
     let pageNumber = 1
 
     if (active) {
         pageNumber = Number(active.textContent)
     } else {
-        btns[0].classList.add('button__pagination--active')
+        btns[0].classList.add('button--pagination-active')
     }
 
     const trax = tracks.slice((pageNumber - 1) * tracksAmountPage, (pageNumber - 1) * tracksAmountPage + 5);
@@ -67,8 +67,8 @@ export function mainTable(tracks: ITrack[], token: string, favTrax: ITrack[]): H
         btns.push(btnPagination(i, tracks, btns, token, favTrax, tracksAmountPage) as HTMLButtonElement)
     }
 
-    return el('.main-table', [
-        el('h2.main-table__title', 'Аудифайлы и треки'),
+    return el('.main-table__special-wrapper', [
+        el('h1.main-table__title', 'Аудифайлы и треки'),
         el('.main-table__super', [
             table(tracks, tracksAmountPage, btns, token, favTrax)
         ]),

@@ -7,7 +7,7 @@ import { modalWindow } from "../components/modalWindow";
 export default function formPageInit(role: 'auth' | 'register', message: "произошла ошибка при авторизации - неверные данные" | "пользователь уже существует" |
     "авторизация прошла успешно" | "пользователь успешно добавлен" | null) {
     setChildren(window.document.body, [
-        headerAuth(),
+        headerAuth(role),
         el('main', [
             el('.container', [
                 (role === 'auth') ? authFormInit(): registerFormInit(),

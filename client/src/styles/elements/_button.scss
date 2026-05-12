@@ -6,7 +6,7 @@
 		padding: 0;
 	}
 
-	&__aside {
+	&--aside {
 		display: flex;
 		padding: 9px 30px;
 		gap: 12px;
@@ -26,7 +26,7 @@
 		}
 	}
 
-	&__play {
+	&--play {
 		display: grid;
 		grid-template-columns: 40px 1fr 262px 195px;
 		transition: background-color $transition;
@@ -42,7 +42,7 @@
 		}
 	}
 
-	&__favourite {
+	&--favourite {
 		.main-table__cell {
 			justify-content: center;
 		}
@@ -55,7 +55,7 @@
 		}
 	}
 
-	&__settings {
+	&--settings {
 		.main-table__cell {
 			justify-content: center;
 		}
@@ -67,35 +67,35 @@
 		}
 	}
 
-	&__shuffle,
-	&__back,
-	&__playSong,
-	&__next,
-	&__repeat {
+	&--shuffle,
+	&--back,
+	&--playSong,
+	&--next,
+	&--repeat {
 		padding: 0;
 
-		&--off .svg-playSong {
+		&-off .svg-playSong {
 			background-color: $color-dark-gray2;
 		}
 	}
 
-	&__shuffle:hover .shuffle-icon,
-	&__back:hover .back-icon,
-	&__next:hover .next-icon,
-	&__repeat:hover .repeat-icon,
-	&__shuffle:focus-visible .shuffle-icon,
-	&__back:focus-visible .back-icon,
-	&__next:focus-visible .next-icon,
-	&__repeat:focus-visible .repeat-icon {
+	&--shuffle:hover .shuffle-icon,
+	&--back:hover .back-icon,
+	&--next:hover .next-icon,
+	&--repeat:hover .repeat-icon,
+	&--shuffle:focus-visible .shuffle-icon,
+	&--back:focus-visible .back-icon,
+	&--next:focus-visible .next-icon,
+	&--repeat:focus-visible .repeat-icon {
 		color: $color-burnt-orange;
 	}
 
-	&__playSong:hover .svg-playSong,
-	&__playSong:focus-visible .svg-playSong {
+	&--playSong:hover .svg-playSong,
+	&--playSong:focus-visible .svg-playSong {
 		background-color: $color-burnt-orange;
 	}
 
-	&__submit {
+	&--submit {
 		border: none;
 		padding: 10px 30px;
 		border-radius: 20px;
@@ -112,7 +112,7 @@
 		}
 	}
 
-	&__link {
+	&--link {
 		color: $color-burnt-orange;
 		text-decoration: underline;
 		transform: scale(1) translateX(0);
@@ -124,7 +124,7 @@
 		}
 	}
 
-	&__pagination {
+	&--pagination {
 		border: 1px solid $color-black;
 		border-radius: 5px;
 		width: 30px;
@@ -140,7 +140,7 @@
 			border-color: $color-burnt-orange;
 		}
 
-		&--active {
+		&-active {
 			background-color: $color-burnt-orange;
 
 			&:hover, 

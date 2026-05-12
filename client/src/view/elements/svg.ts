@@ -3,7 +3,7 @@ import { el } from "redom";
 export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration' | 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat' | 'tick' | 'cross'): HTMLElement {
     switch(role) {
         case 'logo':
-            const svgLogo = el('.svg-logo')
+            const svgLogo = el('span.svg-logo')
             svgLogo.innerHTML = 
             `<svg class="logo-icon" width="33" height="28" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-logo"></use> 
@@ -11,7 +11,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgLogo
         case 'search':
-            const svgSearch = el('.svg-search')
+            const svgSearch = el('span.svg-search')
             svgSearch.innerHTML = 
             `<svg class="search-icon" width="24" height="24" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-search"></use> 
@@ -19,7 +19,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgSearch
         case 'arrow':
-            const svgArrow = el('.svg-arrow')
+            const svgArrow = el('span.svg-arrow')
             svgArrow.innerHTML = 
             `<svg class="arrow-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-arrow"></use> 
@@ -27,7 +27,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgArrow
         case 'musicNote':
-            const svgMusicNote = el('.svg-music-note')
+            const svgMusicNote = el('span.svg-music-note')
             svgMusicNote.innerHTML = 
             `<svg class="music-note-icon" width="32" height="32" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-music-note"></use> 
@@ -35,7 +35,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgMusicNote
         case 'calendar':
-            const svgCalendar = el('.svg-calendar')
+            const svgCalendar = el('span.svg-calendar')
             svgCalendar.innerHTML = 
             `<svg class="calendar-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-calendar"></use> 
@@ -43,7 +43,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgCalendar
         case 'duration':
-            const svgDuration = el('.svg-duration')
+            const svgDuration = el('span.svg-duration')
             svgDuration.innerHTML = 
             `<svg class="duration-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-duration"></use> 
@@ -51,15 +51,15 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgDuration
         case 'heart-favourite':
-            const svgHeartFavourite = el('.svg-heart--favourite')
+            const svgHeartFavourite = el('span.svg-heart svg-heart--favourite')
             svgHeartFavourite.innerHTML = 
-            `<svg class="heart-icon--favourite" width="24" height="24" aria-hidden="true"> 
+            `<svg class="heart-icon heart-icon--favourite" width="24" height="24" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-heart-favourite"></use> 
             </svg>`
 
             return svgHeartFavourite
         case 'heart':
-            const svgHeart = el('.svg-heart')
+            const svgHeart = el('span.svg-heart')
             svgHeart.innerHTML = 
             `<svg class="heart-icon" width="24" height="24" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-heart"></use> 
@@ -67,7 +67,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgHeart
         case 'settings':
-            const svgSettings = el('.svg-settings')
+            const svgSettings = el('span.svg-settings')
             svgSettings.innerHTML = 
             `<svg class="settings-icon" width="23" height="4" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-settings"></use> 
@@ -75,7 +75,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgSettings
         case 'speaker':
-            const svgSpeaker = el('.svg-speaker')
+            const svgSpeaker = el('span.svg-speaker')
             svgSpeaker.innerHTML = 
             `<svg class="speaker-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-speaker"></use> 
@@ -84,7 +84,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
             return svgSpeaker
 
         case 'shuffle':
-            const svgShuffle = el('.svg-shuffle')
+            const svgShuffle = el('span.svg-shuffle')
             svgShuffle.innerHTML = 
             `<svg class="shuffle-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-shuffle"></use> 
@@ -92,7 +92,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgShuffle
         case 'back':
-            const svgBack = el('.svg-back')
+            const svgBack = el('span.svg-back')
             svgBack.innerHTML = 
             `<svg class="back-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-back"></use> 
@@ -100,7 +100,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgBack
         case 'playSong':
-            const svgPlay = el('.svg-playSong')
+            const svgPlay = el('span.svg-playSong')
             svgPlay.innerHTML = 
             `<svg class="playSong-icon" width="13" height="15" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-play"></use> 
@@ -108,7 +108,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgPlay
         case 'next':
-            const svgNext = el('.svg-next')
+            const svgNext = el('span.svg-next')
             svgNext.innerHTML = 
             `<svg class="next-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-next"></use> 
@@ -116,7 +116,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgNext
         case 'repeat':
-            const svgRepeat = el('.svg-repeat')
+            const svgRepeat = el('span.svg-repeat')
             svgRepeat.innerHTML = 
             `<svg class="repeat-icon" width="16" height="16" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-repeat"></use> 
@@ -124,7 +124,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgRepeat
         case 'tick':
-            const svgTick = el('.svg-tick')
+            const svgTick = el('span.svg-tick')
             svgTick.innerHTML = 
             `<svg class="tick-icon" width="10" height="8" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-tick"></use> 
@@ -132,7 +132,7 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
 
             return svgTick
         case 'cross':
-            const svgCross = el('.svg-cross')
+            const svgCross = el('span.svg-cross')
             svgCross.innerHTML = 
             `<svg class="cross-icon" width="32" height="32" aria-hidden="true"> 
                 <use xlink:href="sprite.svg#icon-cross"></use> 

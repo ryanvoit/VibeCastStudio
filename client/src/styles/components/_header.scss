@@ -1,19 +1,27 @@
 .header {
 	width: 100%;
 	background: transparent;
+	// margin-bottom: 60px;
 	transform: translateX(-100%);
 	transition: transform $transition-animation;
 
+	&__search {
+		padding: 15px 0 0 47px;
+		margin: 0 30px 0 0;
+		position: relative;
+		font-size: 12px;
+	}
+
 	&--auth {
 		transition: transform $transition-animation;
-		
+
 		.header__wrapper {
 			display: flex;
 			justify-content: center;
 			padding: 40px 0 0 0;
 		}
 
-		+ main {
+		+main {
 			margin: 0;
 		}
 	}
@@ -47,7 +55,7 @@
 
 	&__wrapper {
 		display: grid;
-    	grid-template-columns: 289px 1fr 246px;
+		grid-template-columns: 289px 1fr 246px;
 		height: 69px;
 		align-items: end;
 	}
@@ -62,5 +70,21 @@
 
 	&__title {
 		font-family: $ff-erica-one;
+	}
+
+	&__input-search {
+		padding: 20px 44px 20px;
+		border: none;
+		background: linear-gradient(90deg, $color-mercury 0%, $color-white-smoke 100%);
+		// background-color: $color-white-smoke;
+		color: $color-nero;
+		border-radius: 30px;
+		// font-size: 12px;
+		line-height: 12px;
+		width: 100%;
+		font-size: inherit;
+		letter-spacing: 0.09em;
+		height: 52px;
+		font-family: inherit;
 	}
 }
