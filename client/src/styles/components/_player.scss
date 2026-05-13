@@ -13,7 +13,8 @@
         grid-template-columns: 434px 1fr 97px;
         align-items: end;
         transform: translateY(100px);
-        transition: transform $transition;
+        opacity: 0;
+        transition: transform $transition, opacity $transition;
     }
 
     &__wrapper {

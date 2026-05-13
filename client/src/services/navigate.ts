@@ -1,5 +1,8 @@
 import mainPageInit from "../view/pages/MainPage"
 import formPageInit from "../view/pages/formPage"
+import Navigo from 'navigo'
+
+const router = new Navigo('/')
 
 export async function navigate(
     page: 'MainPage' | 'FavouritePage' | 'AuthPage' | 'RegisterPage', 
@@ -12,17 +15,30 @@ export async function navigate(
 
     switch(page) {
         case 'MainPage':
-            mainPageInit(username as string, token as string, message)
+            router.navigate('/')
+            router.on('/', () => {
+                mainPageInit(username as string, token as string, message)
+            })
+            // router.resolve()
             // const MainPage = await import("./view/pages/MainPage")
             // MainPage.default()
             break
         case 'AuthPage':
-            formPageInit('auth', message)
+            router.navigate('/auth')
+            router.on('/auth', () => {
+                formPageInit('auth', message)
+            })
+            // router.resolve()
             // const AuthPage = await import("./view/pages/AuthPage")
             // AuthPage.default()
             break  
         case 'RegisterPage':
-            formPageInit('register', message)
+            router.navigate('/register')
+            router.on('/register', () => {
+                formPageInit('register', message)
+            })
+            // router.resolve()
             break
     }
+    router.resolve()
 }
