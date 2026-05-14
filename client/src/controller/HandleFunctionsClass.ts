@@ -120,7 +120,7 @@ export default class HandleFunctionsClass {
         }, 100)
     }
 
-    buttonAside(navigation: 'FavouritePage' | 'MainPage', favTrax: ITrack[], token: string, trax: ITrack[]) {
+    buttonAside(navigation: 'FavouritePage' | 'MainPage', token: string, trax: ITrack[]) {
         const fav = request.fetchFavouriteTracks(token)
         fav.then((f) => {
             setTimeout(() => {
@@ -128,13 +128,14 @@ export default class HandleFunctionsClass {
                 const mainTableWrapper = document.querySelector('.main-table') as HTMLElement
                 const asideNav = document.querySelector('.aside-nav') as HTMLElement
                 const searchEl = document.querySelector('.header__search') as HTMLElement
+                console.log(searchEl);
 
                 if (navigation === 'FavouritePage') {
                     setChildren(mainTableWrapper, [
                         mainTable(f, token, f)
                     ]),
                         setChildren(asideNav, [
-                            aside('favourite', f, token, trax)
+                            aside('favourite', token, trax)
                         ])
                         /**
                          * ! ASIDE - SEARCH !!!!!
@@ -148,7 +149,7 @@ export default class HandleFunctionsClass {
                         mainTable(trax, token, f)
                     ]),
                         setChildren(asideNav, [
-                            aside('main', f, token, trax)
+                            aside('main', token, trax)
                         ]) 
                         // ,
                         // setChildren(searchEl, [

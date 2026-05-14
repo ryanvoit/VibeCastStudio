@@ -26,7 +26,7 @@ export default function mainPageInit(username: string, token: string, message: "
                     el('.container', [
                         el('.main-page-wrapper', [
                             el('.aside-nav', [
-                                aside('main', trackingFav, token, tracking)
+                                aside('main', token, tracking)
                             ]),
                             el('.main-table', [
                                 mainTable(tracking, token, trackingFav),

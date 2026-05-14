@@ -6,6 +6,7 @@ import { ITrack } from "../../services/types";
 import HandleFunctionsClass from "../../controller/HandleFunctionsClass";
 import { table } from "../components/mainTable";
 import requestClass from "../../model/requestClass";
+import buttonAsideClick from "../../controller/buttonAsideClick";
 
 const HandleFunctions = new HandleFunctionsClass()
 const request = new requestClass()
@@ -52,7 +53,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
     }
 }
 
-export function asideBtn(active: boolean, text: string, favTrax: ITrack[], token: string, trax: ITrack[]) {
+export function asideBtn(active: boolean, text: string, token: string, trax: ITrack[]) {
     const buttonAside = el('button.button button--aside', { type: 'button' }, [
         svgInit('musicNote'),
         el("span.sidebar__title", `${text}`),
@@ -63,7 +64,8 @@ export function asideBtn(active: boolean, text: string, favTrax: ITrack[], token
         buttonAside.classList.add('button--aside--active')
     } else {
         buttonAside.addEventListener('click', function () {
-            HandleFunctions.buttonAside(navigation, favTrax, token, trax)
+            // HandleFunctions.buttonAside(navigation, token, trax)
+            buttonAsideClick(navigation, token, trax)
         })
     }
 
