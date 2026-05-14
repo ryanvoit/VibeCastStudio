@@ -40,6 +40,7 @@ export default class HandleFunctionsClass {
         if (id <= 0) {
             id = 1
         }
+        
         const mainPageWrapper = document.querySelector('.main-page-wrapper') as HTMLElement
         const playerSuper = document.querySelector('.player') as HTMLElement
         mainPageWrapper.classList.remove('main-page-wrapper--player-on')
@@ -118,46 +119,6 @@ export default class HandleFunctionsClass {
                 }
             })
         }, 100)
-    }
-
-    buttonAside(navigation: 'FavouritePage' | 'MainPage', token: string, trax: ITrack[]) {
-        const fav = request.fetchFavouriteTracks(token)
-        fav.then((f) => {
-            setTimeout(() => {
-                // navigate(navigation, null)
-                const mainTableWrapper = document.querySelector('.main-table') as HTMLElement
-                const asideNav = document.querySelector('.aside-nav') as HTMLElement
-                const searchEl = document.querySelector('.header__search') as HTMLElement
-                console.log(searchEl);
-
-                if (navigation === 'FavouritePage') {
-                    setChildren(mainTableWrapper, [
-                        mainTable(f, token, f)
-                    ]),
-                        setChildren(asideNav, [
-                            aside('favourite', token, trax)
-                        ])
-                        /**
-                         * ! ASIDE - SEARCH !!!!!
-                         */
-                        // ,
-                        // setChildren(searchEl, [
-                            // searchInput(f, token, f)
-                        // ])
-                } else {
-                    setChildren(mainTableWrapper, [
-                        mainTable(trax, token, f)
-                    ]),
-                        setChildren(asideNav, [
-                            aside('main', token, trax)
-                        ]) 
-                        // ,
-                        // setChildren(searchEl, [
-                            // searchInput(trax, token, f)
-                        // ])
-                }
-            }, 30)
-        })
     }
 
     btnPlay(btn: HTMLButtonElement) {

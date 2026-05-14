@@ -11,7 +11,7 @@ import buttonAsideClick from "../../controller/buttonAsideClick";
 const HandleFunctions = new HandleFunctionsClass()
 const request = new requestClass()
 
-export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack>, id: number, token: string, favTrax?: ITrack[], filtered?: boolean, tracksAll?: ITrack[]) {
+export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack>, id: number, token: string, favTrax?: ITrack[]) {
     const track = tracks.find(track2 => id === track2.id) as ITrack
 
     const isFav = favTrax?.find(tracking => tracking.id === id)
@@ -97,7 +97,7 @@ export function buttonPlayInit(tracks: Array<ITrack>, id: number, token: string)
     return buttonPlay
 }
 
-export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat', tracks?: Array<ITrack>, id?: number, token?: string) {
+export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat', tracks?: Array<ITrack>, id?: number, token?: string, index?: number) {
     const btn = el(`button.button button--${role}`, { type: 'button' }, [
         svgInit(role)
     ]) as HTMLButtonElement
@@ -110,17 +110,29 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
             break
         case 'shuffle':
             btn.addEventListener('click', function () {
+                console.log(tracks);
+                console.log(backId);
                 HandleFunctions.btnShuffle(tracks as Array<ITrack>, token as string)
             })
             break
         case 'back':
+            const maxB = (tracks as Array<ITrack>).length
+            index = index === 0 ? maxB : index
+            const backId = (tracks as Array<ITrack>)[(index as number) - 1].id
             btn.addEventListener('click', function () {
-                HandleFunctions.buttonStartPlay(tracks as Array<ITrack>, (id as number - 1), token as string)
+                console.log(tracks);
+                console.log(backId);
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack>, backId, token as string)
             })
             break
         case 'next':
+            const maxN = (tracks as Array<ITrack>).length
+            index = index === maxN - 1 ? -1 : index
+            const nextId = (tracks as Array<ITrack>)[(index as number) + 1].id
             btn.addEventListener('click', function () {
-                HandleFunctions.buttonStartPlay(tracks as Array<ITrack>, (id as number + 1), token as string)
+                console.log(tracks);
+                console.log(nextId);
+                HandleFunctions.buttonStartPlay(tracks as Array<ITrack>, nextId, token as string)
             })
             break
         case 'repeat':

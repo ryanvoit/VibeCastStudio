@@ -11,12 +11,15 @@ import localStorageWork from "../../model/localStorageClass";
 const lS = new localStorageWork()
 
 export function player(tracks: Array<ITrack>, id: number, token: string, tracksFav: Array<ITrack>) {
-    let track = tracks[id - 1]
+    let track = tracks.find(tracking => tracking.id === id)
+    // let track = tracks[id - 1]
     if(!track) {
         track = tracks[0]
     }
 
     lS.saveTrackId(track.id)
+    const index = tracks.indexOf(track)
+    console.log(index);
 
     let range = el('input.player__range', {
         type: 'range',
@@ -62,9 +65,9 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
         el('.player__duration-wrapper', [
             el('.player__buttons', [
                 btnPlayer('shuffle', tracks, id, token),
-                btnPlayer('back', tracks, id, token),
+                btnPlayer('back', tracks, id, token, index),
                 btnPlayer('playSong'),
-                btnPlayer('next', tracks, id, token),
+                btnPlayer('next', tracks, id, token, index),
                 btnPlayer('repeat', tracks, id, token)
             ]),
             el('.player__range-wrapper', [

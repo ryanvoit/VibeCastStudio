@@ -15,7 +15,6 @@ export default function buttonAsideClick(navigation: 'FavouritePage' | 'MainPage
                 const mainTableWrapper = document.querySelector('.main-table') as HTMLElement
                 const asideNav = document.querySelector('.aside-nav') as HTMLElement
                 const searchEl = document.querySelector('.header__search') as HTMLElement
-                console.log(searchEl);
 
                 if (navigation === 'FavouritePage') {
                     setChildren(mainTableWrapper, [

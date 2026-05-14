@@ -11,9 +11,9 @@ async function firstPage() {
     const user = lS.loadUser()
     if (user) {
         await request.loginUser(user, true)
-    } else {
-        await navigate('AuthPage', null)
-    }
+    } 
+    navigate('AuthPage', null)
+
 }
 
 firstPage()
