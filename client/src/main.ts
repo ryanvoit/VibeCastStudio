@@ -7,11 +7,17 @@ import requestClass from "./model/requestClass";
 const lS = new localStorageWork()
 const request = new requestClass()
 
-const user = lS.loadUser() 
-if (user) {
-    request.loginUser(user, true)
+async function firstPage() {
+    const user = lS.loadUser()
+    if (user) {
+        await request.loginUser(user, true)
+    } else {
+        await navigate('AuthPage', null)
+    }
 }
 
-navigate('AuthPage', null)
+firstPage()
+
+
 
 

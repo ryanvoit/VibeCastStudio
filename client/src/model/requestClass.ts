@@ -41,7 +41,7 @@ export default class requestClass {
     }
 
     async loginUser(user: fetchUser, localStorage?: boolean) {
-        return fetch('http://localhost:8000/api/login', {
+        return await fetch('http://localhost:8000/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
