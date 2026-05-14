@@ -19,7 +19,6 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
 
     lS.saveTrackId(track.id)
     const index = tracks.indexOf(track)
-    console.log(index);
 
     let range = el('input.player__range', {
         type: 'range',

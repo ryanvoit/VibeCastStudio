@@ -110,8 +110,6 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
             break
         case 'shuffle':
             btn.addEventListener('click', function () {
-                console.log(tracks);
-                console.log(backId);
                 HandleFunctions.btnShuffle(tracks as Array<ITrack>, token as string)
             })
             break
@@ -120,8 +118,6 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
             index = index === 0 ? maxB : index
             const backId = (tracks as Array<ITrack>)[(index as number) - 1].id
             btn.addEventListener('click', function () {
-                console.log(tracks);
-                console.log(backId);
                 HandleFunctions.buttonStartPlay(tracks as Array<ITrack>, backId, token as string)
             })
             break
@@ -130,8 +126,6 @@ export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repe
             index = index === maxN - 1 ? -1 : index
             const nextId = (tracks as Array<ITrack>)[(index as number) + 1].id
             btn.addEventListener('click', function () {
-                console.log(tracks);
-                console.log(nextId);
                 HandleFunctions.buttonStartPlay(tracks as Array<ITrack>, nextId, token as string)
             })
             break

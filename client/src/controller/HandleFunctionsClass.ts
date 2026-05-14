@@ -137,14 +137,9 @@ export default class HandleFunctionsClass {
     }
 
     btnShuffle(tracks: Array<ITrack>, token: string) {
-        const idArr: number[] = []
-        for (let i = 0; i < (tracks).length; i++) {
-            idArr.push((tracks)[i].id)
-        }
-        const max = Math.max(...idArr)
-        const randomId = Math.floor(Math.random() * max + 1)
-
-        this.buttonStartPlay(tracks, randomId - 1, token)
+        const randomIndex = (Math.floor(Math.random() * tracks.length + 1)) - 1
+        const randomId = tracks[randomIndex].id
+        this.buttonStartPlay(tracks, randomId, token)
     }
 
     btnRepeat(range: HTMLInputElement, outputRange: HTMLElement) {
