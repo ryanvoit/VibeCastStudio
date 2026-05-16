@@ -27,18 +27,13 @@
 	}
 
 	&--play {
-		display: grid;
-		grid-template-columns: 40px 1fr 262px 195px;
-		transition: background-color $transition;
 		padding: 0;
+		width: 100%;
+		height: 100%;
 
-		.main-table__cell {
-			padding: 14px 0 14px 8px;
-		}
-
-		&:hover,
-		&:focus-visible {
-			background-color: $color-burnt-orange-25;
+		// .main-table__row--secondary::before &,
+		.main-table__row--secondary::before & {
+			opacity: 1
 		}
 	}
 

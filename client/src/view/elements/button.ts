@@ -40,9 +40,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
             return buttonFavNoCell
         case 'settings':
             const buttonSettings = el('button.button button--settings', { type: 'button' }, [
-                el('td.main-table__cell', [
-                    svgInit('settings')
-                ])
+                svgInit('settings')
             ])
 
             buttonSettings.addEventListener('click', function (e) {
@@ -95,6 +93,37 @@ export function buttonPlayInit(tracks: Array<ITrack>, id: number, token: string)
     })
 
     return buttonPlay
+}
+
+export function btnPlayInit(role: 'id' | 'name' | 'other', tracks: Array<ITrack>, id: number, token: string) {
+    const track = tracks.find(track => id === track.id) as ITrack
+    let btn
+
+    switch (role) {
+        case 'id':
+            btn = el('button.button button--play', { type: 'button' }, `${track.id}`)
+            break
+        case 'name':
+            btn = el('button.button button--play', { type: 'button' }, [
+                el('.main-table__wrapper', [
+                    el('img.main-table__pic', { src: pic, height: 60, width: 60, alt: 'Обложка альбома' }),
+                    el('.main-table__inner', [
+                        el('span.main-table__name', `${track.title}`),
+                        el('span.main-table__artist', `${track.artist}`)
+                    ])
+                ]),
+            ])
+            break
+        case 'other':
+            btn = el('button.button button--play', { type: 'button' }, '-')
+            break
+    }
+
+    btn.addEventListener('click', function () {
+        HandleFunctions.buttonStartPlay(tracks, id, token)
+    })
+
+    return btn
 }
 
 export function btnPlayer(role: 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat', tracks?: Array<ITrack>, id?: number, token?: string, index?: number) {

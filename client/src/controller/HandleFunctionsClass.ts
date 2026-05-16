@@ -62,6 +62,8 @@ export default class HandleFunctionsClass {
         const tracks = request.fetchFavouriteTracks(token) as Promise<ITrack[]>
         tracks.then((trax) => {
             const tracking = trax.find(track => track.id === id)
+            console.log(track);
+            console.log(id);
 
             if (tracking) {
                 request.removeFavourite({
@@ -86,11 +88,14 @@ export default class HandleFunctionsClass {
                         idCell = tableCells[i]
                     }
                 }
+                console.log(idCell);
 
                 const trackF = trax.find(track => track.id === id);
+                console.log(trackF);
 
                 if (idCell) {
-                    const favBtn = ((idCell?.parentNode as HTMLElement).nextElementSibling as HTMLElement).firstElementChild as HTMLElement
+                    const favBtn = ((((idCell?.nextElementSibling as HTMLElement).nextElementSibling as HTMLElement).nextElementSibling as HTMLElement).nextElementSibling as HTMLElement).firstElementChild as HTMLElement
+                    console.log(favBtn);
                     favBtn.innerHTML = ''
                     if (trackF) {
                         setChildren(favBtn, [
