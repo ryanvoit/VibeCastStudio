@@ -8,17 +8,6 @@ const router = express.Router();
 // Использование в приложении
 const app = express();
 
-/*
-
-app.use(cors({
-    origin: 'http://localhost:8080', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'application/json'],
-    credentials: true
-}));
-*/
-
-
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 

@@ -9,12 +9,14 @@ export async function navigate(
     username?: string,
     token?: string
 ) {
+    document.body.innerHTML = ''
+
     const router = new Navigo('/')
-    router.on('/auth', () => {
+    router.on('/', () => {
         formPageInit('auth', message)
     })
 
-    router.on('/', () => {
+    router.on('/main', () => {
         mainPageInit(username as string, token as string, message)
     })
 
@@ -24,17 +26,15 @@ export async function navigate(
 
     // router.resolve()
 
-    document.body.innerHTML = ''
-
     switch (page) {
         case 'MainPage':
-            router.navigate('/')
+            router.navigate('/main')
             router.resolve()
             // const MainPage = await import("./view/pages/MainPage")
             // MainPage.default()
             break
         case 'AuthPage':
-            router.navigate('/auth')
+            router.navigate('/')
             router.resolve()
             // const AuthPage = await import("./view/pages/AuthPage")
             // AuthPage.default()

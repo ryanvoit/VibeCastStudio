@@ -13,7 +13,6 @@ async function firstPage() {
         await request.loginUser(user, true)
     } 
     navigate('AuthPage', null)
-
 }
 
 firstPage()

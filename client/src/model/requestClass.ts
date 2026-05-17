@@ -81,6 +81,8 @@ export default class requestClass {
                         success.classList.add('modal-window--none')
                     }
                     document.body.append(modalWindow(data.message))
+                } else {
+                    navigate('AuthPage', null)
                 }
             })
     }
