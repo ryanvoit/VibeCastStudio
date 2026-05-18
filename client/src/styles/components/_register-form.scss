@@ -9,6 +9,23 @@
     transform: translateX(95%);
     transition: transform $transition-animation;
 
+    // @media (max-width: $vp-tablet) {
+        // padding: 200px 120px;
+    // }
+
+    @media (max-width: $vp-mobile) {
+        padding: 200px 120px;
+    }
+
+    @media (max-width: 512px) {
+        padding: 200px 50px;
+    }
+
+    @media (max-width: 432px) {
+        gap: 36px;
+        padding: 200px 50px;
+    }
+
     &--animated {
         transform: translateX(0)
     }

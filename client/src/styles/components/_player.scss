@@ -1,20 +1,36 @@
 .player {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
     &__super-wrapper {
         height: 100px;
-        width: 100vw;
         background-color: $color-white;
-        position: fixed;
-        bottom: 0;
-        right: -142px;
         border-top: 1px solid $color-mercury;
         padding: 20px 30px;
         gap: 20px;
         display: grid;
-        grid-template-columns: 434px 1fr 97px;
+        grid-template-columns: 434px min-content 97px;
         align-items: end;
         transform: translateY(100px);
         opacity: 0;
+        justify-content: space-between;
         transition: transform $transition, opacity $transition;
+
+        @media (max-width: 1200px) {
+            grid-template-columns: 350px min-content 97px;
+        }
+
+        @media (max-width: $vp-tablet) {
+            grid-template-columns: 286px 40px;
+            gap: 10px;
+            height: 120px;
+            padding: 14px 16px 16px 0;
+            position: relative;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
     }
 
     &__wrapper {
@@ -53,6 +69,13 @@
         display: flex;
         gap: 12px;
         align-items: center;
+
+        @media (max-width: $vp-tablet) {
+            position: absolute;
+            bottom: 16px;
+            right: 50%;
+            transform: translateX(50%);
+        }
     }
 
     &__duration-wrapper {
@@ -75,15 +98,39 @@
         width: 184px;
         display: flex;
         gap: 20px;
+
+        @media (max-width: $vp-tablet) {
+            width: 40px;
+        }
     }
 
     &__range {
         appearance: none;
         height: 4px;
-        min-width: 681px;
+        width: 681px;
         background: $color-mercury;
         border-radius: 50px;
         overflow: hidden;
+
+        @media (max-width: 1506px) {
+            width: 600px
+        }
+
+        @media (max-width: 1375px) {
+            width: 400px
+        }
+
+        @media (max-width: $vp-tablet) {
+            width: 500px;
+        }
+
+        @media (max-width: $vp-mobile) {
+            width: 336px;
+        }
+
+        @media (max-width: 500px) {
+            width: 264px;
+        }
 
         &::-webkit-slider-thumb {
             height: 6px;
@@ -114,6 +161,10 @@
         height: 16px;
         align-items: center;
         position: relative;
+
+        @media (max-width: $vp-tablet) {
+            display: none;
+        }
     }
 
     &__range-volume {

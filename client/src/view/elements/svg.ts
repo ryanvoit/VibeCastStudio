@@ -1,6 +1,6 @@
 import { el } from "redom";
 
-export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration' | 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat' | 'tick' | 'cross'): HTMLElement {
+export function svgInit(role: 'search' | 'playActive' | 'playActiveOff' | 'logo' | 'arrow' | 'speaker' | 'musicNote' | 'settings' | 'calendar' | 'heart' | 'heart-favourite' | 'duration' | 'shuffle' | 'back' | 'playSong' | 'next' | 'repeat' | 'tick' | 'cross'): HTMLElement {
     switch(role) {
         case 'logo':
             const svgLogo = el('span.svg-logo')
@@ -139,5 +139,21 @@ export function svgInit(role: 'search' | 'logo' | 'arrow' | 'speaker' | 'musicNo
             </svg>`
 
             return svgCross
+        case 'playActive':
+            const svgPlAct = el('span.svg-play-active')
+            svgPlAct.innerHTML = 
+            `<svg class="play-active-icon" width="24" height="24" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-play-active"></use> 
+            </svg>`
+
+            return svgPlAct
+        case 'playActiveOff':
+            const svgPlActOff = el('span.svg-play-active svg-play-active--off')
+            svgPlActOff.innerHTML = 
+            `<svg class="play-active-icon" width="24" height="24" aria-hidden="true"> 
+                <use xlink:href="sprite.svg#icon-play-active"></use> 
+            </svg>`
+
+            return svgPlActOff
     }
 }

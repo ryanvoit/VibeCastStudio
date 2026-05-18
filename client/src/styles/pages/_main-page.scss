@@ -9,11 +9,17 @@
     &--player-on {
         margin: 0;
 
-        .player__super-wrapper {
+        +.player .player__super-wrapper {
             transform: translateY(0);
             opacity: 1;
             transition: transform $transition;
         }
+    }
+
+    @media (max-width: 900px) {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
     &--animated {

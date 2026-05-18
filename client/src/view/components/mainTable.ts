@@ -22,19 +22,6 @@ export function cellsMain() {
     return mainTableRow
 }
 
-export function cells(trax: ITrack[], tracks: ITrack[], token: string, favTrax: ITrack[]): HTMLElement[] {
-    const rows = []
-    for (let i = 0; i < trax.length; i++) {
-        const tableRow = el('tr.main-table__row main-table__row--secondary', [
-            buttonPlayInit(tracks, trax[i].id, token),
-            buttonInit('favourite', tracks, trax[i].id, token, favTrax),
-            el('td.main-table__cell', `${numToMin(trax[i].duration)}`),
-            buttonInit('settings', tracks, trax[i].id, token),
-        ])
-        rows.push(tableRow)
-    }
-    return rows
-}
 
 export function cellsRest(trax: ITrack[], tracks: ITrack[], token: string, favTrax: ITrack[]): HTMLElement[] {
     const rows = []
@@ -42,8 +29,8 @@ export function cellsRest(trax: ITrack[], tracks: ITrack[], token: string, favTr
         const tableRow = el('tr.main-table__row main-table__row--secondary', [
             el('td.main-table__cell', btnPlayInit('id', tracks, trax[i].id, token)),
             el('td.main-table__cell', btnPlayInit('name', tracks, trax[i].id, token)),
-            el('td.main-table__cell', btnPlayInit('other', tracks, trax[i].id, token)),
-            el('td.main-table__cell', btnPlayInit('other', tracks, trax[i].id, token)),
+            el('td.main-table__cell main-table__cell--other', btnPlayInit('other', tracks, trax[i].id, token)),
+            el('td.main-table__cell main-table__cell--other', btnPlayInit('other', tracks, trax[i].id, token)),
             el('td.main-table__cell', buttonInit('favourite-noCell', tracks, trax[i].id, token, favTrax)),
             el('td.main-table__cell', `${numToMin(trax[i].duration)}`),
             el('td.main-table__cell', buttonInit('settings', tracks, trax[i].id, token)),
@@ -72,7 +59,6 @@ export function table(tracks: ITrack[], tracksAmountPage: number, btns: HTMLButt
 
     return el('table.main-table__table', [
         cellsMain(),
-        // cells(trax, tracks, token, favTrax),
         cellsRest(trax, tracks, token, favTrax),
     ])
 }

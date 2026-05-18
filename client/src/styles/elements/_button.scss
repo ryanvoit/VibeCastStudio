@@ -14,6 +14,13 @@
 		align-items: center;
 		transition: background-color $transition;
 
+		@media (max-width: 900px) {
+			border-radius: 30px;
+			padding: 10px 16px;
+			gap: 8px;
+			height: 44px;
+		}
+
 		&:hover,
 		&:focus-visible {
 			background-color: $color-burnt-orange-25;
@@ -23,6 +30,12 @@
 		&--active:hover,
 		&--active:focus-visible {
 			background-color: $color-white;
+
+			@media (max-width: 900px) {
+				background-color: $color-burnt-orange;
+				color: $color-white;
+				line-height: 12px;
+			}
 		}
 	}
 
@@ -64,8 +77,18 @@
 	&--repeat {
 		padding: 0;
 
-		&-off .svg-playSong {
+		@media (max-width: $vp-tablet) {
+			display: none;
+		}
+
+		&--off .svg-playSong {
 			background-color: $color-dark-gray2;
+		}
+	}
+
+	&--playSong {
+		@media (max-width: $vp-tablet) {
+			display: block;
 		}
 	}
 
@@ -133,7 +156,7 @@
 		&-active {
 			background-color: $color-burnt-orange;
 
-			&:hover, 
+			&:hover,
 			&:focus-visible {
 				color: $color-black;
 			}

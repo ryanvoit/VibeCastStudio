@@ -18,10 +18,16 @@ body {
   line-height: 18px;
   color: $color-nero;
   background: linear-gradient(90deg, $color-white-smoke 0%, $color-white-smoke 30%, $color-white 100%);
+
+  @media (max-width: 900px) {
+    background: $color-white-smoke;
+    min-height: calc(100vh + 140px);
+  }
 }
 
 main {
   flex-grow: 1;
+  position: relative;
 }
 
 img {

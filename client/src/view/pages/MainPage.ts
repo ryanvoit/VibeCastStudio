@@ -30,10 +30,10 @@ export default function mainPageInit(username: string, token: string, message: "
                             ]),
                             el('.main-table', [
                                 mainTable(tracking, token, trackingFav),
-                            ]),
-                            el('.player', [
-                                player(tracking, trackId, token, trackingFav)
                             ])
+                        ]),
+                        el('.player', [
+                            player(tracking, trackId, token, trackingFav)
                         ])
                     ])
                 ]),

@@ -7,11 +7,39 @@
 	transform: translateY(-50%);
 }
 
+.svg-arrow {
+	@media (max-width: 900px) {
+        display: none;
+    }
+}
+
 .heart-icon,
 .heart-icon--favourite {
 	color: $color-burnt-orange;
 	transform: scale(1);
 	transition: transform $transition;
+}
+
+.svg-music-note {
+	@media (max-width: 900px) {
+        display: none;
+    }
+}
+
+.svg-play-active {
+	display: none;
+
+	@media (max-width: 900px) {
+        display: block;
+		transform: scale(1);
+		color: $color-white;
+		transition: transform $transition, color $transition;
+
+		&--off {
+			transform: scale(0);
+			color: $color-black;
+		}
+    }
 }
 
 .settings-icon {

@@ -16,6 +16,48 @@
     opacity: 0;
     animation: appearance-and-fade 5s linear forwards;
 
+    @media (max-width: 1350px) {
+        left: 65%;
+    }
+
+    @media (max-width: 1150px) {
+        left: 60%;
+    }
+
+    @media (max-width: 1020px) {
+        left: 50%;
+    }
+
+    @media (max-width: 900px) {
+        height: 60px;
+        top: 85px;
+    }
+
+    @media (max-width: 840px) {
+        left: 45%
+    }
+
+    @media (max-width: 740px) {
+        left: 40%
+    }
+
+    @media (max-width: 685px) {
+        left: 30%
+    }
+
+    @media (max-width: 590px) {
+        left: 20%
+    }
+
+    @media (max-width: 520px) {
+        left: 10%
+    }
+
+     @media (max-width: 460px) {
+        left: 10px;
+        width: 340px;
+    }
+
     &--none {
         display: none;
     }

@@ -5,6 +5,12 @@
 	position: relative;
 	width: 100%;
 
+	&:first-child .custom-input__label {
+		@media (max-width: 323px) {
+			top: -44px;
+		}
+	}
+
 	&__field {
 		padding: 25px 15px;
 		width: 100%;
@@ -15,11 +21,11 @@
 		border: 2px solid $color-nero;
 		transition: border-color $transition;
 
-		&:hover, 
+		&:hover,
 		&:focus-visible {
 			border-color: $color-burnt-orange;
 
-			+ .custom-input__label {
+			+.custom-input__label {
 				color: $color-burnt-orange
 			}
 		}
@@ -38,5 +44,13 @@
 		background: linear-gradient(180deg, $color-white-smoke 0%, $color-white 50%, $color-white 100%);
 		transition: color $transition;
 		border-radius: 3px;
+
+		@media (max-width: 432px) {
+			top: -25px;
+			left: 0px;
+			background: transparent;
+		}
+
+
 	}
 }

@@ -14,7 +14,7 @@ export default function buttonAsideClick(navigation: 'FavouritePage' | 'MainPage
                 // navigate(navigation, null)
                 const mainTableWrapper = document.querySelector('.main-table') as HTMLElement
                 const asideNav = document.querySelector('.aside-nav') as HTMLElement
-                const searchEl = document.querySelector('.header__search') as HTMLElement
+                const searchEl = document.querySelector('.header__search-wrapper') as HTMLElement
 
                 if (navigation === 'FavouritePage') {
                     setChildren(mainTableWrapper, [
@@ -23,10 +23,6 @@ export default function buttonAsideClick(navigation: 'FavouritePage' | 'MainPage
                         setChildren(asideNav, [
                             aside('favourite', token, trax)
                         ])
-                        /**
-                         * ! ASIDE - SEARCH !!!!!
-                         */
-                        ,
                         setChildren(searchEl, [
                             searchInput(f, token, f)
                         ])
@@ -36,8 +32,7 @@ export default function buttonAsideClick(navigation: 'FavouritePage' | 'MainPage
                     ]),
                         setChildren(asideNav, [
                             aside('main', token, trax)
-                        ]) 
-                        ,
+                        ]),
                         setChildren(searchEl, [
                             searchInput(trax, token, f)
                         ])

@@ -13,7 +13,7 @@ const lS = new localStorageWork()
 export function player(tracks: Array<ITrack>, id: number, token: string, tracksFav: Array<ITrack>) {
     let track = tracks.find(tracking => tracking.id === id)
     // let track = tracks[id - 1]
-    if(!track) {
+    if (!track) {
         track = tracks[0]
     }
 
@@ -27,6 +27,7 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
         step: 1,
         value: 0
     }) as HTMLInputElement
+
     const outputRange = el('output.player__output', `${numRangeToDuration(Number(range.value))}`)
 
     range.addEventListener("input", (event) => {
@@ -61,7 +62,7 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
                 el('span.player__artist', `${track.artist}`)
             ])
         ]),
-        el('.player__duration-wrapper', [
+        el('.player__duration-wrapper ', [
             el('.player__buttons', [
                 btnPlayer('shuffle', tracks, id, token),
                 btnPlayer('back', tracks, id, token, index),
@@ -69,7 +70,7 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
                 btnPlayer('next', tracks, id, token, index),
                 btnPlayer('repeat', tracks, id, token)
             ]),
-            el('.player__range-wrapper', [
+            el('.player__range-wrapper player__range-wrapper--desktop', [
                 outputRange,
                 range,
                 el('span.player__duration', `${numToMin(track.duration)}`)
@@ -79,7 +80,7 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
             svgInit('speaker'),
             rangeVolume,
             rangeVolumeLevel
-        ])
+        ]),
     ])
 
     return player

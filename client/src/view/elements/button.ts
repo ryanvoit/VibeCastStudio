@@ -54,6 +54,7 @@ export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', 
 export function asideBtn(active: boolean, text: string, token: string, trax: ITrack[]) {
     const buttonAside = el('button.button button--aside', { type: 'button' }, [
         svgInit('musicNote'),
+        active ? svgInit('playActive') : svgInit('playActiveOff'),
         el("span.sidebar__title", `${text}`),
     ])
     const navigation = text === 'Избранное' ? 'FavouritePage' : 'MainPage'
