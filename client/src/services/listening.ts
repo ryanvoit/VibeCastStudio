@@ -1,8 +1,5 @@
 import localStorageWork from "../model/localStorageClass"
 import { numRangeToDuration } from "./playerRanges"
-// import HandleFunctionsClass from "../controller/HandleFunctionsClass"
-
-// const HandleFunctions = new HandleFunctionsClass()
 const lS = new localStorageWork()
 
 export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
@@ -13,27 +10,25 @@ export function listening(range: HTMLInputElement, outputRange: HTMLElement) {
         outputRange.textContent = numRangeToDuration(Number(range.value))
         if (Number(range.value) === Number(range.max)) {
             clearInterval(interval)
-            /**
-             * TODO: improving
-             * HandleFunctions.buttonStartPlay(tracks, id)
-             */
         }
     }, 1000)
+
+    function stopListening(btn: HTMLButtonElement) {
+        btn.addEventListener('click', function () {
+            clearInterval(interval)
+        })
+    }
 
     setTimeout(() => {
         const btns = document.querySelectorAll('.button--play')
 
         btns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                clearInterval(interval)
-            })
+            stopListening(btn as HTMLButtonElement)
         })
 
         const btnPlay = document.querySelector('.button--playSong') as HTMLButtonElement
 
-        btnPlay.addEventListener('click', function () {
-            clearInterval(interval)
-        })
+        stopListening(btnPlay as HTMLButtonElement)
 
         const btnLogOut = document.querySelector('.header__user') as HTMLButtonElement
 

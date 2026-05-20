@@ -24,25 +24,18 @@ export async function navigate(
         formPageInit('register', message)
     })
 
-    // router.resolve()
-
     switch (page) {
         case 'MainPage':
             router.navigate('/main')
             router.resolve()
-            // const MainPage = await import("./view/pages/MainPage")
-            // MainPage.default()
             break
         case 'AuthPage':
             router.navigate('/')
             router.resolve()
-            // const AuthPage = await import("./view/pages/AuthPage")
-            // AuthPage.default()
             break
         case 'RegisterPage':
             router.navigate('/register')
             router.resolve()
             break
     }
-    // router.resolve()
 }

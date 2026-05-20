@@ -25,7 +25,6 @@ export default class requestClass {
                         fail.classList.add('modal-window--none')
                     }
                     document.body.append(modalWindow(data.message, false))
-                    // modalWindow(data.message)
                     this.form.classList.remove('register-form--animated')
                     this.header.classList.remove('header--animated')
                     setTimeout(() => {
@@ -35,7 +34,6 @@ export default class requestClass {
                     if (!document.querySelector('.modal-window--fail')) {
                         document.body.append(modalWindow(data.message))
                     }
-                    // setChildren(window.document.body, [modalWindow(data.message)])
                 }
             })
     }
@@ -62,7 +60,6 @@ export default class requestClass {
                         success.classList.add('modal-window--none')
                     }
                     document.body.append(modalWindow(data.message, false))
-                    // modalWindow(data.message)
                     this.form.classList.remove('auth-form--animated')
                     this.header.classList.remove('header--animated')
                     lS.saveLogin(user)
@@ -70,7 +67,6 @@ export default class requestClass {
                         navigate('MainPage', data.message, user.username, data.token)
                     }, 1000)
                 } else if (!localStorage && data.message === "произошла ошибка при авторизации - неверные данные") {
-                    // setChildren(window.document.body, [modalWindow(data.message)])
                     if (document.querySelector('.modal-window--fail')) {
                         const fail = document.querySelector('.modal-window--fail') as HTMLElement
                         fail.classList.remove('modal-window--fail')

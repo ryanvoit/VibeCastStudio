@@ -19,7 +19,6 @@ export function searchInput(tracks: ITrack[], token: string, favTrax: ITrack[]) 
 
 export function registAuthInput(name: 'username' | 'password') {
     const label = (name === 'username') ? 'Имя пользователя*:' : 'Пароль*:'
-    // const error = (name === 'username') ? ''
 
     const field = el('input.custom-input__field', {
         type: 'text',

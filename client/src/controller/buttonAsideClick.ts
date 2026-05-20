@@ -11,7 +11,6 @@ export default function buttonAsideClick(navigation: 'FavouritePage' | 'MainPage
         const fav = request.fetchFavouriteTracks(token)
         fav.then((f) => {
             setTimeout(() => {
-                // navigate(navigation, null)
                 const mainTableWrapper = document.querySelector('.main-table') as HTMLElement
                 const asideNav = document.querySelector('.aside-nav') as HTMLElement
                 const searchEl = document.querySelector('.header__search-wrapper') as HTMLElement

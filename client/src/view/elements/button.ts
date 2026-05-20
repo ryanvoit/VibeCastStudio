@@ -11,33 +11,21 @@ import buttonAsideClick from "../../controller/buttonAsideClick";
 const HandleFunctions = new HandleFunctionsClass()
 const request = new requestClass()
 
-export function buttonInit(role: 'favourite' | 'favourite-noCell' | 'settings', tracks: Array<ITrack>, id: number, token: string, favTrax?: ITrack[]) {
+export function buttonInit(role: 'favourite' | 'settings', tracks: Array<ITrack>, id: number, token: string, favTrax?: ITrack[]) {
     const track = tracks.find(track2 => id === track2.id) as ITrack
 
     const isFav = favTrax?.find(tracking => tracking.id === id)
     switch (role) {
         case 'favourite':
-            const buttonFav = el('button.button button--favourite', { type: 'button' }, [
-                el('td.main-table__cell', [
-                    (isFav) ? svgInit('heart-favourite') : svgInit('heart')
-                ]),
-            ])
-
-            buttonFav.addEventListener('click', function (e) {
-                HandleFunctions.buttonFavourite(track, buttonFav, id, token, role)
-            })
-
-            return buttonFav
-        case 'favourite-noCell':
-            const buttonFavNoCell = el('button.button button--favourite', { type: 'button' }, [
+            const buttonCell = el('button.button button--favourite', { type: 'button' }, [
                 (isFav) ? svgInit('heart-favourite') : svgInit('heart')
             ])
 
-            buttonFavNoCell.addEventListener('click', function (e) {
-                HandleFunctions.buttonFavourite(track, buttonFavNoCell, id, token, role)
+            buttonCell.addEventListener('click', function (e) {
+                HandleFunctions.buttonFavourite(track, buttonCell, id, token, role)
             })
 
-            return buttonFavNoCell
+            return buttonCell
         case 'settings':
             const buttonSettings = el('button.button button--settings', { type: 'button' }, [
                 svgInit('settings')
@@ -63,7 +51,6 @@ export function asideBtn(active: boolean, text: string, token: string, trax: ITr
         buttonAside.classList.add('button--aside--active')
     } else {
         buttonAside.addEventListener('click', function () {
-            // HandleFunctions.buttonAside(navigation, token, trax)
             buttonAsideClick(navigation, token, trax)
         })
     }
@@ -193,7 +180,7 @@ export function btnForm(role: 'submit' | 'link', role2: 'regist' | 'auth') {
     return btn
 }
 
-export function btnPagination(pageNumber: number, tracks: ITrack[], btns: HTMLButtonElement[], token: string, favTrax: ITrack[], tracksAmountPage: number) {
+export function btnPagination(pageNumber: number, tracks: ITrack[], btns: HTMLButtonElement[], token: string, tracksAmountPage: number) {
     const btn = el(
         'button.button button--pagination', { type: 'button' }, `${pageNumber}`
     )

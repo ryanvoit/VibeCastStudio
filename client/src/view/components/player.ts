@@ -12,7 +12,6 @@ const lS = new localStorageWork()
 
 export function player(tracks: Array<ITrack>, id: number, token: string, tracksFav: Array<ITrack>) {
     let track = tracks.find(tracking => tracking.id === id)
-    // let track = tracks[id - 1]
     if (!track) {
         track = tracks[0]
     }
@@ -57,7 +56,7 @@ export function player(tracks: Array<ITrack>, id: number, token: string, tracksF
             el('.player__inner', [
                 el('span.player__title', [
                     el('span.player__name', `${track.title}`),
-                    el('span.player__favourite', buttonInit('favourite-noCell', tracks, id, token, tracksFav))
+                    el('span.player__favourite', buttonInit('favourite', tracks, id, token, tracksFav))
                 ]),
                 el('span.player__artist', `${track.artist}`)
             ])

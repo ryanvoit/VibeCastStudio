@@ -2,8 +2,7 @@ import { el } from 'redom';
 import { ITrack } from '../../services/types';
 import { numToMin } from '../../services/playerRanges';
 import { svgInit } from '../elements/svg';
-import { buttonInit, buttonPlayInit, btnPlayInit } from '../elements/button';
-// import pic from "./img.svg"
+import { buttonInit, btnPlayInit } from '../elements/button';
 import { btnPagination } from "../elements/button"
 
 export function cellsMain() {
@@ -31,14 +30,9 @@ export function cellsRest(trax: ITrack[], tracks: ITrack[], token: string, favTr
             el('td.main-table__cell', btnPlayInit('name', tracks, trax[i].id, token)),
             el('td.main-table__cell main-table__cell--other', btnPlayInit('other', tracks, trax[i].id, token)),
             el('td.main-table__cell main-table__cell--other', btnPlayInit('other', tracks, trax[i].id, token)),
-            el('td.main-table__cell', buttonInit('favourite-noCell', tracks, trax[i].id, token, favTrax)),
+            el('td.main-table__cell', buttonInit('favourite', tracks, trax[i].id, token, favTrax)),
             el('td.main-table__cell', `${numToMin(trax[i].duration)}`),
             el('td.main-table__cell', buttonInit('settings', tracks, trax[i].id, token)),
-
-            // buttonPlayInit(tracks, trax[i].id, token),
-            // buttonInit('favourite', tracks, trax[i].id, token, favTrax),
-            // el('td.main-table__cell', `${numToMin(trax[i].duration)}`),
-            // buttonInit('settings', tracks, trax[i].id, token)
         ])
         rows.push(tableRow)
     }
@@ -73,7 +67,7 @@ export function mainTable(tracks: ITrack[], token: string, favTrax: ITrack[]): H
 
     let btns: HTMLButtonElement[] = []
     for (let i = 1; i < pages + 1 ; i++) {
-        btns.push(btnPagination(i, tracks, btns, token, favTrax, tracksAmountPage) as HTMLButtonElement)
+        btns.push(btnPagination(i, tracks, btns, token, tracksAmountPage) as HTMLButtonElement)
     }
 
     return el('.main-table__special-wrapper', [

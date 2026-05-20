@@ -19,7 +19,6 @@ export function aside(page: 'favourite' | 'main', token: string, trax: ITrack[])
             ])
             break
     }
-
     return aside
 }
 

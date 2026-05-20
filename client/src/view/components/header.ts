@@ -21,7 +21,6 @@ export function header(tracks: ITrack[], username: string, token: string, favTra
 	const header = el('header.header', [
 		el('.container', [
 			el('.header__wrapper', [
-				// el('.header__title visually-hidden', '')
 				el(".header__logo", [
 					svgInit('logo'),
 					el("span.header__title", "VibeCast Studio")

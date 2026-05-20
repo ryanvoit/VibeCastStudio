@@ -1,7 +1,6 @@
 .header {
 	width: 100%;
 	background-color: transparent;
-	// margin-bottom: 60px;
 	transform: translateX(-100%);
 	transition: transform $transition-animation;
 
@@ -123,10 +122,8 @@
 		padding: 20px 44px 20px;
 		border: none;
 		background: linear-gradient(90deg, $color-mercury 0%, $color-white-smoke 100%);
-		// background-color: $color-white-smoke;
 		color: $color-nero;
 		border-radius: 30px;
-		// font-size: 12px;
 		line-height: 12px;
 		width: 100%;
 		font-size: inherit;

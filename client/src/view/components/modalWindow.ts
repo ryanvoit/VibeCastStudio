@@ -24,9 +24,6 @@ export function modalWindow(message: "произошла ошибка при а�
                 svgInit('cross'),
                 el('.modal-window__message', message)
             ])
-            // if (fade) {
-                // modalWindow.classList.add('modal-window--fail-fade')
-            // }
             break
     }
 
