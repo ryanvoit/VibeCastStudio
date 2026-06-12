@@ -71,7 +71,7 @@ export function mainTable(tracks: ITrack[], token: string, favTrax: ITrack[]): H
     }
 
     return el('.main-table__special-wrapper', [
-        el('h1.main-table__title', 'Аудифайлы и треки'),
+        el('h1.main-table__title', 'Аудиофайлы и треки'),
         el('.main-table__super', [
             table(tracks, tracksAmountPage, btns, token, favTrax)
         ]),
